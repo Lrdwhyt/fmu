@@ -12,7 +12,9 @@ interface Store {
     },
     noEliminationKeywords: string[];
     noVoteKeywords: string[];
-    nicknames: NicknameList
+    nicknames: NicknameList;
+    minConfidence: number;
+    nightLength: number;
 }
 
 export interface NicknameList {
@@ -28,7 +30,9 @@ export default {
         games: {},
         noEliminationKeywords: [],
         noVoteKeywords: [],
-        nicknames: {}
+        nicknames: {},
+        minConfidence: 40,
+        nightLength: 10
     } as Store,
 
     mutations: {
@@ -97,6 +101,14 @@ export default {
         removeNickname(state: Store, { player, nickname }: { player: string, nickname: string }): void {
             const index: number = state.nicknames[player].indexOf(nickname);
             Vue.delete(state.nicknames[player], index);
+        },
+
+        setMinConfidence(state: Store, value: number): void {
+            state.minConfidence = value;
+        },
+
+        setNightLength(state: Store, length: number): void {
+            state.nightLength = length;
         }
     },
 
@@ -152,6 +164,14 @@ export default {
                     })
                 });
             }
+
+            if ("minConfidence" in settingsData) {
+                context.commit("setMinConfidence", settingsData.minConfidence);
+            }
+
+            if ("nightLength" in settingsData) {
+                context.commit("setNightLength", settingsData.nightLength);
+            }
         },
 
         deleteGame(context: ActionContext<Store, any>, id: number) {
@@ -187,6 +207,14 @@ export default {
 
         nicknames(state: Store): NicknameList {
             return state.nicknames;
+        },
+
+        minConfidence(state: Store): number {
+            return state.minConfidence;
+        },
+
+        nightLength(state: Store): number {
+            return state.nightLength;
         }
     }
 }

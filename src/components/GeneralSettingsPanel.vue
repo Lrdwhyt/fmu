@@ -14,11 +14,11 @@
         </div>
         <div>
             <label for="minConfidence">Minimum percentage score to match names (100 to require exact match)</label>
-            <input type="number" id="minConfidence" min="0" max="100" size="4" :value="minConfidence" @blur="setMinConfidence" />
+            <input type="number" id="minConfidence" min="0" max="100" size="4" :value="minConfidence" @change="setMinConfidence" />
         </div>
         <div>
             <label for="nightLength">Night length</label>
-            <input type="number" id="nightLength" min="0" size="4" :value="nightLength" @blur="setNightLength" />
+            <input type="number" id="nightLength" min="0" size="4" :value="nightLength" @change="setNightLength" />
             <label>minutes</label>
         </div>
         <no-elimination-keyword-list />
@@ -53,11 +53,11 @@ export default class GeneralSettingsPanel extends Vue {
     }
 
     get minConfidence(): number {
-        return 40;
+        return this.$store.getters.minConfidence;
     }
 
     get nightLength(): number {
-        return 10;
+        return this.$store.getters.nightLength;
     }
 
     updateIncludeUnvotes(e: Event) {
