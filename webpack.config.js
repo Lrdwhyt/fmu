@@ -4,7 +4,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require("webpack");
 
 const userscriptHeader = fs.readFileSync("./userscript-header.js", "utf-8");
-const styleRules = fs.readFileSync("./src/style.css", "utf-8");
+const styleRules = fs.readFileSync("./src/assets/global.css", "utf-8");
 
 module.exports = {
     mode: "development",
