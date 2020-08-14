@@ -11,7 +11,8 @@ interface VoteParserInformation {
     unvoteKeyword: string,
     noEliminationKeywords: string[],
     noVoteKeywords: string[],
-    nicknames: NicknameList
+    nicknames: NicknameList,
+    minConfidence: number
 }
 
 interface VoteTargetPair {
@@ -152,8 +153,8 @@ function matchVoteToTarget(str: string, info: VoteParserInformation): VoteTarget
         }
     }
 
-    const minimumConfidence = 0.4;
-    if (confidence < minimumConfidence) {
+    const minConfidence = info.minConfidence / 100;
+    if (confidence < minConfidence) {
         confidence = 1;
         target = str;
     }

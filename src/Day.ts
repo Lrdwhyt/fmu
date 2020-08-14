@@ -17,7 +17,7 @@ export interface Day {
     }
 }
 
-export function generateNext(days: Day[], nightTime: string, dayLength: number, lastKnownPost: number): Day {
+export function generateNext(days: Day[], nightTime: string, dayLength: number, nightLength: number, lastKnownPost: number): Day {
     if (!days.length) {
         let endDate = getNextDate(nightTime);
         let startDate = new Date(endDate.getTime() - dayLength * 60 * 60 * 1000);
@@ -36,7 +36,6 @@ export function generateNext(days: Day[], nightTime: string, dayLength: number, 
     }
     
     const lastDay: Day = days.slice(-1)[0];
-    const nightLength = 10; // minutes
     const newStartPost: number = lastDay.end.post + 1;
     const newEndPost: number = Math.max(newStartPost + 1, lastKnownPost);
     

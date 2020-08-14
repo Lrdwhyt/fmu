@@ -35,7 +35,8 @@ export default {
                 unvoteKeyword: context.rootGetters.unvoteKeyword,
                 noEliminationKeywords: context.rootGetters.noEliminationKeywords,
                 noVoteKeywords: context.rootGetters.noVoteKeywords,
-                nicknames: context.rootGetters.nicknames
+                nicknames: context.rootGetters.nicknames,
+                minConfidence: context.rootGetters.minConfidence
             });
             for (const vote of votes) {
                 context.commit("addVote", vote);
