@@ -1,0 +1,33 @@
+.word-edit,
+.word-view {
+    align-items: center;
+    display: inline-flex;
+    font-size: 13px;
+}
+
+.word-view > label {
+    display: inline-block;
+    padding: 4px;
+}
+
+.word-edit > input {
+    font-family: inherit;
+    padding: 4px;
+}
+
+.word-view {
+    background-color: rgb(236, 236, 236);
+}
+
+.remove-button {
+    background: inherit;
+    border: none;
+    border-radius: 6px;
+    color: rgb(206, 206, 206);
+    display: inline-block;
+    padding: 4px 4px 4px 0;
+}
+
+.remove-button:hover {
+    color: rgb(187, 10, 10);
+}
