@@ -3,7 +3,7 @@
         <div class="target">
             <div class="number-votes">
                 {{ number }}
-            </div><div class="target-name">Has not voted</div>
+            </div><div class="target-name">Failed to vote</div>
         </div>
         <div class="voters">
             <non-voter v-for="(player, index) in players" :key="index" :player="player" />
