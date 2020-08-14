@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h4>Players</h4>
         <player-list />
         <button @click="setPasteActive">Add from list</button>
         <div v-if="isPasteActive">

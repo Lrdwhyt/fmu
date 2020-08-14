@@ -1,5 +1,5 @@
 <template>
-    <div class="general-settings-wrapper">
+    <div class="general-settings-wrapper settings-panel">
         <div>
             <input type="checkbox" id="includeUnvotes" :checked="includeUnvotes" @input="updateIncludeUnvotes" />
             <label for="includeUnvotes">Include unvotes in tally</label>
@@ -84,7 +84,7 @@ export default class GeneralSettingsPanel extends Vue {
 
 <style scoped>
 .general-settings-wrapper > div {
-    margin-bottom: 3px;
+    min-height: 25px;
 }
 
 input {

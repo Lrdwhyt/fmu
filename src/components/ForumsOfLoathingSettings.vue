@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="settings-panel">
         <label for="postsPerPage">Number of posts per page:</label>
         <input type="number" id="postsPerPage" size="5" :value="this.postsPerPage" @blur="setPostsPerPage" />
     </div>
@@ -23,4 +23,8 @@ export default class ForumsOfLoathingSettings extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+input {
+    padding: 4px;
+}
+</style>

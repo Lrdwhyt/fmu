@@ -31,3 +31,12 @@
 .remove-button:hover {
     color: rgb(187, 10, 10);
 }
+
+button {
+    font-family: inherit;
+    padding: 4px;
+}
+
+.settings-panel {
+    padding: 8px 0;
+}

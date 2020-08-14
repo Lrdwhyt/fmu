@@ -1,5 +1,9 @@
 <template>
-    <div>
+    <div class="settings-panel">
+        <p>
+            Forum Mafia Utilities uses localStorage to store its data. Typically, browsers allow about 5 MB of storage per domain. For long-term usage, it is necessary to periodically clear out unused
+            memory.
+        </p>
         <table>
             <tr v-for="(title, id) in activeGameList" v-bind:key="id">
                 <td>{{ title }}</td>
@@ -51,4 +55,8 @@ export default class MemoryPanel extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+td {
+    padding: 2px 8px;
+}
+</style>
