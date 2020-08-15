@@ -93,6 +93,11 @@ export function createFromLog(votes: Vote[], players: Player[]): TallyWrapper {
         if (player.name in currentVoters) {
             continue;
         }
+        if (player.aliases !== undefined) {
+            if (player.aliases.some((alias) => alias in currentVoters)) {
+                continue;
+            }
+        }
 
         nonVoters.push(player.name);
     }
