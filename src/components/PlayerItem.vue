@@ -13,6 +13,10 @@
             <button>1</button>
         </div>
         <div class="aliases">
+            <div class="word-view" v-for="alias in aliases" :key="alias">
+                <label>{{ alias }}</label
+                ><button class="remove-button" @click="removeAlias(alias)">🗙</button>
+            </div>
             <input type="text" ref="aliasInput" v-if="isAddAlias" @blur="addAlias" @keyup="handleKeyupAlias" />
             <button @click="showAliasInput">+</button>
         </div>
@@ -32,6 +36,15 @@ export default class PlayerItem extends Vue {
     private isEditName: boolean = false;
     private isAddAlias: boolean = false;
 
+    get aliases(): string[] {
+        const player: Player = this.$store.getters.player(this.name);
+        if (player.aliases === undefined) {
+            return [];
+        }
+
+        return player.aliases;
+    }
+
     edit(): void {
         this.isEditName = true;
         Vue.nextTick(() => {
@@ -48,12 +61,19 @@ export default class PlayerItem extends Vue {
     addAlias(e: Event): void {
         const alias = (e.target as HTMLInputElement).value;
         if (alias.length) {
-            this.isAddAlias = false;
             this.$store.commit("addAlias", {
                 player: this.name,
                 alias: alias,
             });
+            this.isAddAlias = false;
         }
+    }
+
+    removeAlias(alias: string): void {
+        this.$store.commit("removeAlias", {
+            player: this.name,
+            alias: alias,
+        });
     }
 
     showAliasInput(): void {

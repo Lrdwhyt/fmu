@@ -12,7 +12,7 @@
 
 .word-view > label {
     display: inline-block;
-    padding: 4px 6px;
+    padding: 4px 2px 4px 6px;
 }
 
 .word-edit > input {
@@ -37,12 +37,20 @@
     color: rgb(187, 10, 10);
 }
 
-button {
+#fmu button {
     font-family: inherit;
-    padding: 4px;
 }
 
-input {
+.fmu-button {
+    background-color: #3a3f73;
+    border: none;
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+    color: #eee;
+    font-family: inherit;
+    padding: 4px 6px;
+}
+
+#fmu input {
     font-family: inherit;
     padding: 4px;
 }
@@ -50,8 +58,4 @@ input {
 .fmu-panel,
 .settings-panel {
     padding: 8px 0;
-}
-
-.word-view:hover {
-    opacity: 0.7;
 }

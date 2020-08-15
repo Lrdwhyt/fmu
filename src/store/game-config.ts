@@ -105,6 +105,28 @@ export default {
 
         setDay(state: Store, obj: { day: number, data: Day }): void {
             Vue.set(state.days, obj.day, obj.data);
+        },
+
+        addAlias(state: Store, obj: { player: string, alias: string }) {
+            const index = state.players.findIndex((player) => player.name === obj.player);
+            if (index === -1) {
+                return;
+            }
+            if (state.players[index].aliases !== undefined) {
+                if (state.players[index].aliases!.indexOf(obj.alias) === -1) {
+                    state.players[index].aliases!.push(obj.alias);
+                }
+            } else {
+                Vue.set(state.players[index], "aliases", [obj.alias]);
+            }
+        },
+
+        removeAlias(state: Store, obj: { player: string, alias: string }) {
+            const index = state.players.findIndex((player) => player.name === obj.player);
+            if (state.players[index].aliases !== undefined) {
+                const aliasIndex = state.players[index].aliases!.findIndex((alias) => alias === obj.alias);
+                Vue.delete(state.players[index].aliases!, aliasIndex);
+            }
         }
     },
 
@@ -184,6 +206,10 @@ export default {
 
         days(state: Store) {
             return state.days;
+        },
+
+        player(state: Store): Player {
+            return (name: string) => state.players.find((player) => player.name === name) || { name: name };
         },
 
         playerList(state: Store): Player[] {

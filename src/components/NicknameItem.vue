@@ -9,7 +9,7 @@
                 ><button class="remove-button" @click="removeNickname(nickname)">🗙</button>
             </div>
             <input type="text" ref="newNickname" @blur="addNickname" @keyup="keyUp" />
-            <button @click="addNickname">Add</button>
+            <button class="fmu-button" @click="addNickname">Add</button>
         </div>
     </div>
 </template>
@@ -64,9 +64,14 @@ export default class NicknameItem extends Vue {
 
 <style scoped>
 .player-name {
-    background-color: #b4afdf;
+    background-color: #746c8b;
+    color: #fff;
     font-weight: bold;
     margin-right: 10px;
+}
+
+.player-name:hover {
+    background-color: #524c63;
 }
 
 .nicknames-wrapper {
