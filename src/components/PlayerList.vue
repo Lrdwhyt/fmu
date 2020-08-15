@@ -1,14 +1,16 @@
 <template>
     <div>
-        <ol class="player-list">
-            <li v-for="player in players" v-bind:key="player.name">
-                <player-item :name="player.name" />
-            </li>
-            <li>
-                <input ref="newPlayer" type="text" @keyup="keyUp" />
-                <button @click="addPlayer">Add</button>
-            </li>
-        </ol>
+        <table class="player-list">
+            <tr>
+                <td>Name</td>
+                <td>Status</td>
+                <td>Died</td>
+                <td>Aliases</td>
+            </tr>
+            <template v-for="player in players">
+                <player-item :player="player" :name="player.name" :key="player.name" />
+            </template>
+        </table>
     </div>
 </template>
 
@@ -28,36 +30,12 @@ export default class PlayerList extends Vue {
     get players(): Player[] {
         return this.$store.getters.playerList;
     }
-
-    keyUp(e: KeyboardEvent): void {
-        if (e.keyCode === 13) {
-            this.addPlayer();
-        }
-    }
-
-    addPlayer(): void {
-        const playerName: string = (this.$refs.newPlayer as HTMLInputElement).value;
-        if (playerName.length) {
-            const player: Player = {
-                name: playerName,
-                isAlive: true,
-            };
-            this.$store.commit("addPlayer", player);
-            (this.$refs.newPlayer as HTMLInputElement).value = "";
-            (this.$refs.newPlayer as HTMLInputElement).focus();
-        }
-    }
 }
 </script>
 
 <style scoped>
-ol {
-    list-style: inside;
-    padding: 0;
-}
-li {
-    list-style-type: decimal-leading-zero;
-    margin-bottom: 4px;
-    padding: 0;
+td {
+    font-weight: bold;
+    padding: 0 8px;
 }
 </style>

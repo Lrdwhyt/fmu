@@ -1,35 +1,41 @@
 <template>
-    <div class="player-item" :class="{ 'dead-player': !isAlive }">
-        <div class="player-name word-edit" v-if="isEditName">
-            <input type="text" ref="edit" :value="this.$props.name" @blur="stopEdit" @keyup="handleKeyup" />
-        </div>
-        <div class="player-name word-view" v-else>
-            <label @click="edit">{{ this.$props.name }}</label
-            ><button class="remove-button" @click="remove">🗙</button>
-        </div>
-        <button class="status-indicator" @click="toggleAlive">{{ lifeString }}</button>
-        <div class="death-selection word-view" v-if="!isAlive">
-            <button @click="switchDeathPhaseType">{{ deathPhaseType }}</button
-            ><input
-                type="number"
-                ref="editDeathTime"
-                v-if="isEditDeathTime"
-                :value="dayOfDeath"
-                size="3"
-                @blur="saveDeathDay"
-                @keyup="handleKeyupDeathDay"
-            />
-            <button @click="editDeathTime" v-else>{{ dayOfDeath }}</button>
-        </div>
-        <div class="aliases">
+    <tr class="player-item" :class="{ 'dead-player': !isAlive }">
+        <td>
+            <div class="player-name word-edit" v-if="isEditName">
+                <input type="text" ref="edit" :value="this.$props.name" @blur="stopEdit" @keyup="handleKeyup" />
+            </div>
+            <div class="player-name word-view" v-else>
+                <label @click="edit">{{ this.$props.name }}</label
+                ><button class="remove-button" @click="remove">🗙</button>
+            </div>
+        </td>
+        <td>
+            <button class="status-indicator" @click="toggleAlive">{{ lifeString }}</button>
+        </td>
+        <td>
+            <div class="death-selection word-view" v-if="!isAlive">
+                <button @click="switchDeathPhaseType">{{ deathPhaseType }}</button
+                ><input
+                    type="number"
+                    ref="editDeathTime"
+                    v-if="isEditDeathTime"
+                    :value="dayOfDeath"
+                    size="3"
+                    @blur="saveDeathDay"
+                    @keyup="handleKeyupDeathDay"
+                />
+                <button @click="editDeathTime" v-else>{{ dayOfDeath }}</button>
+            </div>
+        </td>
+        <td class="aliases">
             <div class="word-view" v-for="alias in aliases" :key="alias">
                 <label>{{ alias }}</label
                 ><button class="remove-button" @click="removeAlias(alias)">🗙</button>
             </div>
             <input type="text" ref="aliasInput" v-if="isAddAlias" @blur="addAlias" @keyup="handleKeyupAlias" />
             <button @click="showAliasInput">+</button>
-        </div>
-    </div>
+        </td>
+    </tr>
 </template>
 
 <script lang="ts">
@@ -43,20 +49,17 @@ import { PhaseType, Phase } from "@/Phase";
 })
 export default class PlayerItem extends Vue {
     @Prop() private name!: string;
+    @Prop() private player!: Player;
     private isEditName: boolean = false;
     private isAddAlias: boolean = false;
     private isEditDeathTime: boolean = false;
 
-    get player(): Player {
-        return this.$store.getters.player(this.name);
-    }
-
     get aliases(): string[] {
-        return this.player.aliases || [];
+        return this.$props.player.aliases || [];
     }
 
     get lifeString(): string {
-        if (this.player.isAlive) {
+        if (this.$props.player.isAlive) {
             return "alive";
         } else {
             return "dead";
@@ -64,20 +67,20 @@ export default class PlayerItem extends Vue {
     }
 
     get isAlive(): boolean {
-        return this.player.isAlive;
+        return this.$props.player.isAlive;
     }
 
     get deathPhaseType(): string {
-        if (this.player.timeOfDeath !== undefined) {
-            return this.player.timeOfDeath.type;
+        if (this.$props.player.timeOfDeath !== undefined) {
+            return this.$props.player.timeOfDeath.type;
         }
 
         return "night";
     }
 
     get dayOfDeath(): number {
-        if (this.player.timeOfDeath !== undefined) {
-            return this.player.timeOfDeath.index + 1;
+        if (this.$props.player.timeOfDeath !== undefined) {
+            return this.$props.player.timeOfDeath.index + 1;
         }
 
         return 1;
@@ -91,19 +94,19 @@ export default class PlayerItem extends Vue {
     }
 
     toggleAlive(): void {
-        const phase: Phase = this.player.timeOfDeath || {
+        const phase: Phase = this.$props.player.timeOfDeath || {
             type: PhaseType.NIGHT,
             index: this.$store.getters.selectedDay || 1,
         };
         this.$store.commit("setDeathStatus", {
             player: this.name,
-            isAlive: !this.player.isAlive,
+            isAlive: !this.$props.player.isAlive,
             timeOfDeath: phase,
         });
     }
 
     switchDeathPhaseType(): void {
-        let phase: Phase = this.player.timeOfDeath || {
+        let phase: Phase = this.$props.player.timeOfDeath || {
             type: PhaseType.NIGHT,
             index: 1,
         };
@@ -114,7 +117,7 @@ export default class PlayerItem extends Vue {
         }
         this.$store.commit("setDeathStatus", {
             player: this.name,
-            isAlive: this.player.isAlive,
+            isAlive: this.$props.player.isAlive,
             timeOfDeath: phase,
         });
     }
@@ -127,14 +130,14 @@ export default class PlayerItem extends Vue {
     }
 
     saveDeathDay(e: Event): void {
-        let phase: Phase = this.player.timeOfDeath || {
+        let phase: Phase = this.$props.player.timeOfDeath || {
             type: PhaseType.NIGHT,
             index: 1,
         };
         phase.index = parseInt((e.target as HTMLInputElement).value) - 1;
         this.$store.commit("setDeathStatus", {
             player: this.name,
-            isAlive: this.player.isAlive,
+            isAlive: this.$props.player.isAlive,
             timeOfDeath: phase,
         });
         this.isEditDeathTime = false;
@@ -201,13 +204,13 @@ export default class PlayerItem extends Vue {
 </script>
 
 <style scoped>
+td {
+    padding: 0 8px;
+}
+
 .dead-player {
     opacity: 0.6;
     text-decoration: line-through;
-}
-
-.player-item {
-    display: inline-block;
 }
 
 .player-name label {

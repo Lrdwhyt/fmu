@@ -1,10 +1,16 @@
 <template>
-    <div>
+    <div class="fmu-panel">
         <player-list />
-        <button @click="setPasteActive">Add from list</button>
-        <div v-if="isPasteActive">
-            <div><textarea ref="pasteArea"/></div>
-            <div><button @click="addMultiple">Add all</button></div>
+        <div>
+            <input ref="newPlayer" type="text" @keyup="handleKeyup" />
+            <button @click="addPlayer">Add</button>
+        </div>
+        <div>
+            <button @click="setPasteActive">Add from list</button>
+            <div v-if="isPasteActive">
+                <div><textarea ref="pasteArea"/></div>
+                <div><button @click="addMultiple">Add all</button></div>
+            </div>
         </div>
     </div>
 </template>
@@ -23,16 +29,12 @@ import { trimChars } from "@/StringUtils";
     },
 })
 export default class PlayerManagementPanel extends Vue {
-    private isMultiPasteActive: boolean = false;
-
-    get isPasteActive(): boolean {
-        return this.isMultiPasteActive;
-    }
+    private isPasteActive: boolean = false;
 
     setPasteActive() {
-        this.isMultiPasteActive = !this.isMultiPasteActive;
+        this.isPasteActive = !this.isPasteActive;
 
-        if (this.isMultiPasteActive) {
+        if (this.isPasteActive) {
             Vue.nextTick(() => {
                 (this.$refs.pasteArea as HTMLTextAreaElement).focus();
             });
@@ -47,12 +49,31 @@ export default class PlayerManagementPanel extends Vue {
 
         const list: string[] = contents.split("\n");
         for (const player of list) {
-            this.addPlayer(player);
+            this.addPlayerFromPaste(player);
         }
-        this.isMultiPasteActive = false;
+        this.isPasteActive = false;
     }
 
-    addPlayer(name: string): void {
+    handleKeyup(e: KeyboardEvent): void {
+        if (e.keyCode === 13) {
+            this.addPlayer();
+        }
+    }
+
+    addPlayer(): void {
+        const playerName: string = (this.$refs.newPlayer as HTMLInputElement).value;
+        if (playerName.length) {
+            const player: Player = {
+                name: playerName,
+                isAlive: true,
+            };
+            this.$store.commit("addPlayer", player);
+            (this.$refs.newPlayer as HTMLInputElement).value = "";
+            (this.$refs.newPlayer as HTMLInputElement).focus();
+        }
+    }
+
+    addPlayerFromPaste(name: string): void {
         if (name.includes(")")) {
             name = name.split(")")[1];
         }
