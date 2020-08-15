@@ -22,7 +22,8 @@ div {
 }
 
 label {
-    padding: 3px;
+    display: inline-block;
+    padding: 4px;
 }
 
 .voter {

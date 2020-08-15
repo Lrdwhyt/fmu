@@ -2,9 +2,8 @@
     <div>
         <div class="player-name word-view">
             <label @click="edit">{{ this.$props.name }}</label
-            ><button class="remove-button" @click="remove">🗙</button>
-        </div>
-        <div class="nicknames-wrapper">
+            ><button class="remove-button" @click="remove">🗙</button> </div
+        ><div class="nicknames-wrapper">
             <div class="nickname word-view" v-for="nickname in nicknames" :key="nickname">
                 <label>{{ nickname }}</label
                 ><button class="remove-button" @click="removeNickname(nickname)">🗙</button>
@@ -65,6 +64,7 @@ export default class NicknameItem extends Vue {
 
 <style scoped>
 .player-name {
+    background-color: #b4afdf;
     font-weight: bold;
     margin-right: 10px;
 }
@@ -75,5 +75,9 @@ export default class NicknameItem extends Vue {
 
 .nickname {
     margin: 0 3px;
+}
+
+input {
+    padding: 4px;
 }
 </style>

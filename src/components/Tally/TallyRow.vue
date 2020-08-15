@@ -2,8 +2,8 @@
     <div>
         <div class="target">
             <div class="number-votes">
-                {{ number }}
-            </div><div class="target-name">
+                {{ number }} </div
+            ><div class="target-name">
                 {{ target }}
             </div>
         </div>

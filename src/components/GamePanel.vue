@@ -3,7 +3,7 @@
         <page-list />
         <div>
             <button @click="showVoteTally" :class="{ 'active-tab': activePanel === 'TallyPanel' }">Tally</button
-            ><button @click="showGameLog" :class="{ 'active-tab': activePanel === 'GameLogView' }">Vote log</button
+            ><button @click="showGameLog" :class="{ 'active-tab': activePanel === 'GameLogView' }">Game log</button
             ><button @click="showGameConfig" :class="{ 'active-tab': activePanel === 'GameConfigPanel' }">Game configuration</button
             ><button @click="showPlayerManagement" :class="{ 'active-tab': activePanel === 'PlayerManagementPanel' }">Players</button>
         </div>

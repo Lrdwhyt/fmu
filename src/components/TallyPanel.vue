@@ -1,13 +1,5 @@
 <template>
-    <div>
-        <!--<template v-for="(item, target) in tally.tally">
-            <div v-bind:key="target">
-                <strong>{{ target }}</strong>
-                <span v-for="vote in item" :key="vote.vote.location" :class="{ unvote: 'unvote' in vote }">
-                    {{ vote.vote.user }} ({{ vote.vote.location }}) {{ vote.unvote ? vote.unvote.location : " " }}
-                </span>
-            </div>
-        </template>-->
+    <div class="fmu-panel">
         <tally-view :tally="tally" />
         <div>
             <button>Update</button>
@@ -69,10 +61,6 @@ export default class TallyPanel extends Vue {
 </script>
 
 <style scoped>
-.unvote {
-    text-decoration: line-through;
-}
-
 textarea {
     height: 0;
     opacity: 0;

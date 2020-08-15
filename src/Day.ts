@@ -34,11 +34,11 @@ export function generateNext(days: Day[], nightTime: string, dayLength: number, 
             }
         }
     }
-    
+
     const lastDay: Day = days.slice(-1)[0];
     const newStartPost: number = lastDay.end.post + 1;
     const newEndPost: number = Math.max(newStartPost + 1, lastKnownPost);
-    
+
     return {
         start: {
             type: lastDay.end.type,

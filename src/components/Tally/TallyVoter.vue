@@ -1,8 +1,8 @@
 <template>
     <div class="voter" :class="{ unvote: hasUnvote }" v-if="visible">
-        <label>{{ user }}</label>
-        <a :title="pair.vote.source">{{ pair.vote.location }}</a>
-        <a v-if="isFullPair">{{ unvoteLocation }}</a>
+        <label>{{ user }}</label
+        ><a :href="linkPost(pair.vote)" :title="pair.vote.source">{{ pair.vote.location }}</a
+        ><a :href="linkPost(pair.unvote)" :title="pair.unvote.source" v-if="isFullPair">{{ unvoteLocation }}</a>
     </div>
 </template>
 
@@ -45,6 +45,10 @@ export default class TallyVoter extends Vue {
     get user(): string {
         return this.pair.vote.user;
     }
+
+    linkPost(vote: Vote): string {
+        return `http://forums.kingdomofloathing.com/vb/showthread.php?p=${vote.link}`;
+    }
 }
 </script>
 
@@ -54,7 +58,12 @@ div {
 }
 
 .unvote {
-    opacity: 0.4;
+    opacity: 0.3;
+    text-decoration: line-through;
+}
+
+.unvote label,
+.unvote a {
     text-decoration: line-through;
 }
 
@@ -62,14 +71,24 @@ div {
     opacity: 0.7;
 }
 
-a {
-    background-color: #888;
+a,
+label {
     display: inline-block;
-    padding: 3px;
+    padding: 4px;
 }
 
-label {
-    padding: 3px;
+a {
+    background-color: #888;
+}
+
+a,
+a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: #aaa;
 }
 
 .voter {

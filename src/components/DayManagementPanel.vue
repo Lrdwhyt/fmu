@@ -35,7 +35,13 @@ export default class DayManagementPanel extends Vue {
         } else {
             lastKnownPost = (totalPages - 1) * this.$store.getters.postsPerPage + 1;
         }
-        const day: Day = generateNext(this.$store.getters.days, this.$store.getters.nightTime, this.$store.getters.dayLength, this.$store.getters.nightLength, lastKnownPost);
+        const day: Day = generateNext(
+            this.$store.getters.days,
+            this.$store.getters.nightTime,
+            this.$store.getters.dayLength,
+            this.$store.getters.nightLength,
+            lastKnownPost
+        );
         this.$store.commit("addDay", day);
     }
 }
