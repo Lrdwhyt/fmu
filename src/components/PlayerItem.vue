@@ -2,15 +2,15 @@
     <tr class="player-item" :class="{ 'dead-player': !isAlive }">
         <td>
             <div class="player-name word-edit" v-if="isEditName">
-                <input type="text" ref="edit" :value="this.$props.name" @blur="stopEdit" @keyup="handleKeyup" />
+                <input type="text" ref="editName" :value="this.$props.name" size="16" @blur="changeName" @keyup="keyupChangeName" />
             </div>
             <div class="player-name word-view" v-else>
-                <label @click="edit">{{ this.$props.name }}</label
+                <label @click="startEditName">{{ this.$props.name }}</label
                 ><button class="remove-button" @click="remove">🗙</button>
             </div>
         </td>
         <td>
-            <button class="status-indicator" @click="toggleAlive">{{ lifeString }}</button>
+            <button class="status-indicator" :class="lifeString" @click="toggleAlive">{{ lifeString }}</button>
         </td>
         <td>
             <div class="death-selection word-view" v-if="!isAlive">
@@ -20,7 +20,7 @@
                     ref="editDeathTime"
                     v-if="isEditDeathTime"
                     :value="dayOfDeath"
-                    size="3"
+                    size="2"
                     @blur="saveDeathDay"
                     @keyup="handleKeyupDeathDay"
                 />
@@ -33,7 +33,7 @@
                 ><button class="remove-button" @click="removeAlias(alias)">🗙</button>
             </div>
             <input type="text" ref="aliasInput" v-if="isAddAlias" @blur="addAlias" @keyup="handleKeyupAlias" />
-            <button @click="showAliasInput">+</button>
+            <button class="fmu-button" @click="showAddAlias">+</button>
         </td>
     </tr>
 </template>
@@ -75,7 +75,7 @@ export default class PlayerItem extends Vue {
             return this.$props.player.timeOfDeath.type;
         }
 
-        return "night";
+        return PhaseType.NIGHT;
     }
 
     get dayOfDeath(): number {
@@ -86,10 +86,10 @@ export default class PlayerItem extends Vue {
         return 1;
     }
 
-    edit(): void {
+    startEditName(): void {
         this.isEditName = true;
         Vue.nextTick(() => {
-            (this.$refs.edit as HTMLInputElement).focus();
+            (this.$refs.editName as HTMLInputElement).focus();
         });
     }
 
@@ -173,20 +173,20 @@ export default class PlayerItem extends Vue {
         });
     }
 
-    showAliasInput(): void {
+    showAddAlias(): void {
         this.isAddAlias = !this.isAddAlias;
         Vue.nextTick(() => {
             (this.$refs.aliasInput as HTMLInputElement).focus();
         });
     }
 
-    handleKeyup(e: KeyboardEvent) {
+    keyupChangeName(e: KeyboardEvent) {
         if (e.keyCode === 13) {
-            this.stopEdit(e);
+            this.changeName(e);
         }
     }
 
-    stopEdit(e: Event): void {
+    changeName(e: Event): void {
         const newValue = (e.target as HTMLInputElement).value;
         if (newValue.length > 0) {
             this.$store.commit("changePlayerName", {
@@ -209,19 +209,61 @@ td {
 }
 
 .dead-player {
-    opacity: 0.6;
+    opacity: 0.4;
+}
+
+.dead-player label {
     text-decoration: line-through;
+}
+
+.player-name {
+    background-color: #746c8b;
+    color: #fff;
+    font-weight: bold;
+}
+
+.player-name:hover {
+    background-color: #524c63;
 }
 
 .player-name label {
     cursor: text;
 }
 
+.player-name.word-edit input {
+    padding: 3px 5px;
+}
+
 .death-selection {
     display: inline-block;
 }
 
+.death-selection button {
+    border: none;
+    padding: 4px;
+}
+
 .aliases {
     display: inline-block;
+}
+
+.status-indicator {
+    border: none;
+    opacity: 0.8;
+    padding: 4px 6px;
+}
+
+.status-indicator:hover {
+    opacity: 1;
+}
+
+.dead {
+    background-color: #ccc;
+    color: #333;
+}
+
+.alive {
+    background-color: #859bdf;
+    color: #fff;
 }
 </style>

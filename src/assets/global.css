@@ -37,22 +37,17 @@
     color: rgb(187, 10, 10);
 }
 
-#fmu button {
-    font-family: inherit;
-}
-
 .fmu-button {
-    background-color: #3a3f73;
+    background-color: #585580;
     border: none;
     box-shadow: 1px 1px rgba(0, 0, 0, 0.5);
-    color: #eee;
+    color: #fff;
     font-family: inherit;
     padding: 4px 6px;
 }
 
-#fmu input {
-    font-family: inherit;
-    padding: 4px;
+.fmu-button:hover {
+    background-color: #446;
 }
 
 .fmu-panel,

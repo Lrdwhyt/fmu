@@ -3,13 +3,13 @@
         <player-list />
         <div>
             <input ref="newPlayer" type="text" @keyup="handleKeyup" />
-            <button @click="addPlayer">Add</button>
+            <button class="fmu-button" @click="addPlayer">Add</button>
         </div>
         <div>
-            <button @click="setPasteActive">Add from list</button>
+            <button class="fmu-button" @click="setPasteActive">Add from list</button>
             <div v-if="isPasteActive">
                 <div><textarea ref="pasteArea"/></div>
-                <div><button @click="addMultiple">Add all</button></div>
+                <div><button class="fmu-button" @click="addMultiple">Add all</button></div>
             </div>
         </div>
     </div>

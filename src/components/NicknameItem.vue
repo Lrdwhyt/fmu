@@ -70,10 +70,6 @@ export default class NicknameItem extends Vue {
     margin-right: 10px;
 }
 
-.player-name:hover {
-    background-color: #524c63;
-}
-
 .nicknames-wrapper {
     display: inline;
 }

@@ -5,7 +5,7 @@
             <no-vote-keyword-item v-bind:key="keyword" :keyword="keyword" />
         </template>
         <add-no-vote-keyword-item v-if="isAddKeyword" @register="hideInput" />
-        <button @click="addKeyword">+</button>
+        <button class="fmu-button" @click="addKeyword">+</button>
     </div>
 </template>
 

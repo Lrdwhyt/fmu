@@ -8,12 +8,12 @@
             <tr v-for="(title, id) in activeGameList" v-bind:key="id">
                 <td>{{ title }}</td>
                 <td>{{ getMemoryUsageByGame(id) }} MB</td>
-                <td><button @click="clear(parseInt(id))">Clear</button></td>
+                <td><button class="fmu-button" @click="clear(parseInt(id))">Clear</button></td>
             </tr>
         </table>
 
         <div>Total memory usage: {{ memoryUsed() }}</div>
-        <button @click="resetAll">Reset</button>
+        <button class="fmu-button" @click="resetAll">Reset</button>
     </div>
 </template>
 
