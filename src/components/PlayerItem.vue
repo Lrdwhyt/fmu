@@ -1,5 +1,5 @@
 <template>
-    <div class="player-item">
+    <div class="player-item" :class="{ 'dead-player': !isAlive }">
         <div class="player-name word-edit" v-if="isEditName">
             <input type="text" ref="edit" :value="this.$props.name" @blur="stopEdit" @keyup="handleKeyup" />
         </div>
@@ -201,6 +201,11 @@ export default class PlayerItem extends Vue {
 </script>
 
 <style scoped>
+.dead-player {
+    opacity: 0.6;
+    text-decoration: line-through;
+}
+
 .player-item {
     display: inline-block;
 }

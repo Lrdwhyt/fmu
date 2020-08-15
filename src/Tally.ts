@@ -1,5 +1,6 @@
 import { Vote, VoteTarget, VoteType } from '@/Vote';
 import { Player } from './Player';
+import { PhaseType } from './Phase';
 
 export interface RawTally {
     [target: string]: RawTallyItem
@@ -38,7 +39,21 @@ export function numberVotes(item: TallyItem): number {
     return item.filter((pair) => !("unvote" in pair)).length;
 }
 
-export function createFromLog(votes: Vote[], players: Player[]): TallyWrapper {
+function canVoteOnDay(player: Player, day: number): boolean {
+    if (player.isAlive || player.timeOfDeath === undefined) {
+        return true;
+    }
+
+    if (player.timeOfDeath.type === PhaseType.NIGHT) {
+        return player.timeOfDeath.index >= day;
+    } else if (player.timeOfDeath.type === PhaseType.DAY) {
+        return player.timeOfDeath.index > day;
+    }
+
+    return false; // should not be reached
+}
+
+export function createFromLog(votes: Vote[], players: Player[], day: number): TallyWrapper {
     let tally: Tally = {};
     let currentVoters: UserVoteTracker = {};
 
@@ -89,15 +104,20 @@ export function createFromLog(votes: Vote[], players: Player[]): TallyWrapper {
 
     // now append players who have yet to vote
     let nonVoters: string[] = [];
-    
+
     for (const player of players) {
         if (player.name in currentVoters) {
             continue;
         }
+
         if (player.aliases !== undefined) {
             if (player.aliases.some((alias) => alias in currentVoters)) {
                 continue;
             }
+        }
+
+        if (!canVoteOnDay(player, day)) {
+            continue;
         }
 
         nonVoters.push(player.name);

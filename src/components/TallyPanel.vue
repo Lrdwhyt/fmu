@@ -45,7 +45,7 @@ export default class TallyPanel extends Vue {
     }
 
     get tally(): TallyWrapper {
-        return createFromLog(this.votes, this.$store.getters.playerList);
+        return createFromLog(this.votes, this.$store.getters.playerList, this.selectedDay);
     }
 
     copyBbcode(): void {
