@@ -53,9 +53,10 @@ export function generateNext(days: Day[], nightTime: string, dayLength: number, 
     }
 }
 
+// get next Date at which time = nightTime
 function getNextDate(nightTime: string): Date {
     let nextDate: Date = new Date();
-    let hoursMinutes = getTimeStringAsHoursMinutes(nightTime);
+    const hoursMinutes = getTimeStringAsHoursMinutes(nightTime);
     nextDate.setHours(hoursMinutes.hours);
     nextDate.setMinutes(hoursMinutes.minutes);
     nextDate.setSeconds(0);
@@ -71,10 +72,7 @@ function getNextDate(nightTime: string): Date {
 export function getTimeStringAsHoursMinutes(time: string) {
     const arr = time.split(":");
     const minutes = parseInt(arr[1]);
-    //const timeZone = getTimeZone();
-    let hours = parseInt(arr[0]);
-    hours += 24;
-    hours = hours % 24;
+    const hours = parseInt(arr[0]) % 24;
 
     return {
         hours,

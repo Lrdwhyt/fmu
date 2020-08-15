@@ -3,7 +3,7 @@
         <page-list />
         <div>
             <button @click="showVoteTally" :class="{ 'active-tab': activePanel === 'TallyPanel' }">Tally</button
-            ><button @click="showGameLog" :class="{ 'active-tab': activePanel === 'GameLogView' }">Game log</button
+            ><button @click="showGameLog" :class="{ 'active-tab': activePanel === 'GameLogPanel' }">Game log</button
             ><button @click="showGameConfig" :class="{ 'active-tab': activePanel === 'GameConfigPanel' }">Game configuration</button
             ><button @click="showPlayerManagement" :class="{ 'active-tab': activePanel === 'PlayerManagementPanel' }">Players</button>
         </div>
@@ -17,7 +17,7 @@ import Component from "vue-class-component";
 import TallyPanel from "./TallyPanel.vue";
 import GameConfigPanel from "./GameConfigPanel.vue";
 import PlayerManagementPanel from "./PlayerManagementPanel.vue";
-import GameLogView from "./GameLogView.vue";
+import GameLogPanel from "./GameLogPanel.vue";
 import PageList from "./PageList.vue";
 
 @Component({
@@ -27,7 +27,7 @@ import PageList from "./PageList.vue";
         TallyPanel,
         GameConfigPanel,
         PlayerManagementPanel,
-        GameLogView,
+        GameLogPanel,
     },
 })
 export default class GamePanel extends Vue {
@@ -46,7 +46,7 @@ export default class GamePanel extends Vue {
     }
 
     showGameLog(): void {
-        this.$store.commit("setGamePanel", "GameLogView");
+        this.$store.commit("setGamePanel", "GameLogPanel");
     }
 
     showGameConfig(): void {

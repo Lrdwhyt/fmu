@@ -9,9 +9,9 @@ let gameId: number = -1;
 
 function convertStringToObject(str: string): any {
     try {
-        const o = JSON.parse(str);
-        if (o) {
-            return o;
+        const obj = JSON.parse(str);
+        if (obj) {
+            return obj;
         }
     } catch {
     }
@@ -76,24 +76,24 @@ export function getPlatform(): any {
     return getAsObjectFromLocalStorage(PLATFORM_DATA);
 }
 
-export function saveSettings(o: any): void {
-    localStorage.setItem(SCRIPT_SETTINGS, JSON.stringify(o));
+export function saveSettings(obj: any): void {
+    localStorage.setItem(SCRIPT_SETTINGS, JSON.stringify(obj));
 }
 
-export function saveGameInfo(o: any): void {
-    localStorage.setItem(gameInfoKey(), JSON.stringify(o));
+export function saveGameInfo(obj: any): void {
+    localStorage.setItem(gameInfoKey(), JSON.stringify(obj));
 }
 
-export function saveGameData(o: any): void {
-    localStorage.setItem(gameDataKey(), JSON.stringify(o));
+export function saveGameData(obj: any): void {
+    localStorage.setItem(gameDataKey(), JSON.stringify(obj));
 }
 
-export function savePlatform(o: any): void {
-    localStorage.setItem(PLATFORM_DATA, JSON.stringify(o));
+export function savePlatform(obj: any): void {
+    localStorage.setItem(PLATFORM_DATA, JSON.stringify(obj));
 }
 
-export function saveInterfaceData(o: any): void {
-    localStorage.setItem(interfaceKey(), JSON.stringify(o));
+export function saveInterfaceData(obj: any): void {
+    localStorage.setItem(interfaceKey(), JSON.stringify(obj));
 }
 
 const decimalPlaces = 1000;

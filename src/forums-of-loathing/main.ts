@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from '@/components/App.vue'
 import Store from "@/store"
 
-let attachFmu = function() {
+const attachFmu = function() {
     let app = document.createElement("div");
     app.id = "fmu-app";
     const attachPoint = document.getElementById("qrform");
@@ -11,7 +11,7 @@ let attachFmu = function() {
     }
 };
 
-let main = function() {
+const main = function() {
     attachFmu();
     Store.dispatch("init");
     Store.dispatch("finalInit");
@@ -22,7 +22,7 @@ let main = function() {
 };
 
 if (document.readyState === "loading") {
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener("DOMContentLoaded", function() {
         main();
     });
 } else {

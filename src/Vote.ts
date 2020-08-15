@@ -1,13 +1,11 @@
-import { Player } from './Player';
-
 export enum VoteType {
     NONE, UNVOTE, VOTE
 }
 
 export enum SpecialVote {
+    NONE = "",
     NOELIMINATION = "No elimination",
     NOVOTE = "No vote",
-    NONE = ""
 }
 
 export type VoteTarget = string | SpecialVote;

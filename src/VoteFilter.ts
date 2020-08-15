@@ -9,7 +9,6 @@ export function filterByDay(day: Day) {
         let startBoundaryFilter: boolean;
         let endBoundaryFilter: boolean;
 
-
         if (startBoundary === DayBoundaryType.DATE) {
             startBoundaryFilter = vote.time >= day.start.date;
         } else {

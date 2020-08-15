@@ -17,7 +17,7 @@ import TallyView from "./Tally/TallyView.vue";
 import DayManagementPanel from "./DayManagementPanel.vue";
 import { Day } from "@/Day";
 import { filterByDay } from "@/VoteFilter";
-import { createFromLog, Tally, FullTally, numberVotes } from "@/Tally";
+import { createFromLog, FullTally } from "@/Tally";
 import { writeBbcode, header } from "@/BbcodeWriter";
 
 @Component({

@@ -8,22 +8,18 @@
                 <span>(#{{ vote.location }})</span>
             </div>
         </template>
-        <day-management-panel />
     </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { Vote, VoteType } from "@/Vote";
-import DayManagementPanel from "./DayManagementPanel.vue";
 import { Day } from "@/Day";
 import { filterByDay } from "@/VoteFilter";
 
 @Component({
     name: "game-log-view",
-    components: {
-        DayManagementPanel,
-    },
+    components: {},
 })
 export default class GameLogView extends Vue {
     get selectedDay(): number {

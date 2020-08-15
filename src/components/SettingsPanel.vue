@@ -17,6 +17,7 @@ import Component from "vue-class-component";
 import NicknameManagerPanel from "./NicknameManagerPanel.vue";
 import PlatformSettings from "./ForumsOfLoathingSettings.vue";
 import GeneralSettingsPanel from "./GeneralSettingsPanel.vue";
+import ColourManagementPanel from "./ColourManagementPanel.vue";
 import MemoryPanel from "./MemoryPanel.vue";
 
 @Component({
@@ -26,6 +27,7 @@ import MemoryPanel from "./MemoryPanel.vue";
         PlatformSettings,
         MemoryPanel,
         GeneralSettingsPanel,
+        ColourManagementPanel,
     },
 })
 export default class SettingsPanel extends Vue {
@@ -57,7 +59,6 @@ export default class SettingsPanel extends Vue {
     }
 
     get activePanel() {
-        //return this.comp;
         return this.$store.getters.settingsPanel;
     }
 }

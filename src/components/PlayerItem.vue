@@ -28,7 +28,7 @@
             </div>
         </td>
         <td class="aliases">
-            <div class="word-view" v-for="alias in aliases" :key="alias">
+            <div class="word-view alias" v-for="alias in aliases" :key="alias">
                 <label>{{ alias }}</label
                 ><button class="remove-button" @click="removeAlias(alias)">🗙</button>
             </div>
@@ -208,7 +208,7 @@ td {
     padding: 0 8px;
 }
 
-.dead-player {
+.dead-player .player-name {
     opacity: 0.4;
 }
 
@@ -245,6 +245,10 @@ td {
 
 .aliases {
     display: inline-block;
+}
+
+.alias {
+    margin: 0 3px;
 }
 
 .status-indicator {

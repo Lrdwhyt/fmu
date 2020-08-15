@@ -21,7 +21,7 @@ interface VoteTargetPair {
 }
 
 export function getVoteList(rawGameData: any, info: VoteParserInformation): Vote[] {
-    let votes: Vote[] = [];
+    const votes: Vote[] = [];
     for (const page in rawGameData) {
         for (const post in rawGameData[page]) {
             if (post === "last") {
@@ -32,8 +32,8 @@ export function getVoteList(rawGameData: any, info: VoteParserInformation): Vote
                 continue;
             }
             const raw = data.content.toLowerCase();
-            let type = getVoteType(raw, info.voteKeyword, info.unvoteKeyword);
-            let target = getVoteTarget(raw, type, info);
+            const type = getVoteType(raw, info.voteKeyword, info.unvoteKeyword);
+            const target = getVoteTarget(raw, type, info);
             if (type === VoteType.VOTE && target.target === SpecialVote.NONE) {
                 continue;
             }
@@ -43,11 +43,9 @@ export function getVoteList(rawGameData: any, info: VoteParserInformation): Vote
                 time: new Date(data.time),
                 link: data.link,
                 target: target.target,
+                confidence: target.confidence,
                 type: type,
                 location: parseInt(post)
-            }
-            if ("confidence" in target) {
-                vote["confidence"] = target.confidence;
             }
             votes.push(vote);
         }
@@ -56,7 +54,7 @@ export function getVoteList(rawGameData: any, info: VoteParserInformation): Vote
     return votes;
 }
 
-export function getVoteType(raw: string, voteKeyword: string, unvoteKeyword: string): VoteType {
+function getVoteType(raw: string, voteKeyword: string, unvoteKeyword: string): VoteType {
     if (raw.includes(unvoteKeyword)) {
         if (!raw.includes(voteKeyword)) {
             return VoteType.UNVOTE;
@@ -81,7 +79,7 @@ export function getVoteType(raw: string, voteKeyword: string, unvoteKeyword: str
     return VoteType.NONE; // unexpected behaviour
 }
 
-export function getVoteTarget(raw: string, type: VoteType, info: VoteParserInformation): VoteTargetPair {
+function getVoteTarget(raw: string, type: VoteType, info: VoteParserInformation): VoteTargetPair {
     if (type === VoteType.VOTE) {
         let j = raw.split(info.voteKeyword);
         let k = j.slice(-1)[0];

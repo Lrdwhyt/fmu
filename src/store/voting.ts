@@ -25,8 +25,6 @@ export default {
 
     actions: {
         generate(context: ActionContext<Store, any>, rawGameData: any): void {
-            // need GM list and player list
-            // and special vote keywords!
             context.commit("reset");
             const votes: Vote[] = getVoteList(rawGameData, {
                 players: context.rootGetters.playerList,
@@ -38,6 +36,7 @@ export default {
                 nicknames: context.rootGetters.nicknames,
                 minConfidence: context.rootGetters.minConfidence
             });
+
             for (const vote of votes) {
                 context.commit("addVote", vote);
             }

@@ -1,5 +1,5 @@
 <template>
-    <div class="general-settings-wrapper settings-panel">
+    <div class="general-settings-wrapper fmu-panel">
         <div>
             <input type="checkbox" id="includeUnvotes" :checked="includeUnvotes" @input="updateIncludeUnvotes" />
             <label for="includeUnvotes">Include unvotes in tally</label>

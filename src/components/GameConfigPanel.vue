@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="fmu-panel">
         <div>
             <moderator-list />
         </div>
