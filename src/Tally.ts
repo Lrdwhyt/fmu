@@ -89,6 +89,7 @@ export function createFromLog(votes: Vote[], players: Player[]): TallyWrapper {
 
     // now append players who have yet to vote
     let nonVoters: string[] = [];
+    
     for (const player of players) {
         if (player.name in currentVoters) {
             continue;

@@ -40,6 +40,7 @@ export default class PlayerList extends Vue {
         if (playerName.length) {
             const player: Player = {
                 name: playerName,
+                isAlive: true,
             };
             this.$store.commit("addPlayer", player);
             (this.$refs.newPlayer as HTMLInputElement).value = "";

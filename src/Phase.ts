@@ -1,8 +1,10 @@
-enum PhaseType {
-    Day, Night, Other
+export enum PhaseType {
+    OTHER = "",
+    DAY = "day",
+    NIGHT = "night"
 }
 
-class Phase {
-    type!: PhaseType;
-    index!: number;
+export interface Phase {
+    type: PhaseType;
+    index: number;
 }

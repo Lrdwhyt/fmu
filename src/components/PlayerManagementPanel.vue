@@ -3,7 +3,7 @@
         <player-list />
         <button @click="setPasteActive">Add from list</button>
         <div v-if="isPasteActive">
-            <div><textarea ref="pasteArea" /></div>
+            <div><textarea ref="pasteArea"/></div>
             <div><button @click="addMultiple">Add all</button></div>
         </div>
     </div>
@@ -67,6 +67,7 @@ export default class PlayerManagementPanel extends Vue {
 
         const player: Player = {
             name: name,
+            isAlive: true,
         };
         this.$store.commit("addPlayer", player);
     }

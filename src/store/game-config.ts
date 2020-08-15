@@ -3,6 +3,7 @@ import { Player } from "@/Player"
 import { Day, DayBoundaryType } from "@/Day"
 import { getGameInfo } from "@/LocalStorageManager"
 import { ActionContext } from 'vuex';
+import { Phase } from '@/Phase';
 
 interface Store {
     isActive: boolean;
@@ -127,6 +128,12 @@ export default {
                 const aliasIndex = state.players[index].aliases!.findIndex((alias) => alias === obj.alias);
                 Vue.delete(state.players[index].aliases!, aliasIndex);
             }
+        },
+
+        setDeathStatus(state: Store, obj: { player: string, isAlive: boolean, timeOfDeath: Phase }) {
+            const index = state.players.findIndex((player) => player.name === obj.player);
+            Vue.set(state.players[index], "isAlive", obj.isAlive);
+            Vue.set(state.players[index], "timeOfDeath", obj.timeOfDeath);
         }
     },
 
@@ -208,8 +215,13 @@ export default {
             return state.days;
         },
 
-        player(state: Store): Player {
-            return (name: string) => state.players.find((player) => player.name === name) || { name: name };
+        player(state: Store) {
+            return (name: string): Player => {
+                return state.players.find((player) => player.name === name) || {
+                    name: name,
+                    isAlive: true
+                }
+            };
         },
 
         playerList(state: Store): Player[] {

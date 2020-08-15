@@ -7,10 +7,19 @@
             <label @click="edit">{{ this.$props.name }}</label
             ><button class="remove-button" @click="remove">🗙</button>
         </div>
-        <button class="status-indicator">alive</button>
-        <div class="death-selection" v-if="false">
-            <button>night</button>
-            <button>1</button>
+        <button class="status-indicator" @click="toggleAlive">{{ lifeString }}</button>
+        <div class="death-selection word-view" v-if="!isAlive">
+            <button @click="switchDeathPhaseType">{{ deathPhaseType }}</button
+            ><input
+                type="number"
+                ref="editDeathTime"
+                v-if="isEditDeathTime"
+                :value="dayOfDeath"
+                size="3"
+                @blur="saveDeathDay"
+                @keyup="handleKeyupDeathDay"
+            />
+            <button @click="editDeathTime" v-else>{{ dayOfDeath }}</button>
         </div>
         <div class="aliases">
             <div class="word-view" v-for="alias in aliases" :key="alias">
@@ -27,6 +36,7 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import { Player } from "@/Player";
+import { PhaseType, Phase } from "@/Phase";
 
 @Component({
     name: "player-item",
@@ -35,14 +45,42 @@ export default class PlayerItem extends Vue {
     @Prop() private name!: string;
     private isEditName: boolean = false;
     private isAddAlias: boolean = false;
+    private isEditDeathTime: boolean = false;
+
+    get player(): Player {
+        return this.$store.getters.player(this.name);
+    }
 
     get aliases(): string[] {
-        const player: Player = this.$store.getters.player(this.name);
-        if (player.aliases === undefined) {
-            return [];
+        return this.player.aliases || [];
+    }
+
+    get lifeString(): string {
+        if (this.player.isAlive) {
+            return "alive";
+        } else {
+            return "dead";
+        }
+    }
+
+    get isAlive(): boolean {
+        return this.player.isAlive;
+    }
+
+    get deathPhaseType(): string {
+        if (this.player.timeOfDeath !== undefined) {
+            return this.player.timeOfDeath.type;
         }
 
-        return player.aliases;
+        return "night";
+    }
+
+    get dayOfDeath(): number {
+        if (this.player.timeOfDeath !== undefined) {
+            return this.player.timeOfDeath.index + 1;
+        }
+
+        return 1;
     }
 
     edit(): void {
@@ -50,6 +88,62 @@ export default class PlayerItem extends Vue {
         Vue.nextTick(() => {
             (this.$refs.edit as HTMLInputElement).focus();
         });
+    }
+
+    toggleAlive(): void {
+        const phase: Phase = this.player.timeOfDeath || {
+            type: PhaseType.NIGHT,
+            index: this.$store.getters.selectedDay || 1,
+        };
+        this.$store.commit("setDeathStatus", {
+            player: this.name,
+            isAlive: !this.player.isAlive,
+            timeOfDeath: phase,
+        });
+    }
+
+    switchDeathPhaseType(): void {
+        let phase: Phase = this.player.timeOfDeath || {
+            type: PhaseType.NIGHT,
+            index: 1,
+        };
+        if (phase.type === PhaseType.NIGHT) {
+            phase.type = PhaseType.DAY;
+        } else {
+            phase.type = PhaseType.NIGHT;
+        }
+        this.$store.commit("setDeathStatus", {
+            player: this.name,
+            isAlive: this.player.isAlive,
+            timeOfDeath: phase,
+        });
+    }
+
+    editDeathTime(): void {
+        this.isEditDeathTime = true;
+        Vue.nextTick(() => {
+            (this.$refs.editDeathTime as HTMLInputElement).focus();
+        });
+    }
+
+    saveDeathDay(e: Event): void {
+        let phase: Phase = this.player.timeOfDeath || {
+            type: PhaseType.NIGHT,
+            index: 1,
+        };
+        phase.index = parseInt((e.target as HTMLInputElement).value) - 1;
+        this.$store.commit("setDeathStatus", {
+            player: this.name,
+            isAlive: this.player.isAlive,
+            timeOfDeath: phase,
+        });
+        this.isEditDeathTime = false;
+    }
+
+    handleKeyupDeathDay(e: KeyboardEvent): void {
+        if (e.keyCode === 13) {
+            this.saveDeathDay(e);
+        }
     }
 
     handleKeyupAlias(e: KeyboardEvent): void {
@@ -111,7 +205,7 @@ export default class PlayerItem extends Vue {
     display: inline-block;
 }
 
-label {
+.player-name label {
     cursor: text;
 }
 

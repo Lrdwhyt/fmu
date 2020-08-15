@@ -1,7 +1,9 @@
+import { Phase } from '@/Phase';
+
 export interface Player {
     name: string;
-    team?: string;
-    isAlive?: string;
-    timeDied?: Phase;
+    isAlive: boolean;
+    timeOfDeath?: Phase;
     aliases?: string[];
+    group?: string;
 }
