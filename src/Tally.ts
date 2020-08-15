@@ -2,16 +2,6 @@ import { Vote, VoteTarget, VoteType } from '@/Vote';
 import { Player } from './Player';
 import { PhaseType } from './Phase';
 
-export interface RawTally {
-    [target: string]: RawTallyItem
-}
-
-export interface RawTallyItem {
-    // raw tally item does not group together votes from the same voter
-    target: VoteTarget;
-    votes: Vote[]
-}
-
 export interface VoteUnvotePair {
     vote: Vote;
     unvote?: Vote;
@@ -23,7 +13,7 @@ export interface Tally {
     [target: string]: TallyItem;
 }
 
-export interface TallyWrapper {
+export interface FullTally {
     tally: Tally;
     nonvoters: string[]
 }
@@ -53,7 +43,7 @@ function canVoteOnDay(player: Player, day: number): boolean {
     return false; // should not be reached
 }
 
-export function createFromLog(votes: Vote[], players: Player[], day: number): TallyWrapper {
+export function createFromLog(votes: Vote[], players: Player[], day: number): FullTally {
     let tally: Tally = {};
     let currentVoters: UserVoteTracker = {};
 
@@ -94,7 +84,7 @@ export function createFromLog(votes: Vote[], players: Player[], day: number): Ta
         }
     }
 
-    // sort tally by players who have the most votes
+    // sort tally in order of targets with most votes to least
     const sortedTally: Tally = {};
     Object.keys(tally).sort((a, b) => {
         return numberVotes(tally[b]) - numberVotes(tally[a]);
@@ -117,44 +107,17 @@ export function createFromLog(votes: Vote[], players: Player[], day: number): Ta
         }
 
         if (!canVoteOnDay(player, day)) {
+            // exclude dead players from non-voter list
             continue;
         }
 
         nonVoters.push(player.name);
     }
 
-    let result: TallyWrapper = {
+    let result: FullTally = {
         tally: sortedTally,
         nonvoters: nonVoters
     }
 
     return result;
-}
-
-function createFromVoteLog(votes: Vote[]): RawTally {
-    let tally: RawTally = {};
-    let currentVoters: { [user: string]: VoteTarget } = {};
-
-    for (const vote of votes) {
-        if (vote.type === VoteType.UNVOTE || vote.user in currentVoters) {
-            const unvote: Vote = {
-                ...vote,
-                type: VoteType.UNVOTE
-            }
-            tally[currentVoters[vote.user]].votes.push(unvote);
-        }
-        if (vote.type === VoteType.VOTE) {
-            if (vote.target in tally) {
-                tally[vote.target].votes.push(vote);
-            } else {
-                tally[vote.target] = {
-                    target: vote.target,
-                    votes: [vote]
-                }
-            }
-            currentVoters[vote.user] = vote.target;
-        }
-    }
-
-    return tally;
 }

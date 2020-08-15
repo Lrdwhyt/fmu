@@ -1,8 +1,8 @@
-import { TallyWrapper, numberVotes } from '@/Tally';
+import { FullTally, numberVotes } from '@/Tally';
 import { VoteType, Vote } from '@/Vote';
 import { Day, DayBoundaryType } from './Day';
 
-export function writeBbcode(tally: TallyWrapper): string {
+export function writeBbcode(tally: FullTally): string {
     let bbcode: string = "";
     for (const item in tally.tally) {
         const tallyItem = tally.tally[item];

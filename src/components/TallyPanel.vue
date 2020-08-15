@@ -17,7 +17,7 @@ import TallyView from "./Tally/TallyView.vue";
 import DayManagementPanel from "./DayManagementPanel.vue";
 import { Day } from "@/Day";
 import { filterByDay } from "@/VoteFilter";
-import { createFromLog, Tally, TallyWrapper, numberVotes } from "@/Tally";
+import { createFromLog, Tally, FullTally, numberVotes } from "@/Tally";
 import { writeBbcode, header } from "@/BbcodeWriter";
 
 @Component({
@@ -44,7 +44,7 @@ export default class TallyPanel extends Vue {
         }
     }
 
-    get tally(): TallyWrapper {
+    get tally(): FullTally {
         return createFromLog(this.votes, this.$store.getters.playerList, this.selectedDay);
     }
 

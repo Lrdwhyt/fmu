@@ -10,7 +10,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import TallyRow from "./TallyRow.vue";
 import NoVoteRow from "./NoVoteRow.vue";
 import { Vote, VoteType } from "@/Vote";
-import { Tally, TallyWrapper } from "@/Tally";
+import { Tally, FullTally } from "@/Tally";
 
 @Component({
     name: "tally-view",
@@ -20,7 +20,7 @@ import { Tally, TallyWrapper } from "@/Tally";
     },
 })
 export default class TallyView extends Vue {
-    @Prop() private tally!: TallyWrapper;
+    @Prop() private tally!: FullTally;
 
     get votes(): Tally {
         return this.tally.tally;
