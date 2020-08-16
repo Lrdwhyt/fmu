@@ -6,7 +6,6 @@ interface Store {
     useColours: boolean;
     includeUnvotes: boolean;
     showPostNumbers: boolean;
-    includeDeadPlayers: boolean;
     games: {
         [id: number]: string;
     },
@@ -29,9 +28,8 @@ const defaultGroupColour = "#000000";
 export default {
     state: {
         useColours: false,
-        includeUnvotes: false,
-        showPostNumbers: false,
-        includeDeadPlayers: false,
+        includeUnvotes: true,
+        showPostNumbers: true,
         games: {},
         noEliminationKeywords: [],
         noVoteKeywords: [],

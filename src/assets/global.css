@@ -44,7 +44,7 @@
 .fmu-button {
     background-color: #7a77a4;
     border: none;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     color: #fff;
     font-family: inherit;
     padding: 4px 6px;
