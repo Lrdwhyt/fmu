@@ -28,7 +28,7 @@ export default new Vuex.Store({
     actions: {
         finalInit(context) {
             if (context.getters.isGameActive) {
-                context.dispatch("updateGameData");
+                context.dispatch("getGameData");
                 context.dispatch("generate", context.getters.rawGameData);
             }
         },
@@ -45,7 +45,7 @@ export default new Vuex.Store({
                     context.commit("addModerator", moderator);
                 }
             }
-            context.dispatch("updateGameData");
+            context.dispatch("getGameData");
             context.dispatch("generate", context.getters.rawGameData);
         },
 
@@ -56,16 +56,17 @@ export default new Vuex.Store({
             resetGame();
         },
 
-        updateGameData(context) {
+        getGameData(context) {
             if (context.getters.moderatorList.length === 0) {
                 return;
             }
+
             const pageData = getPosts({
                 mods: context.getters.moderatorList.map((mod: string) => mod.toLowerCase()),
                 voteKeyword: context.getters.voteKeyword.toLowerCase(),
                 unvoteKeyword: context.getters.unvoteKeyword.toLowerCase()
             })
-            context.commit("updateGameData", pageData);
+            context.commit("setGameData", pageData);
         }
     },
 
