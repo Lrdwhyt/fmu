@@ -84,7 +84,9 @@ export default {
         },
 
         initialiseNicknames(state: Store, { player, nicknames }: { player: string, nicknames: string[] }): void {
-            Vue.set(state.nicknames, player, []);
+            if (!(player in state.nicknames)) {
+                Vue.set(state.nicknames, player, []);
+            }
             for (const nickname of nicknames) {
                 state.nicknames[player].push(nickname);
             }

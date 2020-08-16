@@ -136,8 +136,11 @@ function matchVoteToTarget(str: string, info: VoteParserInformation): VoteTarget
             target = player.name;
         }
 
-        if (player.name in info.nicknames) {
-            for (const alias of info.nicknames[player.name]) {
+        //if (player.name in info.nicknames) {
+        const key = Object.keys(info.nicknames).find((key) => key.toLowerCase() === player.name.toLowerCase());
+        // find player name case-insensitively
+        if (key !== undefined) {
+            for (const alias of info.nicknames[key]) {
                 let score = diceCoefficient(str, alias);
                 if (score > confidence) {
                     confidence = score;
