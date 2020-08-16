@@ -5,7 +5,7 @@
             <moderator-item v-bind:key="moderator" :moderator="moderator" />
         </template>
         <add-moderator-item v-if="isAddModerator" @register="hideInput" />
-        <button @click="addModerator">+</button>
+        <button class="fmu-button" @click="addModerator">+</button>
     </div>
 </template>
 

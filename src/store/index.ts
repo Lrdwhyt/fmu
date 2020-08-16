@@ -7,7 +7,7 @@ import Interface from "./interface"
 import GameData from "./game-data"
 import Voting from "./voting"
 import { saveSettings, saveGameData, saveGameInfo, saveInterfaceData, savePlatform, resetGame } from "@/LocalStorageManager"
-import { getPosts, getThreadId, getThreadTitle } from "@/forums-of-loathing/Parser"
+import { getPosts, getThreadId, getThreadTitle, getCurrentPage, getFirstPoster } from "@/forums-of-loathing/Parser"
 
 
 Vue.use(Vuex);
@@ -36,8 +36,15 @@ export default new Vuex.Store({
         startGame(context) {
             const id: number = getThreadId();
             const title: string = getThreadTitle();
+            const page: number = getCurrentPage();
             context.commit("startGame");
             context.commit("addGame", { id, title });
+            if (page === 1) {
+                const moderator: string = getFirstPoster();
+                if (moderator.length) {
+                    context.commit("addModerator", moderator);
+                }
+            }
             context.dispatch("updateGameData");
             context.dispatch("generate", context.getters.rawGameData);
         },
@@ -50,11 +57,15 @@ export default new Vuex.Store({
         },
 
         updateGameData(context) {
-            context.commit("updateGameData", getPosts({
+            if (context.getters.moderatorList.length === 0) {
+                return;
+            }
+            const pageData = getPosts({
                 mods: context.getters.moderatorList.map((mod: string) => mod.toLowerCase()),
                 voteKeyword: context.getters.voteKeyword.toLowerCase(),
                 unvoteKeyword: context.getters.unvoteKeyword.toLowerCase()
-            }));
+            })
+            context.commit("updateGameData", pageData);
         }
     },
 

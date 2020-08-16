@@ -126,3 +126,19 @@ export function getThreadTitle(): string {
     const index: number = title.lastIndexOf("-");
     return document.title.substring(0, index);
 }
+
+export function getFirstPoster(): string {
+    const thread = document.getElementById("posts");
+
+    if (thread === null) {
+        return "";
+    }
+
+    const posts = thread.getElementsByClassName("page");
+
+    if (posts.length > 0) {
+        return Post.getUsername(posts[0]);
+    }
+
+    return "";
+}
