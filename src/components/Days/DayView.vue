@@ -1,16 +1,28 @@
 <template>
-    <div v-if="visible">
-        <div>
-            <label>Start</label>
-            <post-selection type="start" />
-            <date-selection type="start" />
-        </div>
-        <div>
-            <label>End</label>
-            <post-selection type="end" />
-            <date-selection type="end" />
-        </div>
-    </div>
+    <table v-if="visible">
+        <tr>
+            <td class="boundary-label">
+                <label>Start</label>
+            </td>
+            <td>
+                <post-selection type="start" />
+            </td>
+            <td>
+                <date-selection type="start" />
+            </td>
+        </tr>
+        <tr>
+            <td class="boundary-label">
+                <label>End</label>
+            </td>
+            <td>
+                <post-selection type="end" />
+            </td>
+            <td>
+                <date-selection type="end" />
+            </td>
+        </tr>
+    </table>
 </template>
 
 <script lang="ts">
@@ -42,8 +54,7 @@ export default class DayView extends Vue {
 </script>
 
 <style scoped>
-.day-boundary-option {
-    display: inline-block;
-    margin-bottom: 5px;
+.boundary-label {
+    text-align: right;
 }
 </style>

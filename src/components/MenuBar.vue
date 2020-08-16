@@ -1,8 +1,8 @@
 <template>
     <div>
-        <button v-on:click="toggleGameActive">{{ toggleGameMessage }}</button>
-        <button v-on:click="toggleSettingsPanel">Settings</button>
-        <button>Help</button>
+        <button class="fmu-button" @click="toggleGameActive">{{ toggleGameMessage }}</button>
+        <button class="fmu-button" @click="toggleSettingsPanel">Settings</button>
+        <button class="fmu-button">Help</button>
     </div>
 </template>
 

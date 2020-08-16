@@ -17,8 +17,15 @@
             </tr>
         </table>
 
-        <div>Total memory usage: {{ memoryUsed() }}</div>
-        <button class="fmu-button" @click="resetAll">Reset</button>
+        <p> Total memory usage: {{ memoryUsed() }} </p>
+        <div class="reset-button">
+            <button
+                class="fmu-button"
+                @click="resetAll"
+                title="Reset all data stored in localStorage, including game data and Forum Mafia Utilities settings"
+                >Reset all data</button
+            >
+        </div>
     </div>
 </template>
 
@@ -60,12 +67,20 @@ export default class MemoryPanel extends Vue {
 </script>
 
 <style scoped>
+table {
+    border-collapse: collapse;
+}
+
 td {
     padding: 2px 8px;
 }
 
 .heading td {
-    background-color: #ddd;
+    background-color: #dddde7;
     font-weight: bold;
+}
+
+.reset-button {
+    margin-top: 4px;
 }
 </style>

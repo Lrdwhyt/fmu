@@ -79,6 +79,7 @@ export default class NicknameItem extends Vue {
 }
 
 input {
+    font: inherit;
     padding: 4px;
 }
 </style>

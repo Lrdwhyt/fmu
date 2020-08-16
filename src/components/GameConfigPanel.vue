@@ -6,11 +6,11 @@
         <div id="general-settings">
             <div>
                 <label>Vote keyword</label>
-                <input type="text" :value="voteKeyword" @blur="setVoteKeyword" />
+                <input type="text" :value="voteKeyword" size="12" @blur="setVoteKeyword" />
             </div>
             <div>
                 <label>Unvote keyword</label>
-                <input type="text" :value="unvoteKeyword" @blur="setUnvoteKeyword" />
+                <input type="text" :value="unvoteKeyword" size="12" @blur="setUnvoteKeyword" />
             </div>
             <div>
                 <label>Night time</label>

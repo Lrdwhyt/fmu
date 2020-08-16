@@ -8,8 +8,8 @@
         <div>
             <input ref="newPlayer" type="text" @keyup="handleKeyup" />
             <button class="fmu-button" @click="addPlayer">Add player</button>
+            <button class="fmu-button" @click="showPasteArea">Add from nicknames file</button>
         </div>
-        <button class="fmu-button" @click="showPasteArea">Add from nicknames file</button>
         <div v-if="isPasting">
             <div><textarea ref="pasteArea"/></div>
             <button class="fmu-button" @click="importNicknames">Import</button>
@@ -82,6 +82,7 @@ li {
 }
 
 input {
+    font: inherit;
     padding: 4px;
 }
 </style>

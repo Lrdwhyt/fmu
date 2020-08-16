@@ -1,7 +1,9 @@
 <template>
     <div class="fmu-panel">
         <game-log-view />
-        <day-management-panel />
+        <div class="day-management">
+            <day-management-panel />
+        </div>
     </div>
 </template>
 
@@ -39,4 +41,8 @@ export default class GameLogPanel extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.day-management {
+    margin-top: 8px;
+}
+</style>

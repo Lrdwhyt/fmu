@@ -25,6 +25,7 @@ export default class ForumsOfLoathingSettings extends Vue {
 
 <style scoped>
 input {
+    font: inherit;
     padding: 4px;
 }
 </style>

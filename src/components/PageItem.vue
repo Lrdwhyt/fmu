@@ -1,5 +1,5 @@
 <template>
-    <a :href="link" :class="className">{{ index }}</a>
+    <a :href="link" :class="className" :title="description">{{ index }}</a>
 </template>
 
 <script lang="ts">
@@ -29,6 +29,16 @@ export default class PageItem extends Vue {
 
     get link(): string {
         return `http://forums.kingdomofloathing.com/vb/showthread.php?t=${this.threadId}&page=${this.index}`;
+    }
+
+    get description(): string {
+        if (this.className === "full") {
+            return `${this.index}: full data`;
+        } else if (this.className === "partial") {
+            return `${this.index}: partial data`;
+        } else {
+            return `${this.index}: no data`;
+        }
     }
 }
 </script>

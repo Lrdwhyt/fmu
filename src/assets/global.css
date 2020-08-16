@@ -44,14 +44,14 @@
 .fmu-button {
     background-color: #7a77a4;
     border: none;
-    box-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
     color: #fff;
     font-family: inherit;
     padding: 4px 6px;
 }
 
 .fmu-button:hover {
-    background-color: #446;
+    background-color: rgb(73, 73, 155);
 }
 
 .fmu-panel,

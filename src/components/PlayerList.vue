@@ -38,7 +38,7 @@ table {
 }
 
 td {
-    background-color: #bdbace;
+    background-color: #dddde7;
     font-weight: bold;
     padding: 4px 8px;
 }

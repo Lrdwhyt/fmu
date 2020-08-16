@@ -238,6 +238,7 @@ input,
 select,
 option {
     font: inherit;
+    padding: 4px;
 }
 
 .dead-player .player-name {

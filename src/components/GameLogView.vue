@@ -6,7 +6,6 @@
                 <span>{{ vote.user }} </span>
                 <span>{{ voteString(vote.type) }}</span>
                 <span>{{ typeof vote.target === "number" ? " " : vote.target }}</span>
-                <span></span>
             </td>
         </tr>
     </table>
