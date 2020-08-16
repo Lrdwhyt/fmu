@@ -16,7 +16,7 @@
 
         <div class="add-group">
             <label>New group</label>
-            <input type="text" ref="newGroup" />
+            <input type="text" ref="newGroup" @keyup="handleKeyup" />
             <button class="fmu-button" @click="addGroup">Add</button>
         </div>
     </div>
@@ -49,10 +49,17 @@ export default class ColourManagementPanel extends Vue {
         });
     }
 
+    handleKeyup(e: KeyboardEvent): void {
+        if (e.keyCode === 13) {
+            this.addGroup();
+        }
+    }
+
     addGroup(): void {
         const name = (this.$refs.newGroup as HTMLInputElement).value;
         if (name.length) {
             this.$store.commit("addGroup", name);
+            (this.$refs.newGroup as HTMLInputElement).value = "";
         }
     }
 }
@@ -68,6 +75,7 @@ td {
 }
 
 input {
+    font: inherit;
     padding: 4px;
 }
 
