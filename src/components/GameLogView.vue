@@ -1,25 +1,21 @@
 <template>
     <table>
-        <tr v-for="vote in votes" v-bind:key="vote.location">
-            <td>{{ vote.location }}</td>
-            <td>
-                <span>{{ vote.user }} </span>
-                <span>{{ voteString(vote.type) }}</span>
-                <span>{{ typeof vote.target === "number" ? " " : vote.target }}</span>
-            </td>
-        </tr>
+        <game-log-item v-for="(vote, i) in votes" v-bind:key="i" :index="i" :event="vote" />
     </table>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
+import GameLogItem from "./GameLogItem.vue";
 import { Vote, VoteType } from "@/Vote";
 import { Day } from "@/Day";
 import { filterByDay } from "@/VoteFilter";
 
 @Component({
     name: "game-log-view",
-    components: {},
+    components: {
+        GameLogItem,
+    },
 })
 export default class GameLogView extends Vue {
     get selectedDay(): number {
@@ -30,20 +26,16 @@ export default class GameLogView extends Vue {
         return this.$store.getters.days[this.selectedDay];
     }
 
-    get votes(): Vote[] {
-        if (this.selectedDay in this.$store.getters.days) {
-            return this.$store.getters.voteLog.filter(filterByDay(this.day));
-        } else {
-            return this.$store.getters.voteLog;
+    get votes() {
+        const rawData = this.$store.getters.rawGameData;
+        let result = {};
+        for (const page in rawData) {
+            result = {
+                ...result,
+                ...rawData[page],
+            };
         }
-    }
-
-    voteString(type: VoteType): string {
-        if (type === VoteType.VOTE) {
-            return "voted";
-        } else {
-            return "unvoted";
-        }
+        return result;
     }
 }
 </script>

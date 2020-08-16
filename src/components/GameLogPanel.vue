@@ -1,9 +1,11 @@
 <template>
     <div class="fmu-panel">
         <game-log-view />
+        <!--
         <div class="day-management">
             <day-management-panel />
         </div>
+        -->
     </div>
 </template>
 
@@ -22,23 +24,7 @@ import { filterByDay } from "@/VoteFilter";
         DayManagementPanel,
     },
 })
-export default class GameLogPanel extends Vue {
-    get selectedDay(): number {
-        return this.$store.getters.selectedDay;
-    }
-
-    get day(): Day {
-        return this.$store.getters.days[this.selectedDay];
-    }
-
-    get votes(): Vote[] {
-        if (this.selectedDay in this.$store.getters.days) {
-            return this.$store.getters.voteLog.filter(filterByDay(this.day));
-        } else {
-            return this.$store.getters.voteLog;
-        }
-    }
-}
+export default class GameLogPanel extends Vue {}
 </script>
 
 <style scoped>
