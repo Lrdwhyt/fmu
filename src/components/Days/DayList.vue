@@ -54,11 +54,10 @@ export default class DayList extends Vue {
 }
 
 .day-tab.selected {
-    background-color: rgb(221, 0, 119);
-    color: white;
+    border-bottom: 3px solid rgb(233, 0, 140);
 }
 
-.day-tab.selected:hover {
-    background-color: rgb(233, 0, 140);
+.day-tab.selected > label {
+    padding: 5px 13px 2px;
 }
 </style>

@@ -1,8 +1,7 @@
 <template>
     <div>
         <div class="target">
-            <div class="number-votes">
-                {{ number }} </div
+            <div class="number-votes"> {{ number }} </div
             ><div class="target-name">
                 {{ target }}
             </div>
@@ -41,7 +40,7 @@ export default class TallyRow extends Vue {
 }
 
 .number-votes {
-    background-color: #666;
+    background-color: #1a002f;
     color: #fff;
     display: inline-block;
     font-weight: bold;
@@ -49,7 +48,7 @@ export default class TallyRow extends Vue {
 }
 
 .target-name {
-    background-color: rgb(231, 35, 198);
+    background-color: #4f3d8a;
     color: #fff;
     display: inline-block;
     font-weight: bold;

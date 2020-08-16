@@ -1,8 +1,12 @@
 <template>
     <div>
-        <day-list />
-        <button @click="addDay">+</button>
-        <day-view />
+        <div class="day-nav">
+            <day-list />
+            <button class="fmu-button" @click="addDay">+</button>
+        </div>
+        <div class="day-view">
+            <day-view />
+        </div>
     </div>
 </template>
 
@@ -47,4 +51,8 @@ export default class DayManagementPanel extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.day-view {
+    margin-top: 8px;
+}
+</style>

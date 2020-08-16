@@ -86,6 +86,9 @@ export default class PostSelection extends Vue {
 </script>
 
 <style scoped>
+.word-view label {
+    padding: 4px 6px;
+}
 input {
     font-family: inherit;
     font-size: 13px;

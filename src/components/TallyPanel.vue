@@ -2,8 +2,8 @@
     <div class="fmu-panel">
         <tally-view :tally="tally" />
         <div>
-            <button>Update</button>
-            <button @click="copyBbcode">Copy as BBcode</button>
+            <button class="fmu-button">Update</button>
+            <button class="fmu-button" @click="copyBbcode">Copy as BBcode</button>
         </div>
         <textarea ref="copyContainer" />
         <day-management-panel />

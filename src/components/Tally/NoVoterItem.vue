@@ -27,7 +27,7 @@ label {
 }
 
 .voter {
-    background-color: rgb(215, 215, 231);
+    background-color: #fff;
     margin: 4px;
 }
 </style>

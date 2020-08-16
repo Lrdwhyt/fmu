@@ -88,6 +88,7 @@ export default class GeneralSettingsPanel extends Vue {
 }
 
 input {
-    padding: 3px;
+    font: inherit;
+    padding: 4px;
 }
 </style>

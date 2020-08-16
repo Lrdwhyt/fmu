@@ -78,7 +78,7 @@ label {
 }
 
 a {
-    background-color: #888;
+    background-color: #8d81c4;
 }
 
 a,
@@ -88,11 +88,11 @@ a:hover {
 }
 
 a:hover {
-    background-color: #aaa;
+    background-color: #7a69c3;
 }
 
 .voter {
-    background-color: rgb(215, 215, 231);
+    background-color: #fff;
     margin: 4px;
 }
 </style>

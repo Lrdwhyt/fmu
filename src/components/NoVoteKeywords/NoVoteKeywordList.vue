@@ -30,7 +30,7 @@ export default class NoVoteKeywordList extends Vue {
     }
 
     addKeyword() {
-        this.isAddKeyword = true;
+        this.isAddKeyword = !this.isAddKeyword;
     }
 
     hideInput() {

@@ -1,14 +1,15 @@
 <template>
-    <div>
-        <template v-for="vote in votes">
-            <div v-bind:key="vote.location">
+    <table>
+        <tr v-for="vote in votes" v-bind:key="vote.location">
+            <td>{{ vote.location }}</td>
+            <td>
                 <span>{{ vote.user }} </span>
                 <span>{{ voteString(vote.type) }}</span>
                 <span>{{ typeof vote.target === "number" ? " " : vote.target }}</span>
-                <span>(#{{ vote.location }})</span>
-            </div>
-        </template>
-    </div>
+                <span></span>
+            </td>
+        </tr>
+    </table>
 </template>
 
 <script lang="ts">

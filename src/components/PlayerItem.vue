@@ -19,7 +19,7 @@
         </td>
         <td>
             <div class="death-selection word-view" v-if="!isAlive">
-                <button class="phase-type" @click="switchDeathPhaseType">{{ deathPhaseType }}</button
+                <button class="phase-type" :class="deathPhaseType" @click="switchDeathPhaseType">{{ deathPhaseType }}</button
                 ><input
                     type="number"
                     ref="editDeathTime"
@@ -29,7 +29,7 @@
                     @blur="saveDeathDay"
                     @keyup="handleKeyupDeathDay"
                 />
-                <button @click="editDeathTime" v-else>{{ dayOfDeath }}</button>
+                <button class="phase-index" @click="editDeathTime" v-else>{{ dayOfDeath }}</button>
             </div>
         </td>
         <td class="aliases">
@@ -233,6 +233,13 @@ td {
     padding: 1px 8px;
 }
 
+button,
+input,
+select,
+option {
+    font: inherit;
+}
+
 .dead-player .player-name {
     opacity: 0.4;
 }
@@ -269,7 +276,7 @@ select {
 
 .death-selection button {
     border: none;
-    padding: 4px;
+    padding: 4px 6px;
 }
 
 .aliases {
@@ -300,7 +307,20 @@ select {
     color: #fff;
 }
 
-.phase-type {
-    background-color: #ddd;
+.phase-index {
+    background-color: #fff;
+}
+
+.phase-index:hover {
+    background-color: #eee;
+}
+
+.night {
+    background-color: #5d5d82;
+    color: #fff;
+}
+
+.day {
+    background-color: #bdcde6;
 }
 </style>
