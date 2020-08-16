@@ -2,9 +2,9 @@
     <table class="player-list">
         <tr>
             <td>Name</td>
-            <td>Group</td>
             <td>Status</td>
             <td>Died</td>
+            <td>Group</td>
             <td>Aliases</td>
         </tr>
         <template v-for="player in players">
@@ -41,5 +41,9 @@ td {
     background-color: #dddde7;
     font-weight: bold;
     padding: 4px 8px;
+}
+
+tr:hover {
+    background-color: #dddde7;
 }
 </style>

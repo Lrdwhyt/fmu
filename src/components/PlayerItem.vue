@@ -10,11 +10,6 @@
             </div>
         </td>
         <td>
-            <select @change="changeGroup" v-model="selectedGroup" :style="{ color: selectedGroupColor }">
-                <option v-for="(color, group) in groups" :key="group" :value="group" :style="{ color: color }">{{ group }}</option>
-            </select>
-        </td>
-        <td>
             <button class="status-indicator" :class="lifeString" @click="toggleAlive">{{ lifeString }}</button>
         </td>
         <td>
@@ -31,6 +26,11 @@
                 />
                 <button class="phase-index" @click="editDeathTime" v-else>{{ dayOfDeath }}</button>
             </div>
+        </td>
+        <td>
+            <select @change="changeGroup" v-model="selectedGroup" :style="{ color: selectedGroupColor }">
+                <option v-for="(color, group) in groups" :key="group" :value="group" :style="{ color: color }">{{ group }}</option>
+            </select>
         </td>
         <td class="aliases">
             <div class="word-view alias" v-for="alias in aliases" :key="alias">
