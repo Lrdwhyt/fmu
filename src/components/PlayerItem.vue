@@ -321,7 +321,15 @@ select {
     color: #fff;
 }
 
+.night:hover {
+    background-color: #40405c;
+}
+
 .day {
     background-color: #bdcde6;
+}
+
+.day:hover {
+    background-color: #cfdff8;
 }
 </style>
