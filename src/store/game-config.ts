@@ -30,7 +30,7 @@ export default {
         days: [],
         nightTime: "21:00",
         dayLength: 24,
-        selectedDay: -1
+        selectedDay: 0
     } as Store,
 
     mutations: {

@@ -1,7 +1,11 @@
 <template>
     <div>
-        <tally-row v-for="(item, target) in votes" :item="item" :key="target" :target="target" />
-        <no-vote-row :players="nonVoters" v-if="nonVoters.length" />
+        <div class="vote-tally">
+            <tally-row v-for="(item, target) in votes" :item="item" :key="target" :target="target" />
+        </div>
+        <div class="non-voters">
+            <no-vote-row :players="nonVoters" v-if="nonVoters.length" />
+        </div>
     </div>
 </template>
 
@@ -33,12 +37,7 @@ export default class TallyView extends Vue {
 </script>
 
 <style scoped>
-.unvote {
-    text-decoration: line-through;
-}
-
-textarea {
-    height: 0;
-    opacity: 0;
+.non-voters {
+    margin-top: 25px;
 }
 </style>

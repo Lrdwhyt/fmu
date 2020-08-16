@@ -120,7 +120,7 @@ export default class PlayerItem extends Vue {
     toggleAlive(): void {
         const phase: Phase = this.$props.player.timeOfDeath || {
             type: PhaseType.NIGHT,
-            index: this.$store.getters.selectedDay || 1,
+            index: this.$store.getters.selectedDay,
         };
         this.$store.commit("setDeathStatus", {
             player: this.name,
@@ -130,9 +130,9 @@ export default class PlayerItem extends Vue {
     }
 
     switchDeathPhaseType(): void {
-        let phase: Phase = this.$props.player.timeOfDeath || {
+        const phase: Phase = this.$props.player.timeOfDeath || {
             type: PhaseType.NIGHT,
-            index: 1,
+            index: this.$store.getters.selectedDay,
         };
         if (phase.type === PhaseType.NIGHT) {
             phase.type = PhaseType.DAY;
@@ -156,7 +156,7 @@ export default class PlayerItem extends Vue {
     saveDeathDay(e: Event): void {
         let phase: Phase = this.$props.player.timeOfDeath || {
             type: PhaseType.NIGHT,
-            index: 1,
+            index: this.$store.getters.selectedDay,
         };
         phase.index = parseInt((e.target as HTMLInputElement).value) - 1;
         this.$store.commit("setDeathStatus", {

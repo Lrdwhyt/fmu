@@ -1,7 +1,7 @@
 <template>
     <div class="fmu-panel">
         <tally-view :tally="tally" />
-        <div>
+        <div class="tally-controls">
             <button class="fmu-button">Update</button>
             <button class="fmu-button" @click="copyBbcode">Copy as BBcode</button>
         </div>
@@ -64,5 +64,9 @@ export default class TallyPanel extends Vue {
 textarea {
     height: 0;
     opacity: 0;
+}
+
+.tally-controls {
+    margin-top: 8px;
 }
 </style>
