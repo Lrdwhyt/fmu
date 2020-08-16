@@ -98,6 +98,9 @@ export default {
 
         removeLastDay(state: Store): void {
             state.days.pop();
+            if (state.selectedDay >= state.days.length) {
+                state.selectedDay = state.days.length - 1;
+            }
         },
 
         selectDay(state: Store, day: number): void {
