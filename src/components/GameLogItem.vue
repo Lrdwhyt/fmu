@@ -12,8 +12,9 @@
         <td v-if="isVote">
             <strong>{{ content }}</strong>
         </td>
-        <td :title="fullContent" v-else>
-            {{ content }}
+        <td :title="fullContent" @click="expand" v-else>
+            <span class="expanded-text" v-if="isExpanded">{{ fullContent }}</span>
+            <span v-else>{{ content }}</span>
         </td>
     </tr>
 </template>
@@ -32,6 +33,7 @@ import { linkPost } from "@/forums-of-loathing/LinkUtils";
 export default class GameLogItem extends Vue {
     @Prop() private event!: any;
     @Prop() private index!: number;
+    private isExpanded: boolean = false;
 
     get location(): number {
         return this.$props.index;
@@ -61,10 +63,22 @@ export default class GameLogItem extends Vue {
         return this.$props.event.content;
     }
 
+    lineBreak(str: string): string {
+        return str.replace("\n", "<br>");
+    }
+
+    expand(): void {
+        this.isExpanded = !this.isExpanded;
+    }
+
     linkPost(vote: Vote): string {
         return linkPost(vote);
     }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.expanded-text {
+    white-space: pre-wrap;
+}
+</style>
