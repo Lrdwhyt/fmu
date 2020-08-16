@@ -4,11 +4,11 @@
             <li v-for="(nicks, player) in nicknames" :key="player">
                 <nickname-item :name="player" :nicknames="nicks" />
             </li>
-            <li>
-                <input ref="newPlayer" type="text" @keyup="keyUp" />
-                <button class="fmu-button" @click="addPlayer">Add player</button>
-            </li>
         </ul>
+        <div>
+            <input ref="newPlayer" type="text" @keyup="handleKeyup" />
+            <button class="fmu-button" @click="addPlayer">Add player</button>
+        </div>
         <button class="fmu-button" @click="showPasteArea">Add from nicknames file</button>
         <div v-if="isPasting">
             <div><textarea ref="pasteArea"/></div>
@@ -45,7 +45,7 @@ export default class NicknameManagerPanel extends Vue {
         (this.$refs.newPlayer as HTMLInputElement).value = "";
     }
 
-    keyUp(e: KeyboardEvent): void {
+    handleKeyup(e: KeyboardEvent): void {
         if (e.keyCode === 13) {
             this.addPlayer(e);
         }
@@ -75,8 +75,13 @@ export default class NicknameManagerPanel extends Vue {
 ul {
     padding: 0;
 }
+
 li {
     list-style-type: none;
     margin: 3px 0;
+}
+
+input {
+    padding: 4px;
 }
 </style>

@@ -15,11 +15,16 @@ interface Store {
     nicknames: NicknameList;
     minConfidence: number;
     nightLength: number;
+    groups: {
+        [group: string]: string;
+    }
 }
 
 export interface NicknameList {
     [name: string]: string[];
 }
+
+const defaultGroupColour = "#000000";
 
 export default {
     state: {
@@ -32,7 +37,13 @@ export default {
         noVoteKeywords: [],
         nicknames: {},
         minConfidence: 40,
-        nightLength: 10
+        nightLength: 10,
+        groups: {
+            "none": "#000000",
+            "innocent": "#448aff",
+            "mafia": "#ff1744",
+            "awt": "#aa00ff"
+        }
     } as Store,
 
     mutations: {
@@ -111,6 +122,25 @@ export default {
 
         setNightLength(state: Store, length: number): void {
             state.nightLength = length;
+        },
+
+        addGroup(state: Store, group: string): void {
+            Vue.set(state.groups, group, defaultGroupColour);
+        },
+
+        removeGroup(state: Store, group: string): void {
+            Vue.delete(state.groups, group);
+        },
+
+        changeColour(state: Store, group: { [group: string]: string }): void {
+            state.groups = {
+                ...state.groups,
+                ...group
+            }
+        },
+
+        initialiseGroups(state: Store, obj: any): void {
+            Vue.set(state, "groups", obj);
         }
     },
 
@@ -174,6 +204,10 @@ export default {
             if ("nightLength" in settingsData) {
                 context.commit("setNightLength", settingsData.nightLength);
             }
+
+            if ("groups" in settingsData) {
+                context.commit("initialiseGroups", settingsData.groups);
+            }
         },
 
         deleteGame(context: ActionContext<Store, any>, id: number) {
@@ -217,6 +251,16 @@ export default {
 
         nightLength(state: Store): number {
             return state.nightLength;
+        },
+
+        groups(state: Store): { [group: string]: string } {
+            return state.groups;
+        },
+
+        color(state: Store) {
+            return (group: string): string => {
+                return state.groups[group] || "";
+            }
         }
     }
 }

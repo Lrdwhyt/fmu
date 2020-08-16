@@ -10,11 +10,16 @@
             </div>
         </td>
         <td>
+            <select @change="changeGroup" v-model="selectedGroup" :style="{ color: selectedGroupColor }">
+                <option v-for="(color, group) in groups" :key="group" :value="group" :style="{ color: color }">{{ group }}</option>
+            </select>
+        </td>
+        <td>
             <button class="status-indicator" :class="lifeString" @click="toggleAlive">{{ lifeString }}</button>
         </td>
         <td>
             <div class="death-selection word-view" v-if="!isAlive">
-                <button @click="switchDeathPhaseType">{{ deathPhaseType }}</button
+                <button class="phase-type" @click="switchDeathPhaseType">{{ deathPhaseType }}</button
                 ><input
                     type="number"
                     ref="editDeathTime"
@@ -58,6 +63,14 @@ export default class PlayerItem extends Vue {
         return this.$props.player.aliases || [];
     }
 
+    get selectedGroup(): string {
+        return this.$props.player.group || "none";
+    }
+
+    get selectedGroupColor(): string {
+        return this.$store.getters.color(this.selectedGroup);
+    }
+
     get lifeString(): string {
         if (this.$props.player.isAlive) {
             return "alive";
@@ -86,10 +99,21 @@ export default class PlayerItem extends Vue {
         return 1;
     }
 
+    get groups(): { [group: string]: string } {
+        return this.$store.getters.groups;
+    }
+
     startEditName(): void {
         this.isEditName = true;
         Vue.nextTick(() => {
             (this.$refs.editName as HTMLInputElement).focus();
+        });
+    }
+
+    changeGroup(e: Event): void {
+        this.$store.commit("changePlayerGroup", {
+            player: this.$props.name,
+            group: (e.target as HTMLInputElement).value || "none",
         });
     }
 
@@ -205,7 +229,8 @@ export default class PlayerItem extends Vue {
 
 <style scoped>
 td {
-    padding: 0 8px;
+    border: none;
+    padding: 1px 8px;
 }
 
 .dead-player .player-name {
@@ -234,6 +259,10 @@ td {
     padding: 3px 5px;
 }
 
+select {
+    padding: 4px;
+}
+
 .death-selection {
     display: inline-block;
 }
@@ -248,7 +277,7 @@ td {
 }
 
 .alias {
-    margin: 0 3px;
+    margin-right: 5px;
 }
 
 .status-indicator {
@@ -267,7 +296,11 @@ td {
 }
 
 .alive {
-    background-color: #859bdf;
+    background-color: #6175e1;
     color: #fff;
+}
+
+.phase-type {
+    background-color: #ddd;
 }
 </style>

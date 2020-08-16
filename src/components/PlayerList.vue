@@ -1,17 +1,16 @@
 <template>
-    <div>
-        <table class="player-list">
-            <tr>
-                <td>Name</td>
-                <td>Status</td>
-                <td>Died</td>
-                <td>Aliases</td>
-            </tr>
-            <template v-for="player in players">
-                <player-item :player="player" :name="player.name" :key="player.name" />
-            </template>
-        </table>
-    </div>
+    <table class="player-list">
+        <tr>
+            <td>Name</td>
+            <td>Group</td>
+            <td>Status</td>
+            <td>Died</td>
+            <td>Aliases</td>
+        </tr>
+        <template v-for="player in players">
+            <player-item :player="player" :name="player.name" :key="player.name" />
+        </template>
+    </table>
 </template>
 
 <script lang="ts">
@@ -34,8 +33,13 @@ export default class PlayerList extends Vue {
 </script>
 
 <style scoped>
+table {
+    border-collapse: collapse;
+}
+
 td {
+    background-color: #bdbace;
     font-weight: bold;
-    padding: 0 8px;
+    padding: 4px 8px;
 }
 </style>

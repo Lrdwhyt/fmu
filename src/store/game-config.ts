@@ -104,8 +104,8 @@ export default {
             state.selectedDay = day;
         },
 
-        setDay(state: Store, obj: { day: number, data: Day }): void {
-            Vue.set(state.days, obj.day, obj.data);
+        setDay(state: Store, { day, data }: { day: number, data: Day }): void {
+            Vue.set(state.days, day, data);
         },
 
         addAlias(state: Store, obj: { player: string, alias: string }) {
@@ -134,6 +134,13 @@ export default {
             const index = state.players.findIndex((player) => player.name === obj.player);
             Vue.set(state.players[index], "isAlive", obj.isAlive);
             Vue.set(state.players[index], "timeOfDeath", obj.timeOfDeath);
+        },
+
+        changePlayerGroup(state: Store, obj: { player: string, group: string }): void {
+            const index = state.players.findIndex((player) => player.name === obj.player);
+            if (index !== -1) {
+                Vue.set(state.players[index], "group", obj.group);
+            }
         }
     },
 

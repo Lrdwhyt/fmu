@@ -3,6 +3,10 @@
     --primary-color: rgb(123, 181, 235);
 }
 
+#fmu {
+    font-size: 13px;
+}
+
 .word-edit,
 .word-view {
     align-items: center;
@@ -38,7 +42,7 @@
 }
 
 .fmu-button {
-    background-color: #585580;
+    background-color: #7a77a4;
     border: none;
     box-shadow: 1px 1px rgba(0, 0, 0, 0.5);
     color: #fff;

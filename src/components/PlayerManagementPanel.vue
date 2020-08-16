@@ -1,15 +1,19 @@
 <template>
     <div class="fmu-panel">
-        <player-list />
-        <div>
-            <input ref="newPlayer" type="text" @keyup="handleKeyup" />
-            <button class="fmu-button" @click="addPlayer">Add</button>
+        <div class="player-list">
+            <player-list />
         </div>
-        <div>
-            <button class="fmu-button" @click="setPasteActive">Add from list</button>
-            <div v-if="isPasteActive">
-                <div><textarea ref="pasteArea"/></div>
-                <div><button class="fmu-button" @click="addMultiple">Add all</button></div>
+        <div class="manage-players">
+            <div>
+                <input ref="newPlayer" type="text" @keyup="handleKeyup" />
+                <button class="fmu-button" @click="addPlayer">Add</button>
+            </div>
+            <div>
+                <button class="fmu-button" @click="setPasteActive">Add from list</button>
+                <div v-if="isPasteActive">
+                    <div><textarea ref="pasteArea"/></div>
+                    <div><button class="fmu-button" @click="addMultiple">Add all</button></div>
+                </div>
             </div>
         </div>
     </div>
@@ -63,14 +67,18 @@ export default class PlayerManagementPanel extends Vue {
     addPlayer(): void {
         const playerName: string = (this.$refs.newPlayer as HTMLInputElement).value;
         if (playerName.length) {
-            const player: Player = {
-                name: playerName,
-                isAlive: true,
-            };
-            this.$store.commit("addPlayer", player);
+            this.commitAddPlayer(playerName);
             (this.$refs.newPlayer as HTMLInputElement).value = "";
             (this.$refs.newPlayer as HTMLInputElement).focus();
         }
+    }
+
+    commitAddPlayer(name: string): void {
+        const player: Player = {
+            name: name,
+            isAlive: true,
+        };
+        this.$store.commit("addPlayer", player);
     }
 
     addPlayerFromPaste(name: string): void {
@@ -86,13 +94,18 @@ export default class PlayerManagementPanel extends Vue {
             return;
         }
 
-        const player: Player = {
-            name: name,
-            isAlive: true,
-        };
-        this.$store.commit("addPlayer", player);
+        this.commitAddPlayer(name);
     }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.manage-players {
+    margin-top: 8px;
+}
+
+input {
+    font-family: inherit;
+    padding: 4px;
+}
+</style>
