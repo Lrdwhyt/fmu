@@ -47,10 +47,9 @@ export function getContent(el: Element): string {
         if (node.nodeName.toLowerCase() === "div") {
             continue;
         }
-        content += node.textContent;
 
+        content += node.textContent;
     }
-    //const content = elements[1].textContent || "";
 
     return content.trim();
 }
@@ -63,9 +62,44 @@ export function getBoldText(el: Element): string[] {
     }
     for (const boldElement of boldElements) {
         if (boldElement.textContent) {
-            result.push(boldElement.textContent);
+            //result.push(boldElement.textContent);
         }
+        result.push(getRawText(boldElement));
     }
 
     return result;
+}
+
+// convert smileys to the corresponding string
+function getRawText(el: Element): string {
+    let text: string = "";
+
+    for (const child of el.childNodes) {
+        if (child.nodeName.toLowerCase() === "img") {
+            switch ((child as HTMLImageElement).title) {
+                case "Surprised":
+                    text += ":o";
+                    break;
+
+                case "Broad Smile":
+                    text += ":D";
+                    break;
+
+                case "Razz":
+                    text += ":p";
+                    break;
+
+                case "Mad":
+                    text += ":x";
+                    break;
+
+                default:
+                    break;
+            }
+        } else {
+            text += child.textContent;
+        }
+    }
+
+    return text;
 }
