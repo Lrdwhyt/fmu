@@ -241,6 +241,11 @@ option {
     padding: 4px;
 }
 
+select {
+    background: transparent;
+    border: none;
+}
+
 .dead-player .player-name {
     opacity: 0.4;
 }
