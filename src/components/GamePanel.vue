@@ -68,14 +68,14 @@ export default class GamePanel extends Vue {
 }
 
 button {
-    background-color: #ddd;
+    background-color: var(--fmu-background);
     border: none;
     font-family: inherit;
     padding: 5px 10px;
 }
 
 button:hover {
-    background-color: #eee;
+    background-color: var(--fmu-background-darker);
 }
 
 button.active-tab {

@@ -254,6 +254,10 @@ select {
     text-decoration: line-through;
 }
 
+.dead-player .alias {
+    opacity: 0.4;
+}
+
 .player-name {
     background-color: #746c8b;
     color: #fff;
@@ -295,7 +299,7 @@ select {
 
 .status-indicator {
     border: none;
-    opacity: 0.8;
+    opacity: 0.7;
     padding: 4px 6px;
 }
 

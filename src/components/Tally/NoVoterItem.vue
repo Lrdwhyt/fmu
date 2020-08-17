@@ -38,7 +38,7 @@ div {
 
 label {
     display: inline-block;
-    padding: 4px;
+    padding: 4px 6px;
 }
 
 .voter {

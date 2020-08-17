@@ -46,7 +46,7 @@ export default class TallyRow extends Vue {
 }
 
 .number-votes {
-    background-color: #1a002f;
+    background-color: #575668;
     color: #fff;
     display: inline-block;
     font-weight: bold;
@@ -54,7 +54,7 @@ export default class TallyRow extends Vue {
 }
 
 .target-name {
-    background-color: #4f3d8a;
+    background-color: #8c92b5;
     color: #fff;
     display: inline-block;
     font-weight: bold;

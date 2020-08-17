@@ -92,8 +92,12 @@ label {
     padding: 4px;
 }
 
+label {
+    padding: 4px 6px;
+}
+
 a {
-    background-color: #8d81c4;
+    background-color: #575668;
 }
 
 a,
@@ -103,7 +107,7 @@ a:hover {
 }
 
 a:hover {
-    background-color: #7a69c3;
+    background-color: #383742;
 }
 
 .voter {

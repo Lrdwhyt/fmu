@@ -1,7 +1,8 @@
 <template>
     <div>
         <ol class="page-list">
-            <li v-for="page in totalPages" v-bind:key="page">
+            <li class="page-list-label"><div>Page</div></li
+            ><li v-for="page in totalPages" v-bind:key="page">
                 <page-item :index="page" />
             </li>
         </ol>
@@ -35,5 +36,14 @@ li {
     display: inline-block;
     list-style-type: none;
     padding: 0;
+}
+
+.page-list-label {
+    background-color: #e91e63;
+}
+
+.page-list-label div {
+    display: inline-block;
+    padding: 7px;
 }
 </style>

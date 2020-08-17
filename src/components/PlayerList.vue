@@ -44,6 +44,6 @@ td {
 }
 
 tr:hover {
-    background-color: #dddde7;
+    background-color: #eaeaf0;
 }
 </style>

@@ -37,7 +37,7 @@ export default class NoVoteRow extends Vue {
 }
 
 .number-votes {
-    background-color: rgb(31, 31, 31);
+    background-color: #575668;
     color: #fff;
     display: inline-block;
     font-weight: bold;
@@ -45,8 +45,8 @@ export default class NoVoteRow extends Vue {
 }
 
 .target-name {
-    background-color: #555;
-    color: #fff;
+    background-color: #d1d7e1;
+    color: #333;
     display: inline-block;
     font-weight: bold;
     padding: 5px;

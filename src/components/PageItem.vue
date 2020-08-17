@@ -1,11 +1,11 @@
 <template>
-    <a :href="link" :class="className" :title="description">{{ index }}</a>
+    <a :href="link" :class="[className, selected ? 'selected' : '']" :title="description">{{ index }}</a>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
-import { getTotalPages, getThreadId } from "@/forums-of-loathing/Parser";
+import { getTotalPages, getThreadId, getCurrentPage } from "@/forums-of-loathing/Parser";
 
 @Component({
     name: "page-item",
@@ -14,6 +14,7 @@ import { getTotalPages, getThreadId } from "@/forums-of-loathing/Parser";
 export default class PageItem extends Vue {
     @Prop() private index!: number;
     private threadId: number = getThreadId();
+    private currentPage: number = getCurrentPage();
 
     get className(): string {
         if (this.index in this.$store.getters.rawGameData) {
@@ -25,6 +26,10 @@ export default class PageItem extends Vue {
         } else {
             return "empty";
         }
+    }
+
+    get selected(): boolean {
+        return this.index === this.currentPage;
     }
 
     get link(): string {
@@ -51,20 +56,34 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    opacity: 0.8;
+.selected {
+    border-bottom: 3px solid rgb(233, 0, 140);
+    padding: 7px 7px 4px;
 }
 
 .empty {
-    background-color: rgb(124, 124, 124);
-    color: #fff;
+    background-color: #69647f;
+    color: #ccc;
+}
+
+.empty:hover {
+    background-color: #504d62;
 }
 
 .partial {
-    background-color: rgb(180, 180, 180);
+    background-color: #b7b5c5;
+    color: #fff;
+}
+
+.partial:hover {
+    background-color: #9995ac;
 }
 
 .full {
-    background-color: rgb(223, 223, 223);
+    background-color: #f5f4f7;
+}
+
+.full:hover {
+    background-color: #E0DFE6;
 }
 </style>

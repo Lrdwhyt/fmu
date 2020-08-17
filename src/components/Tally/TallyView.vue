@@ -38,6 +38,6 @@ export default class TallyView extends Vue {
 
 <style scoped>
 .non-voters {
-    margin-top: 25px;
+    margin-top: 12px;
 }
 </style>
