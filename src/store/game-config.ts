@@ -234,7 +234,7 @@ export default {
             };
         },
 
-        playerList(state: Store): Player[] {
+        players(state: Store): Player[] {
             return state.players;
         },
 

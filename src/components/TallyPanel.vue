@@ -18,7 +18,7 @@ import DayManagementPanel from "./DayManagementPanel.vue";
 import { Day } from "@/Day";
 import { filterByDay } from "@/VoteFilter";
 import { createFromLog, FullTally } from "@/Tally";
-import { writeBbcode, header } from "@/BbcodeWriter";
+import { writeBbcode, header, TallyOptions } from "@/BbcodeWriter";
 
 @Component({
     name: "tally-panel",
@@ -45,12 +45,20 @@ export default class TallyPanel extends Vue {
     }
 
     get tally(): FullTally {
-        return createFromLog(this.votes, this.$store.getters.playerList, this.selectedDay);
+        return createFromLog(this.votes, this.$store.getters.players, this.selectedDay);
     }
 
     copyBbcode(): void {
+        const tallyOptions: TallyOptions = {
+            players: this.$store.getters.players,
+            groups: this.$store.getters.groups,
+            includeUnvotes: this.$store.getters.includeUnvotes,
+            useColours: this.$store.getters.useColours,
+            showPostNumbers: this.$store.getters.showPostNumbers,
+        };
+
         const tallyHeader = header(this.selectedDay + 1, this.day);
-        const tally = writeBbcode(this.tally);
+        const tally = writeBbcode(this.tally, tallyOptions);
         const bbCode = tallyHeader + tally;
 
         (this.$refs.copyContainer as HTMLTextAreaElement).value = bbCode;

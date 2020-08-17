@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="visible">
         <div class="target">
             <div class="number-votes"> {{ number }} </div
             ><div class="target-name">
@@ -29,6 +29,14 @@ export default class TallyRow extends Vue {
 
     get number(): number {
         return numberVotes(this.item);
+    }
+
+    get visible(): boolean {
+        return this.includeUnvotes || this.number > 0;
+    }
+
+    get includeUnvotes(): boolean {
+        return this.$store.getters.includeUnvotes;
     }
 }
 </script>

@@ -1,22 +1,50 @@
-import { FullTally, numberVotes } from '@/Tally';
+import { FullTally, numberVotes, VoteUnvotePair } from '@/Tally';
 import { VoteType, Vote } from '@/Vote';
-import { Day, DayBoundaryType } from './Day';
+import { Day, DayBoundaryType } from '@/Day';
+import { Player } from '@/Player';
 
-export function writeBbcode(tally: FullTally): string {
+export interface TallyOptions {
+    players: Player[];
+    groups: { [group: string]: string };
+    includeUnvotes: boolean;
+    useColours: boolean;
+    showPostNumbers: boolean;
+}
+
+export function writeBbcode(tally: FullTally, options: TallyOptions): string {
     let bbcode: string = "";
     for (const item in tally.tally) {
         const tallyItem = tally.tally[item];
+        if (!options.includeUnvotes && numberVotes(tallyItem) === 0) {
+            continue;
+        }
         bbcode += `[b]${item} (${numberVotes(tallyItem)}[b][/b])[/b] - [size=1]`;
         for (const pair of tallyItem) {
-            let userVote: string = `${pair.vote.user} (#${linkVote(pair.vote)}`;
-            if ("unvote" in pair) {
-                userVote += "-" + linkVote(pair.unvote!);
+            let userVote: string = pair.vote.user;
+            if (options.useColours) {
+                const player = options.players.find((player) => player.name.toLowerCase() === pair.vote.user.toLowerCase());
+                if (player !== undefined) {
+                    const group = player.group || "none";
+                    const colour = options.groups[group] || "";
+                    if (colour.length) {
+                        userVote = colourText(userVote, colour);
+                    }
+                }
             }
-            userVote += "[b][/b])";
-            if (pair.vote.type === VoteType.UNVOTE || "unvote" in pair) {
-                // TODO add check if we want to disable showing unvotes
+            if (options.showPostNumbers) {
+                userVote += `(#${linkVote(pair.vote)}`;
+                if ("unvote" in pair) {
+                    userVote += "-" + linkVote(pair.unvote!);
+                }
+                userVote += "[b][/b])";
+            }
+            if (hasUnvote(pair)) {
+                if (!options.includeUnvotes) {
+                    continue;
+                }
                 userVote = strikeOut(userVote);
             }
+
             bbcode += userVote + ", ";
         }
         bbcode = bbcode.slice(0, -2);
@@ -36,12 +64,19 @@ export function writeBbcode(tally: FullTally): string {
     return bbcode;
 }
 
+function hasUnvote(pair: VoteUnvotePair): boolean {
+    return pair.vote.type === VoteType.UNVOTE || "unvote" in pair;
+}
+
 function linkVote(vote: Vote): string {
     return `[post="${vote.link}"]${vote.location}[/post]`
 }
 
 function strikeOut(string: string): string {
     return `[s]${string}[/s]`;
+}
+function colourText(string: string, colour: string): string {
+    return `[color=${colour}]${string}[/color]`;
 }
 
 export function header(index: number, day: Day): string {

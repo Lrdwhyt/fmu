@@ -27,7 +27,7 @@ import { Player } from "@/Player";
 })
 export default class PlayerList extends Vue {
     get players(): Player[] {
-        return this.$store.getters.playerList;
+        return this.$store.getters.players;
     }
 }
 </script>

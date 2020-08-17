@@ -19,11 +19,11 @@ export default class TallyVoter extends Vue {
     @Prop() private pair!: VoteUnvotePair;
 
     get visible(): boolean {
-        return this.showUnvotes || !this.hasUnvote;
+        return this.includeUnvotes || !this.hasUnvote;
     }
 
-    get showUnvotes(): boolean {
-        return true;
+    get includeUnvotes(): boolean {
+        return this.$store.getters.includeUnvotes;
     }
 
     get hasUnvote(): boolean {

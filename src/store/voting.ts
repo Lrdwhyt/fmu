@@ -27,7 +27,7 @@ export default {
         generate(context: ActionContext<Store, any>, rawGameData: any): void {
             context.commit("reset");
             const votes: Vote[] = getVoteList(rawGameData, {
-                players: context.rootGetters.playerList,
+                players: context.rootGetters.players,
                 moderators: context.rootGetters.moderatorList.map((mod: string) => mod.toLowerCase()),
                 voteKeyword: context.rootGetters.voteKeyword,
                 unvoteKeyword: context.rootGetters.unvoteKeyword,
