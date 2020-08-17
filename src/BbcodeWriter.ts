@@ -11,6 +11,7 @@ export interface TallyOptions {
     showPostNumbers: boolean;
 }
 
+// TODO this function is too big and has too much nesting
 export function writeBbcode(tally: FullTally, options: TallyOptions): string {
     let bbcode: string = "";
     for (const item in tally.tally) {
@@ -18,21 +19,12 @@ export function writeBbcode(tally: FullTally, options: TallyOptions): string {
         if (!options.includeUnvotes && numberVotes(tallyItem) === 0) {
             continue;
         }
-        bbcode += `[b]${item} (${numberVotes(tallyItem)}[b][/b])[/b] - [size=1]`;
+        bbcode += `[b]${colourPlayer(item, options)} (${numberVotes(tallyItem)}[b][/b])[/b]`;
+        bbcode += ` - [size=1]`;
         for (const pair of tallyItem) {
-            let userVote: string = pair.vote.user;
-            if (options.useColours) {
-                const player = options.players.find((player) => player.name.toLowerCase() === pair.vote.user.toLowerCase());
-                if (player !== undefined) {
-                    const group = player.group || "none";
-                    const colour = options.groups[group] || "";
-                    if (colour.length) {
-                        userVote = colourText(userVote, colour);
-                    }
-                }
-            }
+            let userVote: string = colourPlayer(pair.vote.user, options);
             if (options.showPostNumbers) {
-                userVote += `(#${linkVote(pair.vote)}`;
+                userVote += ` (#${linkVote(pair.vote)}`;
                 if ("unvote" in pair) {
                     userVote += "-" + linkVote(pair.unvote!);
                 }
@@ -56,7 +48,7 @@ export function writeBbcode(tally: FullTally, options: TallyOptions): string {
         bbcode += "\n";
         bbcode += "[b]Failed to vote (" + tally.nonvoters.length + "[b][/b])[/b] - ";
         for (const player of tally.nonvoters) {
-            bbcode += player + ", ";
+            bbcode += colourPlayer(player, options) + ", ";
         }
         bbcode = bbcode.slice(0, -2);
     }
@@ -77,6 +69,23 @@ function strikeOut(string: string): string {
 }
 function colourText(string: string, colour: string): string {
     return `[color=${colour}]${string}[/color]`;
+}
+
+function colourPlayer(playerName: string, options: TallyOptions): string {
+    const player = options.players.find((player) => player.name.toLowerCase() === playerName.toLowerCase() || (player.aliases !== undefined && player.aliases.includes(playerName)));
+
+    if (!player) {
+        return playerName;
+    }
+
+    const group = player.group || "none";
+    const colour = options.groups[group] || "";
+
+    if (!colour) {
+        return playerName;
+    }
+
+    return colourText(playerName, colour);
 }
 
 export function header(index: number, day: Day): string {
