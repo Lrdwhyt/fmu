@@ -149,6 +149,16 @@ function matchVoteToTarget(str: string, info: VoteParserInformation): VoteTarget
             }
         }
 
+        if (player.aliases !== undefined) {
+            for (const alias of player.aliases) {
+                let score = diceCoefficient(str, alias);
+                if (score > confidence) {
+                    confidence = score;
+                    target = alias;
+                }
+            }
+        }
+
         if (confidence === 1) {
             break;
         }
