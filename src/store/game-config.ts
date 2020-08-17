@@ -227,10 +227,12 @@ export default {
 
         player(state: Store) {
             return (name: string): Player => {
-                return state.players.find((player) => player.name === name) || {
+                return state.players.find((player) => {
+                    return player.name === name || player.aliases !== undefined && player.aliases.includes(name)
+                }) || {
                     name: name,
                     isAlive: true
-                }
+                };
             };
         },
 
