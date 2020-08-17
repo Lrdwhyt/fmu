@@ -6,9 +6,7 @@
                 {{ target }}
             </div>
         </div>
-        <div class="voters">
-            <tally-voter v-for="(pair, index) in item" :key="index" :pair="pair" />
-        </div>
+        <tally-voter v-for="(pair, index) in item" :key="index" :pair="pair" />
     </div>
 </template>
 
