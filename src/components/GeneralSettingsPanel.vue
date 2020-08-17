@@ -13,7 +13,7 @@
             <label for="useColours">Use colours in tally</label>
         </div>
         <div>
-            <label for="minConfidence">Minimum percentage score to match names (100 to require exact match)</label>
+            <label for="minConfidence" title="100 to require exact matches">Minimum percentage score to match names</label>
             <input type="number" id="minConfidence" min="0" max="100" size="4" :value="minConfidence" @change="setMinConfidence" />
         </div>
         <div>
