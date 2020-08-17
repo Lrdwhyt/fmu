@@ -2,7 +2,7 @@
     <div class="fmu-panel">
         <tally-view :tally="tally" />
         <div class="tally-controls">
-            <button class="fmu-button">Update</button>
+            <button class="fmu-button" @click="updateTally">Update</button>
             <button class="fmu-button" @click="copyBbcode">Copy as BBcode</button>
         </div>
         <textarea ref="copyContainer" />
@@ -19,6 +19,7 @@ import { Day } from "@/Day";
 import { filterByDay } from "@/VoteFilter";
 import { createFromLog, FullTally } from "@/Tally";
 import { writeBbcode, header, TallyOptions } from "@/BbcodeWriter";
+import { getPosts } from "@/forums-of-loathing/Parser";
 
 @Component({
     name: "tally-panel",
@@ -46,6 +47,16 @@ export default class TallyPanel extends Vue {
 
     get tally(): FullTally {
         return createFromLog(this.votes, this.$store.getters.players, this.selectedDay);
+    }
+
+    updateTally(): void {
+        const pageData = getPosts({
+            mods: this.$store.getters.moderatorList.map((mod: string) => mod.toLowerCase()),
+            voteKeyword: this.$store.getters.voteKeyword.toLowerCase(),
+            unvoteKeyword: this.$store.getters.unvoteKeyword.toLowerCase(),
+        });
+        this.$store.commit("setGameData", pageData);
+        this.$store.dispatch("generate", this.$store.getters.rawGameData);
     }
 
     copyBbcode(): void {
