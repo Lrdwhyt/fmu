@@ -1,8 +1,13 @@
 <template>
-    <div>
-        <button class="fmu-button" @click="toggleGameActive">{{ toggleGameMessage }}</button>
-        <button class="fmu-button" @click="toggleSettingsPanel">Settings</button>
-        <button class="fmu-button">Help</button>
+    <div class="fmu-menu-bar">
+        <div class="fmu-title" title="Forum Mafia Utilities">
+            FMU
+        </div>
+        <div class="fmu-menu-controls">
+            <button class="fmu-button" @click="toggleGameActive">{{ toggleGameMessage }}</button>
+            <button class="fmu-button" @click="toggleSettingsPanel">Settings</button>
+            <button class="fmu-button" @click="openHelp">Help</button>
+        </div>
     </div>
 </template>
 
@@ -33,7 +38,29 @@ export default class MenuBar extends Vue {
     toggleSettingsPanel() {
         this.$store.commit("toggleSettingsPanel");
     }
+
+    openHelp(): void {
+        window.open("https://github.com/Lrdwhyt/fmu/wiki", "_blank");
+    }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.fmu-menu-bar {
+    background-color: var(--fmu-background);
+    display: inline-block;
+    margin: 6px 0;
+}
+
+.fmu-title {
+    background-color: #e91e63;
+    color: #fff;
+    display: inline-block;
+    padding: 12px 8px;
+}
+
+.fmu-menu-controls {
+    display: inline-block;
+    padding: 0 8px;
+}
+</style>

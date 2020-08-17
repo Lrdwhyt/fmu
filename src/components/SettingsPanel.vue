@@ -1,5 +1,5 @@
 <template>
-    <div v-if="this.isOpen">
+    <div class="settings-panel" v-if="this.isOpen">
         <div class="settings-menu">
             <button @click="showGeneral" :class="{ 'active-tab': activePanel === 'GeneralSettingsPanel' }">General</button
             ><button @click="showPlatform" :class="{ 'active-tab': activePanel === 'PlatformSettings' }">Platform</button
@@ -7,7 +7,9 @@
             ><button @click="showColours" :class="{ 'active-tab': activePanel === 'ColourManagementPanel' }">Colours</button
             ><button @click="showMemory" :class="{ 'active-tab': activePanel === 'MemoryPanel' }">Memory</button>
         </div>
-        <component v-bind:is="activePanel"></component>
+        <div class="active-settings-panel">
+            <component v-bind:is="activePanel" />
+        </div>
     </div>
 </template>
 
@@ -65,6 +67,14 @@ export default class SettingsPanel extends Vue {
 </script>
 
 <style scoped>
+.settings-panel {
+}
+
+.active-settings-panel {
+    background-color: var(--fmu-background);
+    padding: 8px;
+}
+
 button {
     background-color: #ddd;
     border: none;

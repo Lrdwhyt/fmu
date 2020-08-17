@@ -12,7 +12,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import PageItem from "./PageItem.vue";
-import { getTotalPages } from '@/forums-of-loathing/Parser';
+import { getTotalPages } from "@/forums-of-loathing/Parser";
 
 @Component({
     name: "page-list",

@@ -24,9 +24,4 @@ import "@/assets/global.css";
 export default class App extends Vue {}
 </script>
 
-<style scoped>
-#fmu {
-    background-color: #eceff1;
-    padding: 8px;
-}
-</style>
+<style scoped></style>

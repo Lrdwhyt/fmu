@@ -1,13 +1,15 @@
 <template>
-    <div v-if="isActive">
+    <div class="game-panel" v-if="isActive">
         <page-list />
         <div>
             <button @click="showVoteTally" :class="{ 'active-tab': activePanel === 'TallyPanel' }">Tally</button
-            ><button @click="showGameConfig" :class="{ 'active-tab': activePanel === 'GameConfigPanel' }">Game configuration</button
+            ><button @click="showGameConfig" :class="{ 'active-tab': activePanel === 'GameConfigPanel' }">Game Configuration</button
             ><button @click="showPlayerManagement" :class="{ 'active-tab': activePanel === 'PlayerManagementPanel' }">Players</button
-            ><button @click="showGameLog" :class="{ 'active-tab': activePanel === 'GameLogPanel' }">Game log</button>
+            ><button @click="showGameLog" :class="{ 'active-tab': activePanel === 'GameLogPanel' }">Game Log</button>
         </div>
-        <component :is="activePanel" />
+        <div class="active-game-panel">
+            <component :is="activePanel" />
+        </div>
     </div>
 </template>
 
@@ -60,6 +62,11 @@ export default class GamePanel extends Vue {
 </script>
 
 <style scoped>
+.active-game-panel {
+    background-color: var(--fmu-background);
+    padding: 8px;
+}
+
 button {
     background-color: #ddd;
     border: none;
