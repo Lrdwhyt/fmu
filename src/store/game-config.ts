@@ -47,7 +47,10 @@ export default {
         },
 
         addModerator(state: Store, name: string) {
-            state.moderators.push(name);
+            const alreadyExists: boolean = state.moderators.some((moderator: string) => moderator.toLowerCase() === name.toLowerCase());
+            if (!alreadyExists) {
+                state.moderators.push(name);
+            }
         },
 
         removeModerator(state: Store, mod: string) {
@@ -74,10 +77,8 @@ export default {
         },
 
         addPlayer(state: Store, player: Player) {
-            const index: number = state.players.findIndex((existingPlayer: Player) => {
-                return player.name.toLowerCase() === existingPlayer.name.toLowerCase()
-            });
-            if (index === -1) {
+            const alreadyExists: boolean = state.players.some((existingPlayer: Player) => player.name.toLowerCase() === existingPlayer.name.toLowerCase());
+            if (!alreadyExists) {
                 state.players.push(player);
             }
         },
