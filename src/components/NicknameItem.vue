@@ -75,7 +75,7 @@ export default class NicknameItem extends Vue {
 }
 
 .nickname {
-    margin: 0 3px;
+    margin: 2px 3px;
 }
 
 input {
