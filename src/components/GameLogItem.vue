@@ -4,7 +4,7 @@
             {{ time }}
         </td>
         <td>
-            <a :href="linkPost($props.event)">{{ location }}</a>
+            <a :href="linkPost($props.event)">#{{ location }}</a>
         </td>
         <td>
             {{ user }}
@@ -12,9 +12,9 @@
         <td v-if="isVote">
             <strong>{{ content }}</strong>
         </td>
-        <td :title="fullContent" @click="expand" v-else>
+        <td @click="expand" v-else>
             <span class="expanded-text" v-if="isExpanded">{{ fullContent }}</span>
-            <span v-else>{{ content }}</span>
+            <span :title="fullContent" v-else>{{ content }}</span>
         </td>
     </tr>
 </template>
@@ -80,5 +80,13 @@ export default class GameLogItem extends Vue {
 <style scoped>
 .expanded-text {
     white-space: pre-wrap;
+}
+
+tr:hover td {
+    background-color: #fff;
+}
+
+td {
+    padding: 2px 6px;
 }
 </style>

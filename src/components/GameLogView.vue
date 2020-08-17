@@ -40,4 +40,8 @@ export default class GameLogView extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+table {
+    border-collapse: collapse;
+}
+</style>
