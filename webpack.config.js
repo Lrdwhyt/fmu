@@ -4,7 +4,6 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require("webpack");
 
 const userscriptHeader = fs.readFileSync("./userscript-header.js", "utf-8");
-const styleRules = fs.readFileSync("./src/assets/global.css", "utf-8");
 
 module.exports = {
     mode: "development",
@@ -54,7 +53,7 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin(),
         new webpack.BannerPlugin({
-            banner: userscriptHeader + "GM_addStyle(`" + styleRules + "`);",
+            banner: userscriptHeader,
             entryOnly: true,
             raw: true
         })],
