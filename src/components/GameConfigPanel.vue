@@ -73,9 +73,7 @@ export default class GameConfigPanel extends Vue {
 
 <style scoped>
 input {
-    font-family: inherit;
-}
-input {
+    font: inherit;
     padding: 4px;
 }
 #general-settings > div {
