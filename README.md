@@ -6,7 +6,7 @@ Forum Mafia Utilities is a client-side script/extension written for the Forums o
 
 ### Firefox
 
-Forum Mafia Utilities for Firefox requires the Violetmonkey (or other userscript) add-on, which can be downloaded [here](https://addons.mozilla.org/en/firefox/addon/violentmonkey/). With Violentmonkey, you can install Forum Mafia Utilities from the Releases page or by clicking [here](https://github.com/Lrdwhyt/forum-mafia-utilities/releases/download/v0.5.2/forum-mafia-utilities.user.js).
+Forum Mafia Utilities for Firefox requires the Violetmonkey (or other userscript) add-on, which can be downloaded [here](https://addons.mozilla.org/en/firefox/addon/violentmonkey/). With Violentmonkey, you can install Forum Mafia Utilities from [this link](https://gist.github.com/Lrdwhyt/fd4134fe014ca936e4afaec02db0d3d5/raw/forum-mafia-utilities.user.js).
 
 ### Chrome
 
