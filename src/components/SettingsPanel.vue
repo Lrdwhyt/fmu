@@ -78,7 +78,7 @@ export default class SettingsPanel extends Vue {
 button {
     background-color: var(--fmu-background);
     border: none;
-    font-family: inherit;
+    font: inherit;
     padding: 5px 10px;
 }
 
