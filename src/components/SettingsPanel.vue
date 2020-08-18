@@ -67,9 +67,6 @@ export default class SettingsPanel extends Vue {
 </script>
 
 <style scoped>
-.settings-panel {
-}
-
 .active-settings-panel {
     background-color: var(--fmu-background);
     padding: 8px;
