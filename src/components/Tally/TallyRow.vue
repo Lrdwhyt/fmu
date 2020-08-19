@@ -45,6 +45,10 @@ export default class TallyRow extends Vue {
     display: inline-block;
 }
 
+.target {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
+}
+
 .number-votes {
     background-color: #575668;
     color: #fff;

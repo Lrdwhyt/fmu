@@ -1,7 +1,7 @@
 <template>
     <div class="day-nav">
         <label>Days</label>
-        <div class="day-tab word-view" v-for="(day, index) in days" :key="day" @click="selectDay(index)" :class="{ selected: index === selectedDay }">
+        <div class="day-tab" v-for="(day, index) in days" :key="day" @click="selectDay(index)" :class="{ selected: index === selectedDay }">
             <label>{{ index + 1 }}</label
             ><button class="remove-button" @click.stop="remove" v-if="index === days.length - 1">🗙</button>
         </div>
@@ -46,6 +46,12 @@ export default class DayList extends Vue {
 }
 
 .day-tab {
+    background-color: #fff;
+    display: inline-block;
+    font: inherit;
+}
+
+.day-tab > label {
     display: inline-block;
 }
 
