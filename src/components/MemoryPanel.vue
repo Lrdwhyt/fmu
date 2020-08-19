@@ -72,7 +72,7 @@ table {
 }
 
 td {
-    padding: 2px 8px;
+    padding: 6px 8px;
 }
 
 .heading td {
