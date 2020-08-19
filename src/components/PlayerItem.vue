@@ -261,7 +261,6 @@ select {
 .player-name {
     background-color: #746c8b;
     color: #fff;
-    font-weight: bold;
 }
 
 .player-name:hover {
@@ -270,6 +269,7 @@ select {
 
 .player-name label {
     cursor: text;
+    font-weight: bold;
 }
 
 .player-name.word-edit input {
