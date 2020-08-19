@@ -5,11 +5,7 @@ Element should be of class .page
 export function getUsername(el: Element): string {
     const username = el.getElementsByClassName("bigusername")[0];
 
-    if (username.textContent === null) {
-        return "";
-    }
-
-    return username.textContent;
+    return username.textContent || "";
 }
 
 export function getNumber(el: Element): number {
@@ -55,15 +51,12 @@ export function getContent(el: Element): string {
 }
 
 export function getBoldText(el: Element): string[] {
-    let result: string[] = [];
+    const result: string[] = [];
     const boldElements = el.querySelectorAll(".alt1 > div > b");
     if (boldElements.length == 0) {
         return []
     }
     for (const boldElement of boldElements) {
-        if (boldElement.textContent) {
-            //result.push(boldElement.textContent);
-        }
         result.push(getRawText(boldElement));
     }
 
