@@ -108,4 +108,8 @@ input {
     font-family: inherit;
     padding: 4px;
 }
+
+button {
+    margin: 0 4px;
+}
 </style>

@@ -233,7 +233,6 @@ td {
     padding: 1px 8px;
 }
 
-button,
 input,
 select,
 option {
