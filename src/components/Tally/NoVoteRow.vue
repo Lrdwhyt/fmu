@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import NonVoter from "./NoVoterItem.vue";
+import NonVoter from "./NoVoteItem.vue";
 
 @Component({
     name: "no-vote-row",
@@ -30,6 +30,10 @@ export default class NoVoteRow extends Vue {
 .target,
 .voters {
     display: inline-block;
+}
+
+.target {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .number-votes {

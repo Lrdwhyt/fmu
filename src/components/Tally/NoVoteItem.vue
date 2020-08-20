@@ -11,14 +11,14 @@ import { Vue, Component, Prop } from "vue-property-decorator";
     name: "nonvoter",
     components: {},
 })
-export default class NoVoterItem extends Vue {
+export default class NoVoteItem extends Vue {
     @Prop() private player!: string;
 
     get colour(): string {
         if (!this.useColours) {
             return "";
         }
-        
+
         const group = this.$store.getters.player(this.player).group || "none";
         const groupColour = this.$store.getters.color(group) || "#000";
 
@@ -43,6 +43,7 @@ label {
 
 .voter {
     background-color: #fff;
+    box-shadow: var(--card-shadow);
     margin: 4px;
 }
 </style>
