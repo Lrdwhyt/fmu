@@ -112,7 +112,7 @@ a:hover {
 
 .voter {
     background-color: #fff;
-    box-shadow: 0 1px 1px rgba(80, 80, 80, 0.8);
+    box-shadow: 0 1px 2px rgba(80, 80, 80, 0.8);
     margin: 4px;
 }
 </style>

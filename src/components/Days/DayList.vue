@@ -1,9 +1,11 @@
 <template>
     <div class="day-nav">
         <label>Days</label>
-        <div class="day-tab" v-for="(day, index) in days" :key="day" @click="selectDay(index)" :class="{ selected: index === selectedDay }">
-            <label>{{ index + 1 }}</label
-            ><button class="remove-button" @click.stop="remove" v-if="index === days.length - 1">🗙</button>
+        <div class="day-tabs-wrapper">
+            <div class="day-tab" v-for="(day, index) in days" :key="day" @click="selectDay(index)" :class="{ selected: index === selectedDay }">
+                <label>{{ index + 1 }}</label
+                ><button class="remove-button" @click.stop="remove" v-if="index === days.length - 1">🗙</button>
+            </div>
         </div>
     </div>
 </template>
@@ -41,6 +43,11 @@ export default class DayList extends Vue {
     display: inline-block;
 }
 
+.day-tabs-wrapper {
+    box-shadow: 0 1px 2px rgb(80, 80, 80, 0.8);
+    display: inline-block;
+}
+
 .day-tab > label {
     padding: 5px 13px;
 }
@@ -65,5 +72,9 @@ export default class DayList extends Vue {
 
 .day-tab.selected > label {
     padding: 5px 13px 2px;
+}
+
+.day-tab.selected > .remove-button {
+    padding: 4px 4px 1px 0;
 }
 </style>
