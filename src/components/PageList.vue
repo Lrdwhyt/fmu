@@ -1,8 +1,8 @@
 <template>
     <div>
         <ol class="page-list">
-            <li class="page-list-label"><div>Page</div></li>
-            <li v-for="page in totalPages" v-bind:key="page">
+            <li class="page-list-label"><div>Page</div></li
+            ><li v-for="page in totalPages" v-bind:key="page">
                 <PageItem :index="page" />
             </li>
         </ol>
