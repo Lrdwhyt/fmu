@@ -62,10 +62,6 @@ export default class GameLogItem extends Vue {
         return this.$props.event.content;
     }
 
-    lineBreak(str: string): string {
-        return str.replace("\n", "<br>");
-    }
-
     expand(): void {
         this.isExpanded = !this.isExpanded;
     }
