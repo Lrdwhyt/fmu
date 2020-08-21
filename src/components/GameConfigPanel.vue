@@ -1,7 +1,7 @@
 <template>
     <div class="fmu-panel">
         <div>
-            <moderator-list />
+            <ModeratorList />
         </div>
         <div id="general-settings">
             <div>
@@ -31,7 +31,7 @@ import Component from "vue-class-component";
 import ModeratorList from "./Moderators/ModeratorList.vue";
 
 @Component({
-    name: "game-config-panel",
+    name: "GameConfigPanel",
     components: {
         ModeratorList,
     },

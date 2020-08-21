@@ -2,9 +2,9 @@
     <div class="moderator-list">
         <label>Game moderators</label>
         <template v-for="moderator in moderators">
-            <moderator-item v-bind:key="moderator" :moderator="moderator" />
+            <ModeratorItem :key="moderator" :moderator="moderator" />
         </template>
-        <add-moderator-item v-if="isAddModerator" @register="hideInput" />
+        <AddModeratorItem v-if="isAddModerator" @register="hideInput" />
         <button class="fmu-button" @click="addModerator">+</button>
     </div>
 </template>
@@ -16,7 +16,7 @@ import ModeratorItem from "./ModeratorItem.vue";
 import AddModeratorItem from "./AddModeratorItem.vue";
 
 @Component({
-    name: "moderator-list",
+    name: "ModeratorList",
     components: {
         ModeratorItem,
         AddModeratorItem,

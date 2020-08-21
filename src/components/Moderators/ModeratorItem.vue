@@ -10,7 +10,7 @@ import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
 @Component({
-    name: "moderator-item",
+    name: "ModeratorItem",
 })
 export default class ModeratorItem extends Vue {
     @Prop() private moderator!: string;

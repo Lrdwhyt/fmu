@@ -1,8 +1,8 @@
 <template>
     <div id="fmu">
-        <game-panel />
-        <menu-bar />
-        <settings-panel />
+        <GamePanel />
+        <MenuBar />
+        <SettingsPanel />
     </div>
 </template>
 

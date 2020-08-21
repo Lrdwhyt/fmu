@@ -1,7 +1,7 @@
 <template>
     <div class="fmu-panel">
         <div class="player-list">
-            <player-list />
+            <PlayerList />
         </div>
         <div class="manage-players">
             <div>
@@ -27,7 +27,7 @@ import { Player } from "@/Player";
 import { trimChars } from "@/StringUtils";
 
 @Component({
-    name: "player-management-panel",
+    name: "PlayerManagementPanel",
     components: {
         PlayerList,
     },

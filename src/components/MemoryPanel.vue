@@ -23,8 +23,9 @@
                 class="fmu-button"
                 @click="resetAll"
                 title="Reset all data stored in localStorage, including game data and Forum Mafia Utilities settings"
-                >Reset all data</button
             >
+                Reset all data
+            </button>
         </div>
     </div>
 </template>
@@ -36,7 +37,7 @@ import { totalMemoryUsed, memoryUsageByGame, reset } from "../LocalStorageManage
 import { getThreadId } from "../forums-of-loathing/Parser";
 
 @Component({
-    name: "memory-panel",
+    name: "MemoryPanel",
 })
 export default class MemoryPanel extends Vue {
     memoryUsed(): string {

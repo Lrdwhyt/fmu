@@ -8,7 +8,7 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component({
-    name: "add-no-vote-keyword-item",
+    name: "AddNoVoteKeywordItem",
 })
 export default class AddNoVoteKeywordItem extends Vue {
     mounted() {

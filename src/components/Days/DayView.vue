@@ -5,10 +5,10 @@
                 <label>Start</label>
             </td>
             <td>
-                <post-selection type="start" />
+                <PostSelection type="start" />
             </td>
             <td>
-                <date-selection type="start" />
+                <DateSelection type="start" />
             </td>
         </tr>
         <tr>
@@ -16,10 +16,10 @@
                 <label>End</label>
             </td>
             <td>
-                <post-selection type="end" />
+                <PostSelection type="end" />
             </td>
             <td>
-                <date-selection type="end" />
+                <DateSelection type="end" />
             </td>
         </tr>
     </table>
@@ -33,7 +33,7 @@ import PostSelection from "./PostSelection.vue";
 import { Day, DayBoundaryType } from "@/Day";
 
 @Component({
-    name: "day-view",
+    name: "DayView",
     components: {
         DateSelection,
         PostSelection,

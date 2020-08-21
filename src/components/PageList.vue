@@ -1,9 +1,9 @@
 <template>
     <div>
         <ol class="page-list">
-            <li class="page-list-label"><div>Page</div></li
-            ><li v-for="page in totalPages" v-bind:key="page">
-                <page-item :index="page" />
+            <li class="page-list-label"><div>Page</div></li>
+            <li v-for="page in totalPages" v-bind:key="page">
+                <PageItem :index="page" />
             </li>
         </ol>
     </div>
@@ -16,7 +16,7 @@ import PageItem from "./PageItem.vue";
 import { getTotalPages } from "@/forums-of-loathing/Parser";
 
 @Component({
-    name: "page-list",
+    name: "PageList",
     components: {
         PageItem,
     },

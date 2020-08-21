@@ -23,7 +23,7 @@ import ColourManagementPanel from "./ColourManagementPanel.vue";
 import MemoryPanel from "./MemoryPanel.vue";
 
 @Component({
-    name: "settings-panel",
+    name: "SettingsPanel",
     components: {
         NicknameManagerPanel,
         PlatformSettings,

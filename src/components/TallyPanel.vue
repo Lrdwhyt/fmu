@@ -1,12 +1,12 @@
 <template>
     <div class="fmu-panel">
-        <tally-view :tally="tally" />
+        <TallyView :tally="tally" />
         <div class="tally-controls">
             <button class="fmu-button" @click="updateTally">Update</button>
             <button class="fmu-button" @click="copyBbcode">Copy as BBcode</button>
         </div>
         <textarea ref="copyContainer" />
-        <day-management-panel />
+        <DayManagementPanel />
     </div>
 </template>
 
@@ -22,7 +22,7 @@ import { writeBbcode, header, TallyOptions } from "@/BbcodeWriter";
 import { getPosts } from "@/forums-of-loathing/Parser";
 
 @Component({
-    name: "tally-panel",
+    name: "TallyPanel",
     components: {
         TallyView,
         DayManagementPanel,

@@ -8,7 +8,7 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component({
-    name: "add-moderator-item",
+    name: "AddModeratorItem",
 })
 export default class AddModeratorItem extends Vue {
     mounted() {

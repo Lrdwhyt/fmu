@@ -1,7 +1,5 @@
-import { Vote, VoteType, VoteTarget } from "@/Vote"
 import { ActionContext } from 'vuex'
-import { reset } from '@/LocalStorageManager';
-import { Player } from '@/Player';
+import { Vote } from "@/Vote"
 import { getVoteList } from '@/VoteParser';
 
 interface Store {

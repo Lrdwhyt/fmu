@@ -27,8 +27,7 @@ import { filterByDay } from "@/VoteFilter";
 import { linkPost } from "@/forums-of-loathing/LinkUtils";
 
 @Component({
-    name: "game-log-item",
-    components: {},
+    name: "GameLogItem",
 })
 export default class GameLogItem extends Vue {
     @Prop() private event!: any;

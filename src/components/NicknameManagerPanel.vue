@@ -2,7 +2,7 @@
     <div class="nickname-manager-panel">
         <ul class="player-list">
             <li v-for="(nicks, player) in nicknames" :key="player">
-                <nickname-item :name="player" :nicknames="nicks" />
+                <NicknameItem :name="player" :nicknames="nicks" />
             </li>
         </ul>
         <div>
@@ -25,7 +25,7 @@ import { NicknameList } from "@/store/settings";
 import { parseNicknameFile } from "@/NicknameFileImporter";
 
 @Component({
-    name: "nickname-manager-panel",
+    name: "NicknameManagerPanel",
     components: {
         NicknameItem,
     },
@@ -72,7 +72,6 @@ export default class NicknameManagerPanel extends Vue {
 </script>
 
 <style scoped>
-
 ul {
     margin: 0;
     padding: 0;

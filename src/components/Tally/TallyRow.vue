@@ -6,7 +6,7 @@
                 {{ target }}
             </div>
         </div>
-        <tally-voter v-for="(pair, index) in item" :key="index" :pair="pair" />
+        <TallyVoter v-for="(pair, index) in item" :key="index" :pair="pair" />
     </div>
 </template>
 
@@ -16,7 +16,7 @@ import TallyVoter from "./TallyVoter.vue";
 import { numberVotes, TallyItem } from "@/Tally";
 
 @Component({
-    name: "tally-row",
+    name: "TallyRow",
     components: {
         TallyVoter,
     },

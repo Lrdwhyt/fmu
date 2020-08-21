@@ -8,7 +8,7 @@
             <td>Aliases</td>
         </tr>
         <template v-for="player in players">
-            <player-item :player="player" :name="player.name" :key="player.name" />
+            <PlayerItem :player="player" :name="player.name" :key="player.name" />
         </template>
     </table>
 </template>
@@ -20,7 +20,7 @@ import PlayerItem from "./PlayerItem.vue";
 import { Player } from "@/Player";
 
 @Component({
-    name: "player-list",
+    name: "PlayerList",
     components: {
         PlayerItem,
     },

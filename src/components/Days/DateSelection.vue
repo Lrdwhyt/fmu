@@ -19,7 +19,7 @@ import { offsetDate } from "@/DateUtils";
 import { getTimeZone } from "@/forums-of-loathing/Parser";
 
 @Component({
-    name: "day-selection",
+    name: "DateSelection",
     components: {},
 })
 export default class DateSelection extends Vue {

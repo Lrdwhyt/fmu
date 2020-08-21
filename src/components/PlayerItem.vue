@@ -50,7 +50,7 @@ import { Player } from "@/Player";
 import { PhaseType, Phase } from "@/Phase";
 
 @Component({
-    name: "player-item",
+    name: "PlayerItem",
 })
 export default class PlayerItem extends Vue {
     @Prop() private name!: string;

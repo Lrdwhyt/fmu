@@ -2,9 +2,9 @@
     <div class="no-elimination-keyword-list">
         <label>No elimination keywords</label>
         <template v-for="keyword in keywords">
-            <no-elimination-keyword-item v-bind:key="keyword" :keyword="keyword" />
+            <NoEliminationKeywordItem v-bind:key="keyword" :keyword="keyword" />
         </template>
-        <add-no-elimination-keyword-item v-if="isAddKeyword" @register="hideInput" />
+        <AddNoEliminationKeywordItem v-if="isAddKeyword" @register="hideInput" />
         <button class="fmu-button" @click="addKeyword">+</button>
     </div>
 </template>
@@ -16,7 +16,7 @@ import NoEliminationKeywordItem from "./NoEliminationKeywordItem.vue";
 import AddNoEliminationKeywordItem from "./AddNoEliminationKeywordItem.vue";
 
 @Component({
-    name: "no-elimination-keyword-list",
+    name: "NoEliminationKeywordList",
     components: {
         NoEliminationKeywordItem,
         AddNoEliminationKeywordItem,

@@ -10,7 +10,7 @@ import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
 @Component({
-    name: "no-vote-keyword-item",
+    name: "NoVoteKeywordItem",
 })
 export default class NoVoteKeywordItem extends Vue {
     @Prop() private keyword!: string;

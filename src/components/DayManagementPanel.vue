@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="day-nav">
-            <day-list />
+            <DayList />
             <button class="fmu-button" @click="addDay">+</button>
         </div>
         <div class="day-view">
-            <day-view />
+            <DayView />
         </div>
     </div>
 </template>
@@ -19,7 +19,7 @@ import { Day, DayBoundaryType, generateNext } from "@/Day";
 import { getTotalPages } from "@/forums-of-loathing/Parser";
 
 @Component({
-    name: "day-management-panel",
+    name: "DayManagementPanel",
     components: {
         DayList,
         DayView,

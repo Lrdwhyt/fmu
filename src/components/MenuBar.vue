@@ -16,7 +16,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 
 @Component({
-    name: "menu-bar",
+    name: "MenuBar",
 })
 export default class MenuBar extends Vue {
     get isGameActive(): boolean {

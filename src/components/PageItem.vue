@@ -8,7 +8,7 @@ import { Component, Prop } from "vue-property-decorator";
 import { getTotalPages, getThreadId, getCurrentPage } from "@/forums-of-loathing/Parser";
 
 @Component({
-    name: "page-item",
+    name: "PageItem",
     components: {},
 })
 export default class PageItem extends Vue {

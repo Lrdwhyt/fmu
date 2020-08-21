@@ -1,6 +1,6 @@
 <template>
     <table>
-        <game-log-item v-for="(vote, i) in votes" v-bind:key="i" :index="i" :event="vote" />
+        <GameLogItem v-for="(vote, index) in votes" :key="index" :index="index" :event="vote" />
     </table>
 </template>
 
@@ -12,7 +12,7 @@ import { Day } from "@/Day";
 import { filterByDay } from "@/VoteFilter";
 
 @Component({
-    name: "game-log-view",
+    name: "GameLogView",
     components: {
         GameLogItem,
     },

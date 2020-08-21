@@ -8,7 +8,7 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component({
-    name: "nonvoter",
+    name: "NoVoteItem",
     components: {},
 })
 export default class NoVoteItem extends Vue {

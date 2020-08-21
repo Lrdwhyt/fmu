@@ -21,8 +21,8 @@
             <input type="number" id="nightLength" min="0" size="4" :value="nightLength" @change="setNightLength" />
             <label>minutes</label>
         </div>
-        <no-elimination-keyword-list />
-        <no-vote-keyword-list />
+        <NoEliminationKeywordList />
+        <NoVoteKeywordList />
     </div>
 </template>
 
@@ -33,7 +33,7 @@ import NoEliminationKeywordList from "./NoEliminationKeywords/NoEliminationKeywo
 import NoVoteKeywordList from "./NoVoteKeywords/NoVoteKeywordList.vue";
 
 @Component({
-    name: "general-settings-panel",
+    name: "GeneralSettingsPanel",
     components: {
         NoEliminationKeywordList,
         NoVoteKeywordList,

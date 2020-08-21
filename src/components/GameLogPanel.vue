@@ -1,9 +1,9 @@
 <template>
     <div class="fmu-panel">
-        <game-log-view />
+        <GameLogView />
         <!--
         <div class="day-management">
-            <day-management-panel />
+            <DayManagementPanel />
         </div>
         -->
     </div>
@@ -18,7 +18,7 @@ import { Day } from "@/Day";
 import { filterByDay } from "@/VoteFilter";
 
 @Component({
-    name: "game-log-panel",
+    name: "GameLogPanel",
     components: {
         GameLogView,
         DayManagementPanel,

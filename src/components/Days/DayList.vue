@@ -16,8 +16,7 @@ import Component from "vue-class-component";
 import { Day } from "@/Day";
 
 @Component({
-    name: "day-list",
-    components: {},
+    name: "DayList",
 })
 export default class DayList extends Vue {
     get days(): Day[] {

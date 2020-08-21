@@ -3,18 +3,18 @@
         <div class="target">
             <div class="number-votes"> {{ number }} </div><div class="target-name">Failed to vote</div>
         </div>
-        <non-voter v-for="(player, index) in players" :key="index" :player="player" />
+        <NoVoteItem v-for="(player, index) in players" :key="index" :player="player" />
     </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import NonVoter from "./NoVoteItem.vue";
+import NoVoteItem from "./NoVoteItem.vue";
 
 @Component({
-    name: "no-vote-row",
+    name: "NoVoteRow",
     components: {
-        NonVoter,
+        NoVoteItem,
     },
 })
 export default class NoVoteRow extends Vue {

@@ -1,6 +1,6 @@
 <template>
     <div class="game-panel" v-if="isActive">
-        <page-list />
+        <PageList />
         <div>
             <button @click="showVoteTally" :class="{ 'active-tab': activePanel === 'TallyPanel' }">Tally</button
             ><button @click="showGameConfig" :class="{ 'active-tab': activePanel === 'GameConfigPanel' }">Game Configuration</button
@@ -23,7 +23,7 @@ import GameLogPanel from "./GameLogPanel.vue";
 import PageList from "./PageList.vue";
 
 @Component({
-    name: "game-panel",
+    name: "GamePanel",
     components: {
         PageList,
         TallyPanel,

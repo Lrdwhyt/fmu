@@ -10,7 +10,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 
 @Component({
-    name: "fol-settings",
+    name: "ForumsOfLoathingSettings",
 })
 export default class ForumsOfLoathingSettings extends Vue {
     get postsPerPage(): number {

@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="vote-tally">
-            <tally-row v-for="(item, target) in votes" :item="item" :key="target" :target="target" />
+            <TallyRow v-for="(item, target) in votes" :item="item" :key="target" :target="target" />
         </div>
         <div class="non-voters">
-            <no-vote-row :players="nonVoters" v-if="nonVoters.length" />
+            <NoVoteRow :players="nonVoters" v-if="nonVoters.length" />
         </div>
     </div>
 </template>
@@ -17,7 +17,7 @@ import { Vote, VoteType } from "@/Vote";
 import { Tally, FullTally } from "@/Tally";
 
 @Component({
-    name: "tally-view",
+    name: "TallyView",
     components: {
         TallyRow,
         NoVoteRow,

@@ -8,7 +8,7 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component({
-    name: "add-no-elimination-keyword-item",
+    name: "AddNoEliminationKeywordItem",
 })
 export default class AddNoEliminationKeywordItem extends Vue {
     mounted() {

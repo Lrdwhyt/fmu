@@ -20,7 +20,7 @@ import { Component, Prop } from "vue-property-decorator";
 import { Player } from "@/Player";
 
 @Component({
-    name: "nickname-item",
+    name: "NicknameItem",
 })
 export default class NicknameItem extends Vue {
     @Prop() private name!: string;

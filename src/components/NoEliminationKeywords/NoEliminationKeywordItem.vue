@@ -10,7 +10,7 @@ import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
 @Component({
-    name: "no-elimination-keyword-item",
+    name: "NoEliminationKeywordItem",
 })
 export default class NoEliminationKeywordItem extends Vue {
     @Prop() private keyword!: string;

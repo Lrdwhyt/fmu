@@ -11,7 +11,7 @@ import { Component, Prop } from "vue-property-decorator";
 import { Day, DayBoundaryType } from "@/Day";
 
 @Component({
-    name: "post-selection",
+    name: "PostSelection",
     components: {},
 })
 export default class PostSelection extends Vue {

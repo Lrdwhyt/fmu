@@ -27,7 +27,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 
 @Component({
-    name: "colour-management-panel",
+    name: "ColourManagementPanel",
 })
 export default class ColourManagementPanel extends Vue {
     get groups(): { [group: string]: string } {

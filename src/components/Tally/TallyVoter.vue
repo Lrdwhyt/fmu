@@ -2,7 +2,7 @@
     <div class="voter" :class="{ unvote: hasUnvote }" v-if="visible">
         <label :style="{ color: colour }">{{ user }}</label
         ><a :href="linkPost(pair.vote)" :title="pair.vote.source">{{ pair.vote.location }}</a
-        ><a :href="linkPost(pair.unvote)" :title="pair.unvote.source" v-if="isFullPair">{{ unvoteLocation }}</a>
+        ><a v-if="isFullPair" :href="linkPost(pair.unvote)" :title="pair.unvote.source">{{ unvoteLocation }}</a>
     </div>
 </template>
 
@@ -12,7 +12,7 @@ import { Vote, VoteType } from "@/Vote";
 import { VoteUnvotePair } from "@/Tally";
 
 @Component({
-    name: "tally-voter",
+    name: "TallyVoter",
     components: {},
 })
 export default class TallyVoter extends Vue {
