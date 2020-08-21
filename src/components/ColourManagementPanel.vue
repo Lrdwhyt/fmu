@@ -5,11 +5,21 @@
                 <td>
                     <div class="word-view">
                         <label :style="{ color: color }">{{ group }}</label
-                        ><button class="remove-button" @click="remove(group)" v-if="isDeletable(group)">🗙</button>
+                        ><button
+                            class="remove-button"
+                            @click="remove(group)"
+                            v-if="isDeletable(group)"
+                            >🗙</button
+                        >
                     </div>
                 </td>
                 <td>
-                    <input type="color" class="color-picker" :value="color" @change="changeColour($event, group)" />
+                    <input
+                        type="color"
+                        class="color-picker"
+                        :value="color"
+                        @change="changeColour($event, group)"
+                    />
                 </td>
             </tr>
         </table>
@@ -17,7 +27,7 @@
         <div class="add-group">
             <label>New group</label>
             <input type="text" ref="newGroup" @keyup="handleKeyup" />
-            <button class="fmu-button" @click="addGroup">Add</button>
+            <button class="fmu-button" @click="handleAddGroup">Add</button>
         </div>
     </div>
 </template>
@@ -51,14 +61,14 @@ export default class ColourManagementPanel extends Vue {
 
     handleKeyup(e: KeyboardEvent): void {
         if (e.keyCode === 13) {
-            this.addGroup();
+            this.handleAddGroup();
         }
     }
 
-    addGroup(): void {
+    handleAddGroup(): void {
         const name = (this.$refs.newGroup as HTMLInputElement).value;
         if (name.length) {
-            this.$store.commit("addGroup", name);
+            this.$store.commit("handleAddGroup", name);
             (this.$refs.newGroup as HTMLInputElement).value = "";
         }
     }

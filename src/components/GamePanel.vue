@@ -2,10 +2,19 @@
     <div class="game-panel" v-if="isActive">
         <PageList />
         <div>
-            <button @click="showVoteTally" :class="{ 'active-tab': activePanel === 'TallyPanel' }">Tally</button
-            ><button @click="showGameConfig" :class="{ 'active-tab': activePanel === 'GameConfigPanel' }">Game Configuration</button
-            ><button @click="showPlayerManagement" :class="{ 'active-tab': activePanel === 'PlayerManagementPanel' }">Players</button
-            ><button @click="showGameLog" :class="{ 'active-tab': activePanel === 'GameLogPanel' }">Game Log</button>
+            <button @click="showVoteTally" :class="{ 'active-tab': activePanel === 'TallyPanel' }"
+                >Tally</button
+            ><button
+                @click="showGameConfig"
+                :class="{ 'active-tab': activePanel === 'GameConfigPanel' }"
+                >Game Configuration</button
+            ><button
+                @click="showPlayerManagement"
+                :class="{ 'active-tab': activePanel === 'PlayerManagementPanel' }"
+                >Players</button
+            ><button @click="showGameLog" :class="{ 'active-tab': activePanel === 'GameLogPanel' }"
+                >Game Log</button
+            >
         </div>
         <div class="active-game-panel">
             <component :is="activePanel" />

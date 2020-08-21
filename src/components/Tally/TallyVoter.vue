@@ -2,7 +2,9 @@
     <div class="voter" :class="{ unvote: hasUnvote }" v-if="visible">
         <label :style="{ color: colour }">{{ user }}</label
         ><a :href="linkPost(pair.vote)" :title="pair.vote.source">{{ pair.vote.location }}</a
-        ><a v-if="isFullPair" :href="linkPost(pair.unvote)" :title="pair.unvote.source">{{ unvoteLocation }}</a>
+        ><a v-if="isFullPair" :href="linkPost(pair.unvote)" :title="pair.unvote.source">
+            {{ unvoteLocation }}
+        </a>
     </div>
 </template>
 

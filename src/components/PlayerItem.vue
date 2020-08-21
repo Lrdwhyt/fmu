@@ -2,7 +2,14 @@
     <tr class="player-item" :class="{ 'dead-player': !isAlive }">
         <td>
             <div class="player-name word-edit" v-if="isEditName">
-                <input type="text" ref="editName" :value="this.$props.name" size="16" @blur="changeName" @keyup="keyupChangeName" />
+                <input
+                    type="text"
+                    ref="editName"
+                    :value="this.$props.name"
+                    size="16"
+                    @blur="changeName"
+                    @keyup="keyupChangeName"
+                />
             </div>
             <div class="player-name word-view" v-else>
                 <label @click="startEditName">{{ this.$props.name }}</label
@@ -10,11 +17,15 @@
             </div>
         </td>
         <td>
-            <button class="status-indicator" :class="lifeString" @click="toggleAlive">{{ lifeString }}</button>
+            <button class="status-indicator" :class="lifeString" @click="toggleAlive">{{
+                lifeString
+            }}</button>
         </td>
         <td>
             <div class="death-selection word-view" v-if="!isAlive">
-                <button class="phase-type" :class="deathPhaseType" @click="switchDeathPhaseType">{{ deathPhaseType }}</button
+                <button class="phase-type" :class="deathPhaseType" @click="switchDeathPhaseType">{{
+                    deathPhaseType
+                }}</button
                 ><input
                     type="number"
                     ref="editDeathTime"
@@ -28,8 +39,18 @@
             </div>
         </td>
         <td>
-            <select @change="changeGroup" v-model="selectedGroup" :style="{ color: selectedGroupColor }">
-                <option v-for="(color, group) in groups" :key="group" :value="group" :style="{ color: color }">{{ group }}</option>
+            <select
+                @change="changeGroup"
+                v-model="selectedGroup"
+                :style="{ color: selectedGroupColor }"
+            >
+                <option
+                    v-for="(color, group) in groups"
+                    :key="group"
+                    :value="group"
+                    :style="{ color: color }"
+                    >{{ group }}</option
+                >
             </select>
         </td>
         <td class="aliases">
@@ -37,7 +58,13 @@
                 <label>{{ alias }}</label
                 ><button class="remove-button" @click="removeAlias(alias)">🗙</button>
             </div>
-            <input type="text" ref="aliasInput" v-if="isAddAlias" @blur="addAlias" @keyup="handleKeyupAlias" />
+            <input
+                type="text"
+                ref="aliasInput"
+                v-if="isAddAlias"
+                @blur="addAlias"
+                @keyup="handleKeyupAlias"
+            />
             <button class="fmu-button" @click="showAddAlias">+</button>
         </td>
     </tr>

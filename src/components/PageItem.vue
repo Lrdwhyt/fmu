@@ -1,5 +1,7 @@
 <template>
-    <a :href="link" :class="[className, selected ? 'selected' : '']" :title="description">{{ index }}</a>
+    <a :href="link" :class="[className, selected ? 'selected' : '']" :title="description">
+        {{ index }}
+    </a>
 </template>
 
 <script lang="ts">
@@ -18,7 +20,10 @@ export default class PageItem extends Vue {
 
     get className(): string {
         if (this.index in this.$store.getters.rawGameData) {
-            if (this.$store.getters.postsPerPage * this.index === this.$store.getters.rawGameData[this.index].last) {
+            if (
+                this.$store.getters.postsPerPage * this.index ===
+                this.$store.getters.rawGameData[this.index].last
+            ) {
                 return "full";
             } else {
                 return "partial";
@@ -84,6 +89,6 @@ a {
 }
 
 .full:hover {
-    background-color: #E0DFE6;
+    background-color: #e0dfe6;
 }
 </style>

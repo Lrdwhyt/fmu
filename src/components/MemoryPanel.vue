@@ -1,8 +1,9 @@
 <template>
     <div class="fmu-panel">
         <p>
-            Forum Mafia Utilities uses localStorage to store its data. Typically, browsers allow about 5 MB of storage per domain. For long-term
-            usage, it is necessary to periodically clear out unused memory.
+            Forum Mafia Utilities uses localStorage to store its data. Typically, browsers allow
+            about 5 MB of storage per domain. For long-term usage, it is necessary to periodically
+            clear out unused memory.
         </p>
         <table>
             <tr class="heading">

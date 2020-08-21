@@ -1,7 +1,8 @@
 <template>
     <div>
         <div class="target">
-            <div class="number-votes"> {{ number }} </div><div class="target-name">Failed to vote</div>
+            <div class="number-votes"> {{ number }} </div
+            ><div class="target-name">Failed to vote</div>
         </div>
         <NoVoteItem v-for="(player, index) in players" :key="index" :player="player" />
     </div>

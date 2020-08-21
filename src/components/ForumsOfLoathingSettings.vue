@@ -1,7 +1,13 @@
 <template>
     <div class="fmu-panel">
         <label for="postsPerPage">Number of posts per page</label>
-        <input type="number" id="postsPerPage" size="5" :value="this.postsPerPage" @blur="setPostsPerPage" />
+        <input
+            type="number"
+            id="postsPerPage"
+            size="5"
+            :value="this.postsPerPage"
+            @blur="setPostsPerPage"
+        />
     </div>
 </template>
 

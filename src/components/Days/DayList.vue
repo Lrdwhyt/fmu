@@ -2,9 +2,17 @@
     <div class="day-nav">
         <label>Days</label>
         <div class="day-tabs-wrapper">
-            <div class="day-tab" v-for="(day, index) in days" :key="day" @click="selectDay(index)" :class="{ selected: index === selectedDay }">
+            <div
+                class="day-tab"
+                v-for="(day, index) in days"
+                :key="day"
+                @click="selectDay(index)"
+                :class="{ selected: index === selectedDay }"
+            >
                 <label>{{ index + 1 }}</label
-                ><button class="remove-button" @click.stop="remove" v-if="index === days.length - 1">🗙</button>
+                ><button v-if="index === days.length - 1" class="remove-button" @click.stop="remove"
+                    >🗙</button
+                >
             </div>
         </div>
     </div>

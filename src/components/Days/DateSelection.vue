@@ -1,6 +1,13 @@
 <template>
     <div class="day-boundary-option" :class="{ selected: isSelected }" @click="setActive">
-        <input type="date" ref="date" :value="dateString" :readonly="!isSelected" required="required" @blur="edit" /><input
+        <input
+            type="date"
+            ref="date"
+            :value="dateString"
+            :readonly="!isSelected"
+            required="required"
+            @blur="edit"
+        /><input
             type="time"
             ref="time"
             :value="time"
@@ -51,7 +58,9 @@ export default class DateSelection extends Vue {
 
     edit(): void {
         let date = new Date((this.$refs.date as HTMLInputElement).value);
-        const hoursMinutes = getTimeStringAsHoursMinutes((this.$refs.time as HTMLInputElement).value);
+        const hoursMinutes = getTimeStringAsHoursMinutes(
+            (this.$refs.time as HTMLInputElement).value
+        );
         date.setHours(hoursMinutes.hours);
         date.setMinutes(hoursMinutes.minutes);
         date.setSeconds(59);

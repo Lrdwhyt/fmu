@@ -1,6 +1,18 @@
 <template>
-    <div class="day-boundary-option word-view" :class="{ selected: isSelected }" @click="handleClick">
-        <input type="number" ref="edit" :value="post" v-if="isEditing" size="10" @blur="stopEdit" @keyup="handleKeyup" />
+    <div
+        class="day-boundary-option word-view"
+        :class="{ selected: isSelected }"
+        @click="handleClick"
+    >
+        <input
+            type="number"
+            ref="edit"
+            :value="post"
+            v-if="isEditing"
+            size="10"
+            @blur="stopEdit"
+            @keyup="handleKeyup"
+        />
         <label v-else>Post #{{ post }}</label>
     </div>
 </template>

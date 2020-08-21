@@ -3,20 +3,20 @@
         <div>
             <ModeratorList />
         </div>
-        <div id="general-settings">
-            <div>
+        <div>
+            <div class="general-setting">
                 <label>Vote keyword</label>
                 <input type="text" :value="voteKeyword" size="12" @blur="setVoteKeyword" />
             </div>
-            <div>
+            <div class="general-setting">
                 <label>Unvote keyword</label>
                 <input type="text" :value="unvoteKeyword" size="12" @blur="setUnvoteKeyword" />
             </div>
-            <div>
+            <div class="general-setting">
                 <label>Night time</label>
                 <input type="time" :value="nightTime" @blur="setNightTime" required="required" />
             </div>
-            <div>
+            <div class="general-setting">
                 <label title="How long each day lasts in hours">Day length</label>
                 <input type="number" size="4" :value="dayLength" @blur="setDayLength" />
                 hours
@@ -76,7 +76,7 @@ input {
     font: inherit;
     padding: 4px;
 }
-#general-settings > div {
+.general-setting {
     margin: 4px 0;
 }
 </style>

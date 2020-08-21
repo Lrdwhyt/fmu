@@ -1,24 +1,56 @@
 <template>
     <div class="general-settings-wrapper fmu-panel">
         <div>
-            <input type="checkbox" id="includeUnvotes" :checked="includeUnvotes" @input="updateIncludeUnvotes" />
+            <input
+                type="checkbox"
+                id="includeUnvotes"
+                :checked="includeUnvotes"
+                @input="updateIncludeUnvotes"
+            />
             <label for="includeUnvotes">Include unvotes in tally</label>
         </div>
         <div>
-            <input type="checkbox" id="showPostNumbers" :checked="showPostNumbers" @input="updateShowPostNumbers" />
+            <input
+                type="checkbox"
+                id="showPostNumbers"
+                :checked="showPostNumbers"
+                @input="updateShowPostNumbers"
+            />
             <label for="showPostNumbers">Show post numbers in BBCode tally</label>
         </div>
         <div>
-            <input type="checkbox" id="useColours" :checked="useColours" @input="updateUseColours" />
+            <input
+                type="checkbox"
+                id="useColours"
+                :checked="useColours"
+                @input="updateUseColours"
+            />
             <label for="useColours">Use colours in tally</label>
         </div>
         <div>
-            <label for="minConfidence" title="100 to require exact matches">Minimum percentage score to match names</label>
-            <input type="number" id="minConfidence" min="0" max="100" size="4" :value="minConfidence" @change="setMinConfidence" />
+            <label for="minConfidence" title="100 to require exact matches"
+                >Minimum percentage score to match names</label
+            >
+            <input
+                type="number"
+                id="minConfidence"
+                min="0"
+                max="100"
+                size="4"
+                :value="minConfidence"
+                @change="setMinConfidence"
+            />
         </div>
         <div>
             <label for="nightLength">Night length</label>
-            <input type="number" id="nightLength" min="0" size="4" :value="nightLength" @change="setNightLength" />
+            <input
+                type="number"
+                id="nightLength"
+                min="0"
+                size="4"
+                :value="nightLength"
+                @change="setNightLength"
+            />
             <label>minutes</label>
         </div>
         <NoEliminationKeywordList />
