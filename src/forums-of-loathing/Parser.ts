@@ -32,16 +32,17 @@ export function getPosts({ mods, voteKeyword, unvoteKeyword }: { mods: string[],
             voteKeyword,
             unvoteKeyword
         });
+
         pageData = {
             ...pageData,
             ...postData
         }
     }
 
-    const lastPost = Post.getNumber(posts[posts.length - 1]);
+    const lastPostNumber = Post.getNumber(posts[posts.length - 1]);
     pageData = {
         ...pageData,
-        last: lastPost
+        last: lastPostNumber
     };
 
     return {
@@ -63,6 +64,7 @@ export function getPostData(post: Element, { mods, voteKeyword, unvoteKeyword }:
             const lower = msg.toLowerCase();
             return lower.includes(voteKeyword) || lower.includes(unvoteKeyword);
         });
+
         if (boldText.length > 0) {
             content = boldText.slice(-1)[0];
         }
@@ -74,7 +76,6 @@ export function getPostData(post: Element, { mods, voteKeyword, unvoteKeyword }:
 
     const timestamp: Date = parseDate(Post.getTime(post), timeZone);
     const postId = Post.getId(post);
-
     const postNumber = Post.getNumber(post);
 
     return {
@@ -89,10 +90,13 @@ export function getPostData(post: Element, { mods, voteKeyword, unvoteKeyword }:
 
 export function getCurrentPage(): number {
     const el = document.querySelector(".pagenav td.vbmenu_control:first-child");
+
     if (el === null) {
         return 1;
     }
+
     const pageString: string = el.textContent || "";
+
     if (pageString.length > 0) {
         return parseInt(pageString.split(" ")[1]);
     } else {
@@ -102,10 +106,13 @@ export function getCurrentPage(): number {
 
 export function getTotalPages(): number {
     const el = document.querySelector(".pagenav td.vbmenu_control:first-child");
+
     if (el === null) {
         return 1;
     }
+
     const pageString: string = el.textContent || "";
+
     if (pageString.length > 0) {
         return parseInt(pageString.split(" ")[3]);
     } else {
@@ -124,6 +131,7 @@ export function getThreadId(): number {
 export function getThreadTitle(): string {
     const title: string = document.title;
     const index: number = title.lastIndexOf("-");
+
     return document.title.substring(0, index);
 }
 
