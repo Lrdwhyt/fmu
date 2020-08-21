@@ -12,7 +12,7 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { Vote, VoteType } from "@/Vote";
 import { VoteUnvotePair } from "@/Tally";
-import { linkVote } from '@/forums-of-loathing/LinkUtils';
+import { linkVote } from "@/forums-of-loathing/LinkUtils";
 
 @Component({
     name: "TallyVoter",
@@ -53,11 +53,11 @@ export default class TallyVoter extends Vue {
     }
 
     get unvoteLocation(): number {
-        if (this.pair.unvote !== undefined) {
-            return this.pair.unvote.location;
+        if (this.pair.unvote === undefined) {
+            return 0;
         }
 
-        return 0;
+        return this.pair.unvote.location;
     }
 
     get user(): string {

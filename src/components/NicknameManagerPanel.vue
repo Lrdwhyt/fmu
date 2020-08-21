@@ -8,9 +8,9 @@
         <div>
             <input ref="newPlayer" type="text" @keyup="handleKeyup" />
             <button class="fmu-button" @click="addPlayer">Add player</button>
-            <button class="fmu-button" @click="showPasteArea">Add from nicknames file</button>
+            <button class="fmu-button" @click="togglePasteArea">Add from nicknames file</button>
         </div>
-        <div v-if="isPasting">
+        <div v-if="showPasteArea">
             <div><textarea ref="pasteArea"/></div>
             <button class="fmu-button" @click="importNicknames">Import</button>
         </div>
@@ -31,7 +31,7 @@ import { parseNicknameFile } from "@/NicknameFileImporter";
     },
 })
 export default class NicknameManagerPanel extends Vue {
-    private isPasting: boolean = false;
+    private showPasteArea: boolean = false;
 
     get nicknames(): NicknameList {
         return this.$store.getters.nicknames;
@@ -51,11 +51,13 @@ export default class NicknameManagerPanel extends Vue {
         }
     }
 
-    showPasteArea(): void {
-        this.isPasting = !this.isPasting;
-        Vue.nextTick(() => {
-            (this.$refs.pasteArea as HTMLTextAreaElement).focus();
-        });
+    togglePasteArea(): void {
+        this.showPasteArea = !this.showPasteArea;
+        if (this.showPasteArea) {
+            Vue.nextTick(() => {
+                (this.$refs.pasteArea as HTMLTextAreaElement).focus();
+            });
+        }
     }
 
     importNicknames(): void {

@@ -111,19 +111,19 @@ export default class PlayerItem extends Vue {
     }
 
     get deathPhaseType(): string {
-        if (this.$props.player.timeOfDeath !== undefined) {
-            return this.$props.player.timeOfDeath.type;
+        if (this.$props.player.timeOfDeath === undefined) {
+            return PhaseType.NIGHT;
         }
 
-        return PhaseType.NIGHT;
+        return this.$props.player.timeOfDeath.type;
     }
 
     get dayOfDeath(): number {
-        if (this.$props.player.timeOfDeath !== undefined) {
-            return this.$props.player.timeOfDeath.index + 1;
+        if (this.$props.player.timeOfDeath === undefined) {
+            return 1;
         }
-
-        return 1;
+        
+        return this.$props.player.timeOfDeath.index + 1;
     }
 
     get groups(): { [group: string]: string } {

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="tally-view">
         <div class="vote-tally">
             <TallyRow v-for="(item, target) in votes" :item="item" :key="target" :target="target" />
         </div>
