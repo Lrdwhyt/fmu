@@ -4,7 +4,7 @@
             {{ time }}
         </td>
         <td>
-            <a :href="linkPost($props.event)">#{{ location }}</a>
+            <a :href="linkPost($props.event.link)">#{{ location }}</a>
         </td>
         <td>
             {{ user }}
@@ -70,8 +70,8 @@ export default class GameLogItem extends Vue {
         this.isExpanded = !this.isExpanded;
     }
 
-    linkPost(vote: Vote): string {
-        return linkPost(vote);
+    linkPost(postId: string): string {
+        return linkPost(postId);
     }
 }
 </script>

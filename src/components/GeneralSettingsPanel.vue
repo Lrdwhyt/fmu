@@ -1,6 +1,6 @@
 <template>
-    <div class="general-settings-wrapper fmu-panel">
-        <div>
+    <div class="fmu-panel">
+        <div class="general-setting">
             <input
                 type="checkbox"
                 id="includeUnvotes"
@@ -9,7 +9,7 @@
             />
             <label for="includeUnvotes">Include unvotes in tally</label>
         </div>
-        <div>
+        <div class="general-setting">
             <input
                 type="checkbox"
                 id="showPostNumbers"
@@ -18,7 +18,7 @@
             />
             <label for="showPostNumbers">Show post numbers in BBCode tally</label>
         </div>
-        <div>
+        <div class="general-setting">
             <input
                 type="checkbox"
                 id="useColours"
@@ -27,7 +27,7 @@
             />
             <label for="useColours">Use colours in tally</label>
         </div>
-        <div>
+        <div class="general-setting">
             <label for="minConfidence" title="100 to require exact matches"
                 >Minimum percentage score to match names</label
             >
@@ -41,7 +41,7 @@
                 @change="setMinConfidence"
             />
         </div>
-        <div>
+        <div class="general-setting">
             <label for="nightLength">Night length</label>
             <input
                 type="number"
@@ -115,7 +115,7 @@ export default class GeneralSettingsPanel extends Vue {
 </script>
 
 <style scoped>
-.general-settings-wrapper > div {
+.general-setting {
     min-height: 25px;
 }
 

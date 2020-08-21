@@ -1,8 +1,8 @@
 <template>
     <div class="voter" :class="{ unvote: hasUnvote }" v-if="visible">
         <label :style="{ color: colour }">{{ user }}</label
-        ><a :href="linkPost(pair.vote)" :title="pair.vote.source">{{ pair.vote.location }}</a
-        ><a v-if="isFullPair" :href="linkPost(pair.unvote)" :title="pair.unvote.source">
+        ><a :href="linkVote(pair.vote)" :title="pair.vote.source">{{ pair.vote.location }}</a
+        ><a v-if="isFullPair" :href="linkVote(pair.unvote)" :title="pair.unvote.source">
             {{ unvoteLocation }}
         </a>
     </div>
@@ -12,6 +12,7 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { Vote, VoteType } from "@/Vote";
 import { VoteUnvotePair } from "@/Tally";
+import { linkVote } from '@/forums-of-loathing/LinkUtils';
 
 @Component({
     name: "TallyVoter",
@@ -63,8 +64,8 @@ export default class TallyVoter extends Vue {
         return this.pair.vote.user;
     }
 
-    linkPost(vote: Vote): string {
-        return `http://forums.kingdomofloathing.com/vb/showthread.php?p=${vote.link}`;
+    linkVote(vote: Vote): string {
+        return linkVote(vote);
     }
 }
 </script>
