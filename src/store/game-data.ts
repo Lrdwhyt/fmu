@@ -1,5 +1,5 @@
-import { getGameData } from "@/LocalStorageManager"
 import { ActionContext } from 'vuex';
+import { getGameData } from "@/LocalStorageManager"
 
 interface Store {
     data: {};

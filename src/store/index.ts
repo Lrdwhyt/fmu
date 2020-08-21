@@ -29,7 +29,7 @@ export default new Vuex.Store({
         finalInit(context) {
             if (context.getters.isGameActive) {
                 context.dispatch("getGameData");
-                context.dispatch("generate", context.getters.rawGameData);
+                context.dispatch("generateVoteData");
             }
         },
 
@@ -46,7 +46,7 @@ export default new Vuex.Store({
                 }
             }
             context.dispatch("getGameData");
-            context.dispatch("generate", context.getters.rawGameData);
+            context.dispatch("generateVoteData");
         },
 
         stopGame(context) {

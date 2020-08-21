@@ -50,13 +50,8 @@ export default class TallyPanel extends Vue {
     }
 
     updateTally(): void {
-        const pageData = getPosts({
-            mods: this.$store.getters.moderatorList.map((mod: string) => mod.toLowerCase()),
-            voteKeyword: this.$store.getters.voteKeyword.toLowerCase(),
-            unvoteKeyword: this.$store.getters.unvoteKeyword.toLowerCase(),
-        });
-        this.$store.commit("setGameData", pageData);
-        this.$store.dispatch("generate", this.$store.getters.rawGameData);
+        this.$store.dispatch("updateGameData");
+        this.$store.dispatch("generateVoteData");
     }
 
     copyBbcode(): void {
