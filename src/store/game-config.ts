@@ -9,14 +9,14 @@ interface Store {
     isActive: boolean;
     moderators: string[];
     players: Player[];
-    votes: {
-    };
     voteKeyword: string;
     unvoteKeyword: string;
     days: Day[];
     nightTime: string;
     dayLength: number;
     selectedDay: number;
+    playerSortField: string;
+    playerSortOrder: number;
 }
 
 export default {
@@ -26,11 +26,12 @@ export default {
         players: [],
         voteKeyword: "vote",
         unvoteKeyword: "unvote",
-        votes: {},
         days: [],
         nightTime: "21:00",
         dayLength: 24,
-        selectedDay: -1
+        selectedDay: -1,
+        playerSortField: "",
+        playerSortOrder: 1
     } as Store,
 
     mutations: {
@@ -145,6 +146,14 @@ export default {
             if (index !== -1) {
                 Vue.set(state.players[index], "group", obj.group);
             }
+        },
+
+        setPlayerSortField(state: Store, field: string): void {
+            state.playerSortField = field;
+        },
+
+        setPlayerSortOrder(state: Store, order: number): void {
+            state.playerSortOrder = order;
         }
     },
 
@@ -193,6 +202,14 @@ export default {
 
             if ("selectedDay" in gameData) {
                 context.commit("selectDay", gameData.selectedDay);
+            }
+
+            if ("playerSortField" in gameData) {
+                context.commit("setPlayerSortField", gameData.playerSortField);
+            }
+
+            if ("playerSortOrder" in gameData) {
+                context.commit("setPlayerSortOrder", gameData.playerSortOrder);
             }
         },
     },
@@ -243,6 +260,14 @@ export default {
 
         selectedDay(state: Store): number {
             return state.selectedDay;
+        },
+
+        playerSortField(state: Store): string {
+            return state.playerSortField;
+        },
+
+        playerSortOrder(state: Store): number {
+            return state.playerSortOrder;
         }
     }
 }
