@@ -97,16 +97,22 @@ export default class DateSelection extends Vue {
 
 <style scoped>
 input {
+    border: none;
     font-family: inherit;
     font-size: 13px;
     padding: 4px;
 }
 
 .day-boundary-option {
+    box-shadow: var(--card-shadow);
     display: inline-block;
 }
 
 .selected {
     border-bottom: 3px solid rgb(66, 148, 255);
+}
+
+.selected input {
+    padding: 4px 4px 1px 4px;
 }
 </style>

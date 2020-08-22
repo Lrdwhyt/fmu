@@ -114,4 +114,12 @@ input {
 .selected {
     border-bottom: 3px solid rgb(66, 148, 255);
 }
+
+.selected > input {
+    padding: 4px 4px 1px 4px;
+}
+
+.selected > label {
+    padding: 4px 6px 1px 6px;
+}
 </style>
