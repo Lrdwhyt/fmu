@@ -1,7 +1,6 @@
 <template>
     <div class="day-nav">
-        <div class="days-label">
-            <label>Days</label> </div
+        <div class="days-label"> <label>Days</label> </div
         ><div class="day-tabs">
             <DayItem :index="-1" /><DayItem
                 v-for="(day, index) in days"
@@ -41,10 +40,11 @@ export default class DayList extends Vue {
     background-color: #e91e63;
     color: #fff;
     display: inline-block;
-    padding: 5px 10px;
+    padding: 4px 10px;
 }
 
 .day-tabs {
+    background-color: #fff;
     display: inline-block;
 }
 </style>

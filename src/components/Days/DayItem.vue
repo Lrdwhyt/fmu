@@ -51,7 +51,7 @@ export default class DayItem extends Vue {
 
 <style scoped>
 .day-tab > label {
-    padding: 5px 13px;
+    padding: 4px 12px;
 }
 
 .day-tab {
@@ -73,10 +73,14 @@ export default class DayItem extends Vue {
 }
 
 .day-tab.selected > label {
-    padding: 5px 13px 2px;
+    padding: 4px 12px 1px;
+}
+
+.remove-button {
+    padding: 3px 4px 3px 0;
 }
 
 .day-tab.selected > .remove-button {
-    padding: 4px 4px 1px 0;
+    padding: 3px 4px 1px 0;
 }
 </style>

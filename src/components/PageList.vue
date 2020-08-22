@@ -39,7 +39,8 @@ li {
 }
 
 .page-list-label {
-    background-color: #e91e63;
+    background-color: var(--fmu-highlight);
+    color: #fff;
 }
 
 .page-list-label div {
