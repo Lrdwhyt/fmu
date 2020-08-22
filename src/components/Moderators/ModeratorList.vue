@@ -5,7 +5,7 @@
             <ModeratorItem :key="moderator" :moderator="moderator" />
         </template>
         <AddModeratorItem v-if="isAddModerator" @register="hideInput" />
-        <button class="fmu-button" @click="addModerator">+</button>
+        <button class="fmu-button" @click="toggleAddModerator">+</button>
     </div>
 </template>
 
@@ -29,8 +29,8 @@ export default class ModeratorList extends Vue {
         return this.$store.getters.moderatorList;
     }
 
-    addModerator() {
-        this.isAddModerator = true;
+    toggleAddModerator() {
+        this.isAddModerator = !this.isAddModerator;
     }
 
     hideInput() {

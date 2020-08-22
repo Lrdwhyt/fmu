@@ -62,6 +62,7 @@
                 type="text"
                 ref="aliasInput"
                 v-if="showAddAlias"
+                placeholder="Alias"
                 @blur="addAlias"
                 @keyup="handleKeyupAlias"
             />

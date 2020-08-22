@@ -6,9 +6,9 @@
             </li>
         </ul>
         <div>
-            <input ref="newPlayer" type="text" @keyup="handleKeyup" />
-            <button class="fmu-button" @click="addPlayer">Add player</button>
-            <button class="fmu-button" @click="togglePasteArea">Add from nicknames file</button>
+            <input ref="newPlayer" type="text" placeholder="Player" @keyup="handleKeyup" />
+            <button class="fmu-button" @click="addPlayer">Add</button>
+            <button class="fmu-button" @click="togglePasteArea">Import from nicknames file</button>
         </div>
         <div v-if="showPasteArea">
             <div><textarea ref="pasteArea"/></div>

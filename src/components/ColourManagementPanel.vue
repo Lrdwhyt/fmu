@@ -8,7 +8,7 @@
                         ><button
                             class="remove-button"
                             @click="remove(group)"
-                            v-if="isDeletable(group)"
+                            v-if="isRemovable(group)"
                             >🗙</button
                         >
                     </div>
@@ -25,8 +25,7 @@
         </table>
 
         <div class="add-group">
-            <label>New group</label>
-            <input type="text" ref="newGroup" @keyup="handleKeyup" />
+            <input type="text" ref="newGroup" placeholder="Group" @keyup="handleKeyup" />
             <button class="fmu-button" @click="handleAddGroup">Add</button>
         </div>
     </div>
@@ -44,7 +43,7 @@ export default class ColourManagementPanel extends Vue {
         return this.$store.getters.groups;
     }
 
-    isDeletable(group: string): boolean {
+    isRemovable(group: string): boolean {
         return group !== "none";
     }
 

@@ -5,7 +5,7 @@
         </div>
         <div class="manage-players">
             <div>
-                <input ref="newPlayer" type="text" @keyup="handleKeyup" />
+                <input ref="newPlayer" type="text" placeholder="Player" @keyup="handleKeyup" />
                 <button class="fmu-button" @click="addPlayer">Add</button>
                 <button class="fmu-button" @click="setPasteActive">Add from list</button>
             </div>

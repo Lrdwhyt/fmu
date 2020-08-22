@@ -8,7 +8,13 @@
                 <label>{{ nickname }}</label
                 ><button class="remove-button" @click="removeNickname(nickname)">🗙</button>
             </div>
-            <input type="text" ref="newNickname" @blur="addNickname" @keyup="keyUp" />
+            <input
+                type="text"
+                ref="newNickname"
+                placeholder="Nickname"
+                @blur="addNickname"
+                @keyup="keyUp"
+            />
             <button class="fmu-button" @click="addNickname">Add</button>
         </div>
     </div>
