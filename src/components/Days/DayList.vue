@@ -1,19 +1,13 @@
 <template>
     <div class="day-nav">
-        <label>Days</label>
-        <div class="day-tabs-wrapper">
-            <div
-                class="day-tab"
+        <div class="days-label">
+            <label>Days</label> </div
+        ><div class="day-tabs">
+            <DayItem :index="-1" /><DayItem
                 v-for="(day, index) in days"
-                :key="day"
-                @click="selectDay(index)"
-                :class="{ selected: index === selectedDay }"
-            >
-                <label>{{ index + 1 }}</label
-                ><button v-if="index === days.length - 1" class="remove-button" @click.stop="remove"
-                    >🗙</button
-                >
-            </div>
+                :key="index"
+                :index="index"
+            />
         </div>
     </div>
 </template>
@@ -21,67 +15,36 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import DayItem from "./DayItem.vue";
 import { Day } from "@/Day";
 
 @Component({
     name: "DayList",
+    components: {
+        DayItem,
+    },
 })
 export default class DayList extends Vue {
     get days(): Day[] {
         return this.$store.getters.days;
-    }
-
-    get selectedDay(): number {
-        return this.$store.getters.selectedDay;
-    }
-
-    selectDay(index: number): void {
-        this.$store.commit("selectDay", index);
-    }
-
-    remove(e: Event): void {
-        this.$store.commit("removeLastDay");
     }
 }
 </script>
 
 <style scoped>
 .day-nav {
-    display: inline-block;
-}
-
-.day-tabs-wrapper {
     box-shadow: 0 1px 2px rgb(80, 80, 80, 0.8);
     display: inline-block;
 }
 
-.day-tab > label {
-    padding: 5px 13px;
-}
-
-.day-tab {
-    background-color: #fff;
+.days-label {
+    background-color: #e91e63;
+    color: #fff;
     display: inline-block;
-    font: inherit;
+    padding: 5px 10px;
 }
 
-.day-tab > label {
+.day-tabs {
     display: inline-block;
-}
-
-.day-tab:hover {
-    background-color: #eee;
-}
-
-.day-tab.selected {
-    border-bottom: 3px solid rgb(233, 0, 140);
-}
-
-.day-tab.selected > label {
-    padding: 5px 13px 2px;
-}
-
-.day-tab.selected > .remove-button {
-    padding: 4px 4px 1px 0;
 }
 </style>

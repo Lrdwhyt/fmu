@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="day-nav">
+        <div>
             <DayList />
             <button class="fmu-button" @click="addDay">+</button>
         </div>
