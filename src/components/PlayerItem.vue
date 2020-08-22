@@ -61,11 +61,11 @@
             <input
                 type="text"
                 ref="aliasInput"
-                v-if="isAddAlias"
+                v-if="showAddAlias"
                 @blur="addAlias"
                 @keyup="handleKeyupAlias"
             />
-            <button class="fmu-button" @click="showAddAlias">+</button>
+            <button class="fmu-button" @click="toggleAddAlias">+</button>
         </td>
     </tr>
 </template>
@@ -83,7 +83,7 @@ export default class PlayerItem extends Vue {
     @Prop() private name!: string;
     @Prop() private player!: Player;
     private isEditName: boolean = false;
-    private isAddAlias: boolean = false;
+    private showAddAlias: boolean = false;
     private isEditDeathTime: boolean = false;
 
     get aliases(): string[] {
@@ -122,7 +122,7 @@ export default class PlayerItem extends Vue {
         if (this.$props.player.timeOfDeath === undefined) {
             return 1;
         }
-        
+
         return this.$props.player.timeOfDeath.index + 1;
     }
 
@@ -213,7 +213,7 @@ export default class PlayerItem extends Vue {
                 player: this.name,
                 alias: alias,
             });
-            this.isAddAlias = false;
+            this.showAddAlias = false;
         }
     }
 
@@ -224,11 +224,13 @@ export default class PlayerItem extends Vue {
         });
     }
 
-    showAddAlias(): void {
-        this.isAddAlias = !this.isAddAlias;
-        Vue.nextTick(() => {
-            (this.$refs.aliasInput as HTMLInputElement).focus();
-        });
+    toggleAddAlias(): void {
+        this.showAddAlias = !this.showAddAlias;
+        if (this.showAddAlias) {
+            Vue.nextTick(() => {
+                (this.$refs.aliasInput as HTMLInputElement).focus();
+            });
+        }
     }
 
     keyupChangeName(e: KeyboardEvent) {

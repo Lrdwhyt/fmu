@@ -37,7 +37,6 @@ export default class PlayerManagementPanel extends Vue {
 
     setPasteActive() {
         this.isPasteActive = !this.isPasteActive;
-
         if (this.isPasteActive) {
             Vue.nextTick(() => {
                 (this.$refs.pasteArea as HTMLTextAreaElement).focus();
