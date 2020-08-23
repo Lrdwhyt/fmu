@@ -1,11 +1,11 @@
 <template>
     <table class="player-list">
         <tr>
-            <td @click="sortByName">Name</td>
-            <td @click="sortByStatus">Status</td>
-            <td @click="sortByTimeOfDeath">Died</td>
-            <td @click="sortByGroup">Group</td>
-            <td>Aliases</td>
+            <th @click="sortByName">{{ nameColumnHeader }}</th>
+            <th @click="sortByStatus">{{ statusColumnHeader }}</th>
+            <th @click="sortByTimeOfDeath">{{ timeOfDeathColumnHeader }}</th>
+            <th @click="sortByGroup">{{ groupColumnHeader }}</th>
+            <th>Aliases</th>
         </tr>
         <template v-for="player in sortedPlayers">
             <PlayerItem :player="player" :name="player.name" :key="player.name" />
@@ -58,6 +58,46 @@ export default class PlayerList extends Vue {
         return this.$store.getters.playerSortOrder;
     }
 
+    get sortOrderCharacter(): string {
+        if (this.sortOrder === 1) {
+            return "▲";
+        } else {
+            return "▼";
+        }
+    }
+
+    get nameColumnHeader(): string {
+        if (this.sortField !== "name") {
+            return "Name";
+        }
+
+        return "Name " + this.sortOrderCharacter;
+    }
+
+    get statusColumnHeader(): string {
+        if (this.sortField !== "status") {
+            return "Status";
+        }
+
+        return "Status " + this.sortOrderCharacter;
+    }
+
+    get timeOfDeathColumnHeader(): string {
+        if (this.sortField !== "timeOfDeath") {
+            return "Died";
+        }
+
+        return "Died " + this.sortOrderCharacter;
+    }
+
+    get groupColumnHeader(): string {
+        if (this.sortField !== "group") {
+            return "Group";
+        }
+
+        return "Group " + this.sortOrderCharacter;
+    }
+
     sortByName(): void {
         if (this.sortField === "name") {
             this.$store.commit("setPlayerSortOrder", -1 * this.sortOrder);
@@ -101,10 +141,17 @@ table {
     border-collapse: collapse;
 }
 
-td {
+th {
     background-color: #dddde7;
+    cursor: pointer;
     font-weight: bold;
+    min-width: 80px;
     padding: 4px 8px;
+    text-align: left;
+}
+
+th:hover {
+    background-color: #cbcbda;
 }
 
 tr:hover {

@@ -260,7 +260,7 @@ export default class PlayerItem extends Vue {
 <style scoped>
 td {
     border: none;
-    padding: 1px 8px;
+    padding: 6px 8px 0;
 }
 
 input,
