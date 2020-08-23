@@ -90,14 +90,15 @@ export default class TallyPanel extends Vue {
 
 <style scoped>
 .copy-container {
-    height: 1px; /* make element visible so Chrome can copy */
     opacity: 0;
-    overflow: hidden;
+    position: absolute;
+    z-index: -999;
 }
 
 .copy-container.show-copy-container {
-    height: auto;
     opacity: inherit;
+    position: relative;
+    z-index: auto;
 }
 
 .copy-area {
