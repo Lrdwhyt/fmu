@@ -315,6 +315,7 @@ select {
 
 .death-selection button {
     border: none;
+    font: inherit;
     padding: 4px 6px;
 }
 
@@ -328,6 +329,7 @@ select {
 
 .status-indicator {
     border: none;
+    font: inherit;
     opacity: 0.7;
     padding: 4px 6px;
 }
