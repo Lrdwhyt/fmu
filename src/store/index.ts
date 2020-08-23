@@ -28,7 +28,7 @@ export default new Vuex.Store({
     actions: {
         finalInit(context) {
             if (context.getters.isGameActive) {
-                context.dispatch("getGameData");
+                context.dispatch("updateGameData");
                 context.dispatch("generateVoteData");
             }
         },
@@ -45,7 +45,7 @@ export default new Vuex.Store({
                     context.commit("addModerator", moderator);
                 }
             }
-            context.dispatch("getGameData");
+            context.dispatch("updateGameData");
             context.dispatch("generateVoteData");
         },
 
@@ -56,7 +56,7 @@ export default new Vuex.Store({
             resetGame();
         },
 
-        getGameData(context) {
+        updateGameData(context) {
             if (context.getters.moderatorList.length === 0) {
                 return;
             }

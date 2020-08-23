@@ -6,7 +6,7 @@
             <button class="fmu-button" @click="copyBbcode">Copy as BBcode</button>
             <div class="copy-container" ref="copyContainer">
                 <div>Please manually copy the following text:</div>
-                <textarea ref="copyArea" @blur="hideCopyContainer" />
+                <textarea ref="copyArea" class="copy-area" @blur="hideCopyContainer" />
             </div>
         </div>
         <DayManagementPanel />
@@ -90,8 +90,9 @@ export default class TallyPanel extends Vue {
 
 <style scoped>
 .copy-container {
-    height: 0;
+    height: 1px; /* make element visible so Chrome can copy */
     opacity: 0;
+    overflow: hidden;
 }
 
 .copy-container.show-copy-container {
@@ -99,7 +100,7 @@ export default class TallyPanel extends Vue {
     opacity: inherit;
 }
 
-textarea {
+.copy-area {
     height: 4em;
 }
 
