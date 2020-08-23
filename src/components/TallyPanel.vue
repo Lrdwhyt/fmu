@@ -4,8 +4,11 @@
         <div class="tally-controls">
             <button class="fmu-button" @click="updateTally">Update</button>
             <button class="fmu-button" @click="copyBbcode">Copy as BBcode</button>
+            <div class="copy-container" ref="copyContainer">
+                <div>Please manually copy the following text:</div>
+                <textarea ref="copyArea" @blur="hideCopyContainer" />
+            </div>
         </div>
-        <textarea ref="copyContainer" />
         <DayManagementPanel />
     </div>
 </template>
@@ -67,20 +70,40 @@ export default class TallyPanel extends Vue {
         const tally = writeBbcode(this.tally, tallyOptions);
         const bbCode = tallyHeader + tally;
 
-        (this.$refs.copyContainer as HTMLTextAreaElement).value = bbCode;
-        (this.$refs.copyContainer as HTMLTextAreaElement).select();
-        document.execCommand("copy");
+        (this.$refs.copyArea as HTMLTextAreaElement).value = bbCode;
+        (this.$refs.copyArea as HTMLTextAreaElement).select();
+        try {
+            const copySuccess = document.execCommand("copy");
+            if (!copySuccess) {
+                (this.$refs.copyContainer as HTMLDivElement).classList.add("show-copy-container");
+            }
+        } catch {
+            (this.$refs.copyContainer as HTMLDivElement).classList.add("show-copy-container");
+        }
+    }
+
+    hideCopyContainer(): void {
+        (this.$refs.copyContainer as HTMLDivElement).classList.remove("show-copy-container");
     }
 }
 </script>
 
 <style scoped>
-textarea {
+.copy-container {
     height: 0;
     opacity: 0;
 }
 
+.copy-container.show-copy-container {
+    height: auto;
+    opacity: inherit;
+}
+
+textarea {
+    height: 4em;
+}
+
 .tally-controls {
-    margin-top: 8px;
+    margin: 8px 0;
 }
 </style>

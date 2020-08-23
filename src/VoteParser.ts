@@ -81,29 +81,29 @@ function getVoteType(raw: string, voteKeyword: string, unvoteKeyword: string): V
 
 function getVoteTarget(raw: string, type: VoteType, info: VoteParserInformation): VoteTargetPair {
     if (type === VoteType.VOTE) {
-        let j = raw.split(info.voteKeyword);
-        let k = j.slice(-1)[0];
-        k = trimChars(k, " :;.,");
-        if (k.length === 0) {
+        let postVoteText = raw.split(info.voteKeyword);
+        let rawVoteTarget = postVoteText.slice(-1)[0];
+        rawVoteTarget = trimChars(rawVoteTarget, " :;.,");
+        if (rawVoteTarget.length === 0) {
             // uh-oh, nothing appears after the vote. Need to backtrack.
-            if (j.length <= 2) {
+            if (postVoteText.length <= 2) {
                 return { target: SpecialVote.NONE };
             }
-            k = j.slice(-2)[0] + j.slice(-1)[0];
-            k = trimChars(k, " :;.,");
+            rawVoteTarget = postVoteText.slice(-2)[0] + postVoteText.slice(-1)[0];
+            rawVoteTarget = trimChars(rawVoteTarget, " :;.,");
         }
         const regex = /([\(\[][0-9]+[\)\]])/;
         // Match numbers in braces or brackets: [3] (5)
-        if (k.match(regex)) {
+        if (rawVoteTarget.match(regex)) {
             // likely part of tally
             return { target: SpecialVote.NONE };
         }
-        k = trimChars(k, " :;.()[]{},");
-        if (k.length === 0) {
+        rawVoteTarget = trimChars(rawVoteTarget, " :;.()[]{},");
+        if (rawVoteTarget.length === 0) {
             return { target: SpecialVote.NONE };
         }
 
-        return matchVoteToTarget(k, info);
+        return matchVoteToTarget(rawVoteTarget, info);
     }
 
     return { target: SpecialVote.NONE };
