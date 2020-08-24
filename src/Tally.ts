@@ -111,6 +111,21 @@ export function createFromLog(votes: Vote[], players: Player[], day: number): Fu
             continue;
         }
 
+        // now run case-insensitive checks
+        const hasVoted = Object.keys(currentVoters).some((voter) => {
+            if (voter.toLowerCase() === player.name.toLowerCase()) {
+                return true;
+            }
+
+            if (player.aliases !== undefined) {
+                return player.aliases.some((alias) => alias.toLowerCase() === voter.toLowerCase());
+            }
+        });
+
+        if (hasVoted) {
+            continue;
+        }
+
         nonVoters.push(player.name);
     }
 
