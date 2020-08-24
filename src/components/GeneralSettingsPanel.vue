@@ -28,6 +28,15 @@
             <label for="useColours">Use colours in tally</label>
         </div>
         <div class="general-setting">
+            <input
+                type="checkbox"
+                id="useManualCopy"
+                :checked="useManualCopy"
+                @input="updateUseManualCopy"
+            />
+            <label for="useManualCopy">Allow manually copying BBCode tallies</label>
+        </div>
+        <div class="general-setting">
             <label for="minConfidence" title="100 to require exact matches"
                 >Minimum percentage score to match names</label
             >
@@ -92,6 +101,10 @@ export default class GeneralSettingsPanel extends Vue {
         return this.$store.getters.nightLength;
     }
 
+    get useManualCopy(): boolean {
+        return this.$store.getters.useManualCopy;
+    }
+
     updateIncludeUnvotes(e: Event) {
         this.$store.commit("setIncludeUnvotes", (e.target as HTMLInputElement).checked);
     }
@@ -102,6 +115,10 @@ export default class GeneralSettingsPanel extends Vue {
 
     updateShowPostNumbers(e: Event) {
         this.$store.commit("updateShowPostNumbers", (e.target as HTMLInputElement).checked);
+    }
+
+    updateUseManualCopy(e: Event) {
+        this.$store.commit("setUseManualCopy", (e.target as HTMLInputElement).checked);
     }
 
     setMinConfidence(e: Event): void {

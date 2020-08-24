@@ -5,8 +5,13 @@
             <button class="fmu-button" @click="updateTally">Update</button>
             <button class="fmu-button" @click="copyBbcode">Copy as BBcode</button>
             <div class="copy-container" ref="copyContainer">
-                <div>Please manually copy the following text:</div>
-                <textarea ref="copyArea" class="copy-area" @blur="hideCopyContainer" />
+                <div>Copy the following text:</div>
+                <textarea
+                    ref="copyArea"
+                    class="copy-area"
+                    @click="selectCopyArea"
+                    @blur="hideCopyContainer"
+                />
             </div>
         </div>
         <DayManagementPanel />
@@ -52,6 +57,10 @@ export default class TallyPanel extends Vue {
         return createFromLog(this.votes, this.$store.getters.players, this.selectedDay);
     }
 
+    get useManualCopy(): boolean {
+        return this.$store.getters.useManualCopy;
+    }
+
     updateTally(): void {
         this.$store.dispatch("updateGameData");
         this.$store.dispatch("generateVoteData");
@@ -80,6 +89,13 @@ export default class TallyPanel extends Vue {
         } catch {
             (this.$refs.copyContainer as HTMLDivElement).classList.add("show-copy-container");
         }
+        if (this.useManualCopy) {
+            (this.$refs.copyContainer as HTMLDivElement).classList.add("show-copy-container");
+        }
+    }
+
+    selectCopyArea(): void {
+        (this.$refs.copyArea as HTMLTextAreaElement).select();
     }
 
     hideCopyContainer(): void {

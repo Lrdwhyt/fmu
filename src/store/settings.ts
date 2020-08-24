@@ -16,7 +16,8 @@ interface Store {
     nightLength: number;
     groups: {
         [group: string]: string;
-    }
+    };
+    useManualCopy: boolean;
 }
 
 export interface NicknameList {
@@ -41,7 +42,8 @@ export default {
             "innocent": "#448aff",
             "mafia": "#ff1744",
             "awt": "#aa00ff"
-        }
+        },
+        useManualCopy: false
     } as Store,
 
     mutations: {
@@ -139,6 +141,10 @@ export default {
 
         initialiseGroups(state: Store, obj: any): void {
             Vue.set(state, "groups", obj);
+        },
+
+        setUseManualCopy(state: Store, useManualCopy: boolean): void {
+            state.useManualCopy = useManualCopy;
         }
     },
 
@@ -206,6 +212,10 @@ export default {
             if ("groups" in settingsData) {
                 context.commit("initialiseGroups", settingsData.groups);
             }
+
+            if ("useManualCopy" in settingsData) {
+                context.commit("setUseManualCopy", settingsData.useManualCopy);
+            }
         },
 
         deleteGame(context: ActionContext<Store, any>, id: number) {
@@ -259,6 +269,10 @@ export default {
             return (group: string): string => {
                 return state.groups[group] || "";
             }
+        },
+
+        useManualCopy(state: Store): boolean {
+            return state.useManualCopy;
         }
     }
 }
