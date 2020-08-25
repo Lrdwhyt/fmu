@@ -51,7 +51,11 @@
             />
         </div>
         <div class="general-setting">
-            <label for="nightLength">Night length</label>
+            <label
+                for="nightLength"
+                title="Time delay used to determine how soon the next day starts after nightfall."
+                >Night length</label
+            >
             <input
                 type="number"
                 id="nightLength"
