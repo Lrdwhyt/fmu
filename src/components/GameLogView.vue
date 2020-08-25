@@ -9,7 +9,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import GameLogItem from "./GameLogItem.vue";
 import { Vote, VoteType } from "@/Vote";
 import { Day } from "@/Day";
-import { filterByDay } from "@/VoteFilter";
+import { filterGameLog } from "@/GameDataFilter";
 
 @Component({
     name: "GameLogView",
@@ -26,16 +26,18 @@ export default class GameLogView extends Vue {
         return this.$store.getters.days[this.selectedDay];
     }
 
+    get rawGameData() {
+        return this.$store.getters.rawGameData;
+    }
+
     get votes() {
-        const rawData = this.$store.getters.rawGameData;
-        let result = {};
-        for (const page in rawData) {
-            result = {
-                ...result,
-                ...rawData[page],
-            };
+        if (!(this.selectedDay in this.$store.getters.days)) {
+            return Object.values(this.rawGameData).reduce((result, current) =>
+                Object.assign(result, current)
+            );
         }
-        return result;
+
+        return filterGameLog(this.rawGameData, this.day);
     }
 }
 </script>

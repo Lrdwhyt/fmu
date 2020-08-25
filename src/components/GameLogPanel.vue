@@ -1,11 +1,9 @@
 <template>
     <div class="fmu-panel">
         <GameLogView />
-        <!--
         <div class="day-management">
             <DayManagementPanel />
         </div>
-        -->
     </div>
 </template>
 
