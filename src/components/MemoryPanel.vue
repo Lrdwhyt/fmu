@@ -23,7 +23,7 @@
             <button
                 class="fmu-button"
                 @click="resetAll"
-                title="Reset all data stored in localStorage, including game data and Forum Mafia Utilities settings"
+                title="Delete all data stored for this domain in localStorage, including game data and Forum Mafia Utilities settings"
             >
                 Reset all data
             </button>
