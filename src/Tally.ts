@@ -9,12 +9,12 @@ export interface VoteUnvotePair {
 
 export interface TallyItem extends Array<VoteUnvotePair> { }
 
-export interface Tally {
+export interface VoteTally {
     [target: string]: TallyItem;
 }
 
 export interface FullTally {
-    tally: Tally;
+    tally: VoteTally;
     nonvoters: string[]
 }
 
@@ -45,7 +45,7 @@ function canVoteOnDay(player: Player, day: number): boolean {
 
 // generate tally from array of Vote objects
 export function createFromLog(votes: Vote[], players: Player[], day: number): FullTally {
-    let tally: Tally = {};
+    let tally: VoteTally = {};
     let currentVoters: UserVoteTracker = {};
 
     for (const vote of votes) {
@@ -87,7 +87,7 @@ export function createFromLog(votes: Vote[], players: Player[], day: number): Fu
     }
 
     // sort tally in order of targets with most votes to least
-    const sortedTally: Tally = {};
+    const sortedTally: VoteTally = {};
     Object.keys(tally).sort((a, b) => {
         return numberVotes(tally[b]) - numberVotes(tally[a]);
     }).forEach(function(key) {

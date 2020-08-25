@@ -67,6 +67,7 @@ function linkVote(vote: Vote): string {
 function strikeOut(string: string): string {
     return `[s]${string}[/s]`;
 }
+
 function colourText(string: string, colour: string): string {
     return `[color=${colour}]${string}[/color]`;
 }
