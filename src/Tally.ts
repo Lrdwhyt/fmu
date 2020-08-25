@@ -43,20 +43,22 @@ function canVoteOnDay(player: Player, day: number): boolean {
     return false; // should not be reached
 }
 
+// generate tally from array of Vote objects
 export function createFromLog(votes: Vote[], players: Player[], day: number): FullTally {
     let tally: Tally = {};
     let currentVoters: UserVoteTracker = {};
 
     for (const vote of votes) {
-        if (vote.type === VoteType.UNVOTE || vote.user in currentVoters) {
+        const userLowerCase: string = vote.user.toLowerCase();
+        if (vote.type === VoteType.UNVOTE || userLowerCase in currentVoters) {
             const unvote: Vote = {
                 ...vote,
                 type: VoteType.UNVOTE
             }
-            if (vote.user in currentVoters) {
-                const index = currentVoters[vote.user].index;
-                tally[currentVoters[vote.user].target][index].unvote = unvote;
-                delete currentVoters[vote.user];
+            if (userLowerCase in currentVoters) {
+                const index = currentVoters[userLowerCase].index;
+                tally[currentVoters[userLowerCase].target][index].unvote = unvote;
+                delete currentVoters[userLowerCase];
             } else {
                 // if user is not in currentVoters, we should probably ignore
                 // the vote since we do not know the target (unless specified)
@@ -77,7 +79,7 @@ export function createFromLog(votes: Vote[], players: Player[], day: number): Fu
                     vote
                 }]
             }
-            currentVoters[vote.user] = {
+            currentVoters[userLowerCase] = {
                 target: vote.target,
                 index: tally[vote.target].length - 1
             }
@@ -96,33 +98,18 @@ export function createFromLog(votes: Vote[], players: Player[], day: number): Fu
     let nonVoters: string[] = [];
 
     for (const player of players) {
-        if (player.name in currentVoters) {
+        if (player.name.toLowerCase() in currentVoters) {
             continue;
         }
 
         if (player.aliases !== undefined) {
-            if (player.aliases.some((alias) => alias in currentVoters)) {
+            if (player.aliases.some((alias) => alias.toLowerCase() in currentVoters)) {
                 continue;
             }
         }
 
         if (!canVoteOnDay(player, day)) {
             // exclude dead players from non-voter list
-            continue;
-        }
-
-        // now run case-insensitive checks
-        const hasVoted = Object.keys(currentVoters).some((voter) => {
-            if (voter.toLowerCase() === player.name.toLowerCase()) {
-                return true;
-            }
-
-            if (player.aliases !== undefined) {
-                return player.aliases.some((alias) => alias.toLowerCase() === voter.toLowerCase());
-            }
-        });
-
-        if (hasVoted) {
             continue;
         }
 
