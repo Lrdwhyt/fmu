@@ -53,18 +53,12 @@ export function createFromLog(votes: Vote[], players: Player[], day: number): Fu
                 ...vote,
                 type: VoteType.UNVOTE
             }
+            // if user is not in currentVoters, we should probably ignore
+            // the vote since we do not know the target (unless specified)
             if (currentVoters.has(userLowerCase)) {
                 const index = currentVoters.get(userLowerCase)!.index;
                 tally[currentVoters.get(userLowerCase)!.target][index].unvote = unvote;
                 currentVoters.delete(userLowerCase);
-            } else {
-                // if user is not in currentVoters, we should probably ignore
-                // the vote since we do not know the target (unless specified)
-                /*
-                tally[vote.target].push({
-                    vote: unvote
-                })
-                */
             }
         }
         if (vote.type === VoteType.VOTE) {

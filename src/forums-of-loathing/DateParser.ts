@@ -16,9 +16,9 @@ const monthNameMap: { [month: string]: number } = {
 };
 
 export function parseDate(raw: string, timeZone: number): Date {
-    raw = raw.replace(/,/g, "");
+    let rawStripped = raw.replace(/,/g, "");
     let date = new Date();
-    const stringArr = raw.split(" ");
+    const stringArr = rawStripped.split(" ");
     const timeArr = stringArr.slice(-2);
     const time = timeArr[0].split(":");
     const minutes = parseInt(time[1]);

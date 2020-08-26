@@ -77,7 +77,10 @@ function colourPlayer(playerName: string, options: TallyOptions): string {
         return playerName;
     }
 
-    const player = options.players.find((player) => player.name.toLowerCase() === playerName.toLowerCase() || (player.aliases !== undefined && player.aliases.includes(playerName)));
+    const player = options.players.find((player) => {
+        return player.name.toLowerCase() === playerName.toLowerCase() ||
+            (player.aliases !== undefined && player.aliases.includes(playerName))
+    });
 
     if (!player) {
         return playerName;

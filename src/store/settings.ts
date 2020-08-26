@@ -86,7 +86,7 @@ export default {
         },
 
         registerNewPlayer(state: Store, player: string): void {
-            for (const key in state.nicknames) {
+            for (const key of Object.keys(state.nicknames)) {
                 if (player.toLowerCase() === key.toLowerCase()) {
                     return;
                 }
