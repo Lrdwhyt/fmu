@@ -18,11 +18,9 @@ export interface FullTally {
     nonvoters: string[]
 }
 
-interface UserVoteTracker {
-    [user: string]: {
-        target: VoteTarget,
-        index: number
-    }
+interface VoteTracker {
+    target: VoteTarget,
+    index: number
 }
 
 export function numberVotes(item: TallyItem): number {
@@ -46,19 +44,19 @@ function canVoteOnDay(player: Player, day: number): boolean {
 // generate tally from array of Vote objects
 export function createFromLog(votes: Vote[], players: Player[], day: number): FullTally {
     let tally: VoteTally = {};
-    let currentVoters: UserVoteTracker = {};
+    let currentVoters: Map<string, VoteTracker> = new Map();
 
     for (const vote of votes) {
         const userLowerCase: string = vote.user.toLowerCase();
-        if (vote.type === VoteType.UNVOTE || userLowerCase in currentVoters) {
+        if (vote.type === VoteType.UNVOTE || currentVoters.has(userLowerCase)) {
             const unvote: Vote = {
                 ...vote,
                 type: VoteType.UNVOTE
             }
-            if (userLowerCase in currentVoters) {
-                const index = currentVoters[userLowerCase].index;
-                tally[currentVoters[userLowerCase].target][index].unvote = unvote;
-                delete currentVoters[userLowerCase];
+            if (currentVoters.has(userLowerCase)) {
+                const index = currentVoters.get(userLowerCase)!.index;
+                tally[currentVoters.get(userLowerCase)!.target][index].unvote = unvote;
+                currentVoters.delete(userLowerCase);
             } else {
                 // if user is not in currentVoters, we should probably ignore
                 // the vote since we do not know the target (unless specified)
@@ -79,10 +77,10 @@ export function createFromLog(votes: Vote[], players: Player[], day: number): Fu
                     vote
                 }]
             }
-            currentVoters[userLowerCase] = {
+            currentVoters.set(userLowerCase, {
                 target: vote.target,
                 index: tally[vote.target].length - 1
-            }
+            })
         }
     }
 
@@ -98,12 +96,12 @@ export function createFromLog(votes: Vote[], players: Player[], day: number): Fu
     let nonVoters: string[] = [];
 
     for (const player of players) {
-        if (player.name.toLowerCase() in currentVoters) {
+        if (currentVoters.has(player.name.toLowerCase())) {
             continue;
         }
 
         if (player.aliases !== undefined) {
-            if (player.aliases.some((alias) => alias.toLowerCase() in currentVoters)) {
+            if (player.aliases.some((alias) => currentVoters.has(alias.toLowerCase()))) {
                 continue;
             }
         }
