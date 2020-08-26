@@ -23,7 +23,6 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { Vote, VoteType } from "@/Vote";
 import { Day } from "@/Day";
-import { filterByDay } from "@/VoteFilter";
 import { linkPost } from "@/forums-of-loathing/LinkUtils";
 
 @Component({

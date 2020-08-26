@@ -13,7 +13,6 @@ import GameLogView from "./GameLogView.vue";
 import DayManagementPanel from "./DayManagementPanel.vue";
 import { Vote } from "@/Vote";
 import { Day } from "@/Day";
-import { filterByDay } from "@/VoteFilter";
 
 @Component({
     name: "GameLogPanel",

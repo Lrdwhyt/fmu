@@ -7,7 +7,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
-import { getTotalPages, getThreadId, getCurrentPage } from "@/forums-of-loathing/Parser";
+import { getThreadId, getCurrentPage } from "@/forums-of-loathing/Parser";
 
 @Component({
     name: "PageItem",

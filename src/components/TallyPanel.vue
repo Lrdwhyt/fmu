@@ -27,7 +27,6 @@ import { Day } from "@/Day";
 import { filterByDay } from "@/VoteFilter";
 import { createFromLog, FullTally } from "@/Tally";
 import { writeBbcode, header, TallyOptions } from "@/BbcodeWriter";
-import { getPosts } from "@/forums-of-loathing/Parser";
 
 @Component({
     name: "TallyPanel",
