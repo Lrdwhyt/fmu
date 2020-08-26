@@ -22,21 +22,26 @@ interface VoteTargetPair {
 
 export function getVoteList(rawGameData: any, info: VoteParserInformation): Vote[] {
     const votes: Vote[] = [];
-    for (const page in rawGameData) {
-        for (const post in rawGameData[page]) {
+    for (const page of Object.keys(rawGameData)) {
+        for (const post of Object.keys(rawGameData[page])) {
             if (post === "last") {
                 continue; // TODO find better way to handle this
             }
-            const data: any = rawGameData[page][post];
+
+            const data: any = rawGameData[page][post]; // TODO don't use any
+            
             if (info.moderators.includes(data.user.toLowerCase())) {
                 continue;
             }
+
             const raw = data.content.toLowerCase();
             const type = getVoteType(raw, info.voteKeyword, info.unvoteKeyword);
             const target = getVoteTarget(raw, type, info);
+
             if (type === VoteType.VOTE && target.target === SpecialVote.NONE) {
                 continue;
             }
+
             let vote: Vote = {
                 source: data.content,
                 user: data.user,
@@ -81,7 +86,7 @@ function getVoteType(raw: string, voteKeyword: string, unvoteKeyword: string): V
 
 function getVoteTarget(raw: string, type: VoteType, info: VoteParserInformation): VoteTargetPair {
     if (type === VoteType.VOTE) {
-        let postVoteText = raw.split(info.voteKeyword);
+        const postVoteText = raw.split(info.voteKeyword);
         let rawVoteTarget = postVoteText.slice(-1)[0];
         rawVoteTarget = trimChars(rawVoteTarget, " :;.,");
         if (rawVoteTarget.length === 0) {
@@ -136,7 +141,6 @@ function matchVoteToTarget(str: string, info: VoteParserInformation): VoteTarget
             target = player.name;
         }
 
-        //if (player.name in info.nicknames) {
         const key = Object.keys(info.nicknames).find((key) => key.toLowerCase() === player.name.toLowerCase());
         // find player name case-insensitively
         if (key !== undefined) {
@@ -177,31 +181,37 @@ function matchVoteToTarget(str: string, info: VoteParserInformation): VoteTarget
 }
 
 function getBigrams(str: string): string[] {
-    let bigrams = [];
+    const bigrams = [];
+
     for (let i = 0; i < str.length - 1; i++) {
         bigrams.push(str.slice(i, i + 2));
     }
+
     return bigrams;
 }
 
 function diceCoefficient(a: string, b: string) {
-    a = a.toLowerCase();
-    b = b.toLowerCase();
-    if (a === b) {
+    const aLower = a.toLowerCase();
+    const bLower = b.toLowerCase();
+
+    if (aLower === bLower) {
         return 1;
     }
-    let pairs1 = getBigrams(a);
-    let pairs2 = getBigrams(b);
-    let totalLength = pairs1.length + pairs2.length;
+
+    const pairsA = getBigrams(aLower);
+    let pairsB = getBigrams(bLower);
+    const totalLength = pairsA.length + pairsB.length;
     let score = 0;
-    for (const x in pairs1) {
-        for (const y in pairs2) {
-            if (pairs1[x] === pairs2[y]) {
+
+    for (const x in pairsA) {
+        for (const y in pairsB) {
+            if (pairsA[x] === pairsB[y]) {
                 score++;
-                pairs2.splice(parseInt(y), 1);
+                pairsB.splice(parseInt(y), 1);
                 break;
             }
         }
     }
+
     return 2 * score / totalLength;
 }
