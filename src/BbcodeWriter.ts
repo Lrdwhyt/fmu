@@ -14,7 +14,7 @@ export interface TallyOptions {
 // TODO this function is too big and has too much nesting
 export function writeBbcode(tally: FullTally, options: TallyOptions): string {
     let bbcode: string = "";
-    for (const item in tally.tally) {
+    for (const item of Object.keys(tally.tally)) {
         const tallyItem = tally.tally[item];
         if (!options.includeUnvotes && numberVotes(tallyItem) === 0) {
             continue;

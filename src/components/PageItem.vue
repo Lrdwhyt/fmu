@@ -18,12 +18,17 @@ export default class PageItem extends Vue {
     private threadId: number = getThreadId();
     private currentPage: number = getCurrentPage();
 
+    get postsPerPage(): number {
+        return this.$store.getters.postsPerPage;
+    }
+
+    get lastStoredPost(): number {
+        return this.$store.getters.rawGameData[this.index].last;
+    }
+
     get className(): string {
         if (this.index in this.$store.getters.rawGameData) {
-            if (
-                this.$store.getters.postsPerPage * this.index ===
-                this.$store.getters.rawGameData[this.index].last
-            ) {
+            if (this.postsPerPage * this.index === this.lastStoredPost) {
                 return "full";
             } else {
                 return "partial";
