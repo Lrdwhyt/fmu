@@ -1,5 +1,9 @@
 <template>
-    <div class="day-tab" @click="selectDay" :class="{ selected: isSelected }">
+    <div
+        class="day-tab"
+        @click="selectDay"
+        :class="{ selected: isSelected, 'last-day': isRemovable }"
+    >
         <label>{{ text }}</label
         ><button v-if="isRemovable" class="remove-button" @click.stop="remove">🗙</button>
     </div>
@@ -50,10 +54,6 @@ export default class DayItem extends Vue {
 </script>
 
 <style scoped>
-.day-tab > label {
-    padding: 4px 12px;
-}
-
 .day-tab {
     background-color: #fff;
     display: inline-block;
@@ -62,6 +62,7 @@ export default class DayItem extends Vue {
 
 .day-tab > label {
     display: inline-block;
+    padding: 4px 12px;
 }
 
 .day-tab:hover {
@@ -82,5 +83,9 @@ export default class DayItem extends Vue {
 
 .day-tab.selected > .remove-button {
     padding: 3px 4px 1px 0;
+}
+
+.day-tab.last-day > label {
+    padding-right: 6px;
 }
 </style>
