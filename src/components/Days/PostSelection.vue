@@ -28,23 +28,20 @@ import { Day, DayBoundaryType } from "@/Day";
 })
 export default class PostSelection extends Vue {
     @Prop() private type!: "start" | "end";
+    @Prop() private activeDay!: number;
 
     private isEditing: boolean = false;
-
-    get selectedDay(): number {
-        return this.$store.getters.selectedDay;
-    }
 
     get isSelected(): boolean {
         return this.day[this.type].type === DayBoundaryType.POST;
     }
 
     get day(): Day {
-        return this.$store.getters.days[this.selectedDay];
+        return this.$store.getters.days[this.activeDay];
     }
 
     get post(): number {
-        return this.$store.getters.days[this.selectedDay][this.type].post;
+        return this.$store.getters.days[this.activeDay][this.type].post;
     }
 
     handleKeyup(e: KeyboardEvent): void {
@@ -58,7 +55,7 @@ export default class PostSelection extends Vue {
         const postNumber: number = parseInt((e.target as HTMLInputElement).value);
         if (postNumber > 0) {
             this.$store.commit("setDay", {
-                day: this.selectedDay,
+                day: this.activeDay,
                 data: {
                     ...this.day,
                     [this.type]: {
@@ -72,7 +69,7 @@ export default class PostSelection extends Vue {
 
     switchDayType() {
         this.$store.commit("setDay", {
-            day: this.selectedDay,
+            day: this.activeDay,
             data: {
                 ...this.day,
                 [this.type]: {

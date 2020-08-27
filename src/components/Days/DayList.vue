@@ -6,6 +6,7 @@
                 v-for="(day, index) in days"
                 :key="index"
                 :index="index"
+                :active="index === activeDay"
             />
         </div>
     </div>
@@ -13,7 +14,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Component from "vue-class-component";
+import { Component, Prop } from "vue-property-decorator";
 import DayItem from "./DayItem.vue";
 import { Day } from "@/Day";
 
@@ -24,6 +25,8 @@ import { Day } from "@/Day";
     },
 })
 export default class DayList extends Vue {
+    @Prop() private activeDay!: number;
+
     get days(): Day[] {
         return this.$store.getters.days;
     }

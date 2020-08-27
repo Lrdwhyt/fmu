@@ -1,9 +1,9 @@
 <template>
     <div class="fmu-panel">
-        <GameLogView />
         <div class="day-management">
-            <DayManagementPanel />
+            <DayManagementPanel :activeDay="selectedDay" />
         </div>
+        <GameLogView />
     </div>
 </template>
 
@@ -21,7 +21,11 @@ import { Day } from "@/Day";
         DayManagementPanel,
     },
 })
-export default class GameLogPanel extends Vue {}
+export default class GameLogPanel extends Vue {
+    get selectedDay(): number {
+        return this.$store.getters.selectedDay;
+    }
+}
 </script>
 
 <style scoped>

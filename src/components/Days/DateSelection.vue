@@ -31,17 +31,14 @@ import { getTimeZone } from "@/forums-of-loathing/Parser";
 })
 export default class DateSelection extends Vue {
     @Prop() private type!: "start" | "end";
-
-    get selectedDay(): number {
-        return this.$store.getters.selectedDay;
-    }
+    @Prop() private activeDay!: number;
 
     get isSelected(): boolean {
         return this.day[this.type].type === DayBoundaryType.DATE;
     }
 
     get day(): Day {
-        return this.$store.getters.days[this.selectedDay];
+        return this.$store.getters.days[this.activeDay];
     }
 
     get localDate(): Date {
@@ -66,7 +63,7 @@ export default class DateSelection extends Vue {
         date.setSeconds(59);
         date.setMilliseconds(999);
         this.$store.commit("setDay", {
-            day: this.selectedDay,
+            day: this.activeDay,
             data: {
                 ...this.day,
                 [this.type]: {
@@ -81,7 +78,7 @@ export default class DateSelection extends Vue {
         if (!this.isSelected) {
             e.preventDefault();
             this.$store.commit("setDay", {
-                day: this.selectedDay,
+                day: this.activeDay,
                 data: {
                     ...this.day,
                     [this.type]: {

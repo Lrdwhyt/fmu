@@ -14,7 +14,7 @@
                 />
             </div>
         </div>
-        <DayManagementPanel />
+        <DayManagementPanel :activeDay="selectedDay" />
     </div>
 </template>
 

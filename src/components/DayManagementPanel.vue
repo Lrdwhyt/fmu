@@ -1,18 +1,18 @@
 <template>
     <div>
         <div>
-            <DayList />
+            <DayList :activeDay="activeDay" />
             <button class="fmu-button" @click="addDay">+</button>
         </div>
         <div class="day-view">
-            <DayView />
+            <DayView :day="activeDay" />
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import Component from "vue-class-component";
+import { Component, Prop } from "vue-property-decorator";
 import DayList from "./Days/DayList.vue";
 import DayView from "./Days/DayView.vue";
 import { Day, DayBoundaryType, generateNext } from "@/Day";
@@ -26,9 +26,7 @@ import { getTotalPages } from "@/forums-of-loathing/Parser";
     },
 })
 export default class DayManagementPanel extends Vue {
-    get selectedDay(): number {
-        return this.$store.getters.selectedDay;
-    }
+    @Prop() private activeDay!: number;
 
     addDay(): void {
         let lastKnownPost: number = 1;

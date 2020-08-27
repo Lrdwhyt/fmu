@@ -5,10 +5,10 @@
                 <label>Start</label>
             </td>
             <td>
-                <PostSelection type="start" />
+                <PostSelection type="start" :activeDay="day" />
             </td>
             <td>
-                <DateSelection type="start" />
+                <DateSelection type="start" :activeDay="day" />
             </td>
         </tr>
         <tr>
@@ -16,10 +16,10 @@
                 <label>End</label>
             </td>
             <td>
-                <PostSelection type="end" />
+                <PostSelection type="end" :activeDay="day" />
             </td>
             <td>
-                <DateSelection type="end" />
+                <DateSelection type="end" :activeDay="day" />
             </td>
         </tr>
     </table>
@@ -40,15 +40,12 @@ import { Day, DayBoundaryType } from "@/Day";
     },
 })
 export default class DayView extends Vue {
+    @Prop() private day!: number;
     private isEditStartPost: boolean = false;
     private isEditEndPost: boolean = false;
 
-    get selectedDay(): number {
-        return this.$store.getters.selectedDay;
-    }
-
     get visible(): boolean {
-        return this.selectedDay in this.$store.getters.days;
+        return this.day in this.$store.getters.days;
     }
 }
 </script>
