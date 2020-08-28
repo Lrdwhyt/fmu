@@ -56,7 +56,7 @@ function findPlayerByName(name: string, players: Player[]): Player | undefined {
 }
 
 // generate tally from array of Vote objects
-export function createFromLog(votes: Vote[], players: Player[], day: number): FullTally {
+export function createTally(votes: Vote[], players: Player[], day: number): FullTally {
     let tally: VoteTally = {};
     let currentVoters: Map<string, VoteTracker> = new Map();
 

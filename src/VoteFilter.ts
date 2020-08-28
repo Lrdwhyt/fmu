@@ -1,7 +1,7 @@
 import { Vote } from '@/Vote';
 import { Day, DayBoundaryType } from '@/Day';
 
-export function filterByDay(day: Day) {
+export function filterVotesByDay(day: Day) {
     return function(vote: Vote): boolean {
         let startBoundary: DayBoundaryType = day.start.type;
         let endBoundary: DayBoundaryType = day.end.type;

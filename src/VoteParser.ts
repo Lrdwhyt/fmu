@@ -20,7 +20,7 @@ interface VoteTargetPair {
     target: VoteTarget;
 }
 
-export function getVoteList(rawGameData: any, info: VoteParserInformation): Vote[] {
+export function parseVotes(rawGameData: any, info: VoteParserInformation): Vote[] {
     const votes: Vote[] = [];
     for (const page of Object.keys(rawGameData)) {
         for (const post of Object.keys(rawGameData[page])) {
@@ -110,13 +110,14 @@ function getVoteTarget(raw: string, type: VoteType, info: VoteParserInformation)
             return { target: SpecialVote.NONE };
         }
 
-        return matchVoteToTarget(rawVoteTarget, info);
+        return getInterpretedVoteTarget(rawVoteTarget, info);
     }
 
     return { target: SpecialVote.NONE };
 }
 
-function matchVoteToTarget(str: string, info: VoteParserInformation): VoteTargetPair {
+// try to match string of vote target to a player in game or special vote
+function getInterpretedVoteTarget(str: string, info: VoteParserInformation): VoteTargetPair {
     let confidence: number = 0;
     let target: VoteTarget = str;
 

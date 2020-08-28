@@ -12,7 +12,7 @@ export interface TallyOptions {
 }
 
 // TODO this function is too big and has too much nesting
-export function writeBbcode(tally: FullTally, options: TallyOptions): string {
+export function getTallyAsBbcode(tally: FullTally, options: TallyOptions): string {
     let bbcode: string = "";
     for (const item of Object.keys(tally.tally)) {
         const tallyItem = tally.tally[item];
@@ -96,7 +96,7 @@ function colourPlayer(playerName: string, options: TallyOptions): string {
     return colourText(playerName, colour);
 }
 
-export function header(index: number, day: Day): string {
+export function getTallyHeader(index: number, day: Day): string {
     let start = "";
     let end = "";
     if (day.start.type === DayBoundaryType.POST) {
