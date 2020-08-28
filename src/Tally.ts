@@ -41,6 +41,7 @@ function canVoteOnDay(player: Player, day: number): boolean {
     return false; // should not be reached
 }
 
+// search player list and all aliases for string
 function findPlayerByName(name: string, players: Player[]): Player | undefined {
     return players.find((player) => {
         if (player.name.toLowerCase() === name) {
@@ -68,7 +69,7 @@ export function createTally(votes: Vote[], players: Player[], day: number): Full
             // possibly do something with this in the future
         } else {
             if (!canVoteOnDay(player, day)) {
-                // player is dead and vote shouldn't be counted
+                // player is dead so vote shouldn't be counted
                 continue;
             }
         }
@@ -104,16 +105,16 @@ export function createTally(votes: Vote[], players: Player[], day: number): Full
     const sortedTally: VoteTally = {};
     Object.keys(tally).sort((a, b) => {
         return numberVotes(tally[b]) - numberVotes(tally[a]);
-    }).forEach(function(key) {
+    }).forEach((key) => {
         sortedTally[key] = tally[key];
     });
 
     // now append players who have yet to vote
-    const nonVoters: string[] = [];
+    const nonvoters: string[] = [];
 
     for (const player of players) {
         if (!canVoteOnDay(player, day)) {
-            // exclude dead players from non-voter list
+            // exclude dead players
             continue;
         }
 
@@ -127,12 +128,12 @@ export function createTally(votes: Vote[], players: Player[], day: number): Full
             }
         }
 
-        nonVoters.push(player.name);
+        nonvoters.push(player.name);
     }
 
     const result: FullTally = {
         tally: sortedTally,
-        nonvoters: nonVoters
+        nonvoters: nonvoters
     }
 
     return result;

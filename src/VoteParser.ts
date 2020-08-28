@@ -22,6 +22,7 @@ interface VoteTargetPair {
 
 export function parseVotes(rawGameData: any, info: VoteParserInformation): Vote[] {
     const votes: Vote[] = [];
+    
     for (const page of Object.keys(rawGameData)) {
         for (const post of Object.keys(rawGameData[page])) {
             if (post === "last") {
@@ -88,19 +89,21 @@ function getVoteType(raw: string, voteKeyword: string, unvoteKeyword: string): V
 
 function getVoteTarget(raw: string, type: VoteType, info: VoteParserInformation): VoteTargetPair {
     if (type === VoteType.VOTE) {
-        const postVoteText = raw.split(info.voteKeyword);
-        let rawVoteTarget = postVoteText.slice(-1)[0];
+        const textAfterKeyword = raw.split(info.voteKeyword);
+        let rawVoteTarget = textAfterKeyword.slice(-1)[0];
         rawVoteTarget = trimChars(rawVoteTarget, " :;.,");
         if (rawVoteTarget.length === 0) {
             // uh-oh, nothing appears after the vote. Need to backtrack.
-            if (postVoteText.length <= 2) {
+            if (textAfterKeyword.length <= 2) {
                 return { target: SpecialVote.NONE };
             }
-            rawVoteTarget = postVoteText.slice(-2)[0] + postVoteText.slice(-1)[0];
+            rawVoteTarget = textAfterKeyword.slice(-2)[0] + textAfterKeyword.slice(-1)[0];
             rawVoteTarget = trimChars(rawVoteTarget, " :;.,");
         }
-        const regex = /([\(\[][0-9]+[\)\]])/;
+
         // Match numbers in braces or brackets: [3] (5)
+        const regex = /([\(\[][0-9]+[\)\]])/;
+
         if (rawVoteTarget.match(regex)) {
             // likely part of tally
             return { target: SpecialVote.NONE };
@@ -110,14 +113,14 @@ function getVoteTarget(raw: string, type: VoteType, info: VoteParserInformation)
             return { target: SpecialVote.NONE };
         }
 
-        return getInterpretedVoteTarget(rawVoteTarget, info);
+        return interpretVoteTarget(rawVoteTarget, info);
     }
 
     return { target: SpecialVote.NONE };
 }
 
 // try to match string of vote target to a player in game or special vote
-function getInterpretedVoteTarget(str: string, info: VoteParserInformation): VoteTargetPair {
+function interpretVoteTarget(str: string, info: VoteParserInformation): VoteTargetPair {
     let confidence: number = 0;
     let target: VoteTarget = str;
 
