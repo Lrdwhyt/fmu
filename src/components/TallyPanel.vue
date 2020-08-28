@@ -20,9 +20,9 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { Vote, VoteType } from "@/Vote";
 import TallyView from "./Tally/TallyView.vue";
 import DayManagementPanel from "./DayManagementPanel.vue";
+import { Vote, VoteType } from "@/Vote";
 import { Day } from "@/Day";
 import { filterVotesByDay } from "@/VoteFilter";
 import { createTally, FullTally } from "@/Tally";

@@ -15,10 +15,10 @@ interface TotalData {
     [page: number]: PageData
 }
 
-export function filterGameLog(data: TotalData, day: Day) {
+export function filterGameLogByDay(data: TotalData, day: Day) {
     return Object.values(data).reduce((result, current) => {
         for (const [key, value] of Object.entries(current)) {
-            if (!inBounds(parseInt(key), new Date((value as GameData).time), day)) {
+            if (!isPostInRange(parseInt(key), new Date((value as GameData).time), day)) {
                 continue;
             }
             Object.assign(result, { [key]: value });
@@ -27,7 +27,7 @@ export function filterGameLog(data: TotalData, day: Day) {
     }, {});
 }
 
-function inBounds(post: number, date: Date, day: Day): boolean {
+function isPostInRange(post: number, date: Date, day: Day): boolean {
     let startBoundaryFilter: boolean = true;
     let endBoundaryFilter: boolean = true;
 

@@ -54,7 +54,7 @@ export default class DateSelection extends Vue {
     }
 
     setDate(): void {
-        let date = new Date((this.$refs.date as HTMLInputElement).value);
+        const date = new Date((this.$refs.date as HTMLInputElement).value);
         const hoursMinutes = getTimeStringAsHoursMinutes(
             (this.$refs.time as HTMLInputElement).value
         );

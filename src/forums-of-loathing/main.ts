@@ -3,7 +3,7 @@ import App from '@/components/App.vue'
 import Store from "@/store"
 
 const attachFmu = function() {
-    let app = document.createElement("div");
+    const app = document.createElement("div");
     app.id = "fmu-app";
     const attachPoint = document.getElementById("qrform");
     if (attachPoint !== null && attachPoint.parentNode !== null) {

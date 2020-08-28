@@ -9,7 +9,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import GameLogItem from "./GameLogItem.vue";
 import { Vote, VoteType } from "@/Vote";
 import { Day } from "@/Day";
-import { filterGameLog } from "@/GameDataFilter";
+import { filterGameLogByDay } from "@/GameDataFilter";
 
 @Component({
     name: "GameLogView",
@@ -37,7 +37,7 @@ export default class GameLogView extends Vue {
             );
         }
 
-        return filterGameLog(this.rawGameData, this.day);
+        return filterGameLogByDay(this.rawGameData, this.day);
     }
 }
 </script>

@@ -15,7 +15,7 @@ export default {
     } as Store,
 
     mutations: {
-        toggleSettingsPanel(state: Store) {
+        toggleSettingsPanel(state: Store): void {
             state.isSettingsPanelOpen = !state.isSettingsPanelOpen
         },
 
@@ -33,7 +33,7 @@ export default {
     },
 
     actions: {
-        init(context: ActionContext<Store, any>) {
+        init(context: ActionContext<Store, any>): void {
             const interfaceData: Store = getInterfaceData();
 
             if ("isSettingsPanelOpen" in interfaceData) {

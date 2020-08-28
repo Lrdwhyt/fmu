@@ -150,7 +150,7 @@ export default {
 
     actions: {
         init(context: ActionContext<Store, any>) {
-            let settingsData: Store = getSettings();
+            const settingsData: Store = getSettings();
             if ("includeUnvotes" in settingsData) {
                 context.commit("setIncludeUnvotes", settingsData.includeUnvotes);
             }

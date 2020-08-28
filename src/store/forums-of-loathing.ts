@@ -11,14 +11,14 @@ export default {
     } as Store,
 
     mutations: {
-        setPostsPerPage(state: Store, postsPerPage: number) {
+        setPostsPerPage(state: Store, postsPerPage: number): void {
             state.postsPerPage = postsPerPage;
         }
     },
 
     actions: {
-        init(context: ActionContext<Store, any>) {
-            let platformData = getPlatform();
+        init(context: ActionContext<Store, any>): void {
+            const platformData = getPlatform();
 
             if ("postsPerPage" in platformData) {
                 context.commit("setPostsPerPage", platformData.postsPerPage);

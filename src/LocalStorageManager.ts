@@ -51,7 +51,7 @@ function interfaceKeyById(id: number): string {
 }
 
 function getAsObjectFromLocalStorage(key: string): any {
-    let s: string = localStorage.getItem(key) || "";
+    const s: string = localStorage.getItem(key) || "";
 
     return convertStringToObject(s);
 }

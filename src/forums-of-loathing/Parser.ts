@@ -58,9 +58,7 @@ export function getPostData(post: Element, { mods, voteKeyword, unvoteKeyword }:
     if (mods.includes(username.toLowerCase())) {
         content = Post.getContent(post);
     } else {
-        let boldText: string[] = Post.getBoldText(post);
-
-        boldText = boldText.filter((msg: string) => {
+        let boldText: string[] = Post.getBoldText(post).filter((msg: string) => {
             const lower = msg.toLowerCase();
             return lower.includes(voteKeyword) || lower.includes(unvoteKeyword);
         });

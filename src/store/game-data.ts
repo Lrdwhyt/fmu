@@ -11,7 +11,7 @@ export default {
     } as Store,
 
     mutations: {
-        setGameData(state: Store, append: any) {
+        setGameData(state: Store, append: any): void {
             state.data = {
                 ...state.data,
                 ...append
@@ -20,8 +20,8 @@ export default {
     },
 
     actions: {
-        init(context: ActionContext<Store, any>) {
-            let gameData = getGameData();
+        init(context: ActionContext<Store, any>): void {
+            const gameData = getGameData();
             if ("data" in gameData) {
                 context.commit("setGameData", gameData.data);
             }
