@@ -15,7 +15,7 @@ import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import DayList from "./Days/DayList.vue";
 import DayView from "./Days/DayView.vue";
-import { Day, DayBoundaryType, generateNext } from "@/Day";
+import { Day, DayBoundaryType, generateNextDay } from "@/Day";
 import { getTotalPages } from "@/forums-of-loathing/Parser";
 
 @Component({
@@ -37,7 +37,7 @@ export default class DayManagementPanel extends Vue {
         } else {
             lastKnownPost = (totalPages - 1) * this.$store.getters.postsPerPage + 1;
         }
-        const day: Day = generateNext(
+        const day: Day = generateNextDay(
             this.$store.getters.days,
             this.$store.getters.nightTime,
             this.$store.getters.dayLength,

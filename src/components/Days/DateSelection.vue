@@ -6,13 +6,13 @@
             :value="dateString"
             :readonly="!isSelected"
             required="required"
-            @blur="edit"
+            @blur="setDate"
         /><input
             type="time"
             ref="time"
             :value="time"
             :readonly="!isSelected"
-            @blur="edit"
+            @blur="setDate"
             required="required"
         />
     </div>
@@ -53,7 +53,7 @@ export default class DateSelection extends Vue {
         return this.localDate.toISOString().substr(11, 5);
     }
 
-    edit(): void {
+    setDate(): void {
         let date = new Date((this.$refs.date as HTMLInputElement).value);
         const hoursMinutes = getTimeStringAsHoursMinutes(
             (this.$refs.time as HTMLInputElement).value
@@ -110,6 +110,6 @@ input {
 }
 
 .selected input {
-    padding: 4px 4px 1px 4px;
+    padding-bottom: 1px;
 }
 </style>

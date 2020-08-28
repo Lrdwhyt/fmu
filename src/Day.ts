@@ -1,5 +1,3 @@
-import { getTimeZone } from '@/forums-of-loathing/Parser';
-
 export enum DayBoundaryType {
     POST, DATE
 }
@@ -17,10 +15,10 @@ export interface Day {
     }
 }
 
-export function generateNext(days: Day[], nightTime: string, dayLength: number, nightLength: number, lastKnownPost: number): Day {
-    if (!days.length) {
-        let endDate = getNextDate(nightTime);
-        let startDate = new Date(endDate.getTime() - dayLength * 60 * 60 * 1000);
+export function generateNextDay(days: Day[], nightTime: string, dayLength: number, nightLength: number, lastKnownPost: number): Day {
+    if (days.length === 0) {
+        const endDate = getNextNight(nightTime);
+        const startDate = new Date(endDate.getTime() - dayLength * 60 * 60 * 1000);
         return {
             start: {
                 type: DayBoundaryType.POST,
@@ -54,25 +52,25 @@ export function generateNext(days: Day[], nightTime: string, dayLength: number, 
 }
 
 // get next Date at which time = nightTime
-function getNextDate(nightTime: string): Date {
-    let nextDate: Date = new Date();
+function getNextNight(nightTime: string): Date {
+    let nextNight: Date = new Date();
     const hoursMinutes = getTimeStringAsHoursMinutes(nightTime);
-    nextDate.setHours(hoursMinutes.hours);
-    nextDate.setMinutes(hoursMinutes.minutes);
-    nextDate.setSeconds(0);
-    nextDate.setMilliseconds(0);
+    nextNight.setHours(hoursMinutes.hours);
+    nextNight.setMinutes(hoursMinutes.minutes);
+    nextNight.setSeconds(59);
+    nextNight.setMilliseconds(999);
 
-    if (nextDate <= new Date()) {
-        nextDate = new Date(nextDate.getTime() + 24 * 60 * 60 * 1000);
+    if (nextNight <= new Date()) {
+        nextNight = new Date(nextNight.getTime() + 24 * 60 * 60 * 1000);
     }
 
-    return nextDate;
+    return nextNight;
 }
 
 export function getTimeStringAsHoursMinutes(time: string) {
     const arr = time.split(":");
-    const minutes = parseInt(arr[1]);
     const hours = parseInt(arr[0]) % 24;
+    const minutes = parseInt(arr[1]);
 
     return {
         hours,
