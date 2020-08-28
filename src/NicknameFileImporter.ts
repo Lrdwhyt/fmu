@@ -20,7 +20,7 @@ export function parseNicknameFile(data: string): NicknameEntry[] {
         }
 
         if (isEndOfNicknames) {
-            let entry: NicknameEntry = {
+            const entry: NicknameEntry = {
                 player: line,
                 nicknames: currentNicknames
             }

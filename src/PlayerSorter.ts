@@ -38,7 +38,6 @@ export function sortByGroup(order: number) {
     };
 }
 
-// TODO this can probably be simplified somehow
 export function sortByTimeOfDeath(order: number) {
     return (a: Player, b: Player) => {
         if (a.isAlive && !b.isAlive) {
@@ -48,6 +47,7 @@ export function sortByTimeOfDeath(order: number) {
         } else if (a.isAlive && b.isAlive) {
             return 0;
         } else {
+            // both dead
             if (a.timeOfDeath === b.timeOfDeath) {
                 return 0;
             } else if (a.timeOfDeath!.index > b.timeOfDeath!.index) {
@@ -60,6 +60,7 @@ export function sortByTimeOfDeath(order: number) {
                 } else if (a.timeOfDeath!.type < b.timeOfDeath!.type) {
                     return order;
                 } else {
+                    // shouldn't be reached as we already checked for equality
                     return 0;
                 }
             }

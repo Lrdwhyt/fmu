@@ -29,7 +29,7 @@ export function getVoteList(rawGameData: any, info: VoteParserInformation): Vote
             }
 
             const data: any = rawGameData[page][post]; // TODO don't use any
-            
+
             if (info.moderators.includes(data.user.toLowerCase())) {
                 continue;
             }
@@ -42,7 +42,7 @@ export function getVoteList(rawGameData: any, info: VoteParserInformation): Vote
                 continue;
             }
 
-            let vote: Vote = {
+            const vote: Vote = {
                 source: data.content,
                 user: data.user,
                 time: new Date(data.time),
@@ -64,8 +64,10 @@ function getVoteType(raw: string, voteKeyword: string, unvoteKeyword: string): V
         if (!raw.includes(voteKeyword)) {
             return VoteType.UNVOTE;
         }
+
         const lastIndexOfVote: number = raw.lastIndexOf(voteKeyword) + voteKeyword.length;
         const lastIndexOfUnvote: number = raw.lastIndexOf(unvoteKeyword) + unvoteKeyword.length;
+
         if (lastIndexOfVote > lastIndexOfUnvote) {
             return VoteType.VOTE;
         } else if (lastIndexOfUnvote > lastIndexOfVote) {
@@ -119,7 +121,7 @@ function matchVoteToTarget(str: string, info: VoteParserInformation): VoteTarget
     let target: VoteTarget = str;
 
     for (const keyword of info.noEliminationKeywords) {
-        let score = diceCoefficient(str, keyword);
+        const score = diceCoefficient(str, keyword);
         if (score > confidence) {
             confidence = score;
             target = SpecialVote.NOELIMINATION;
@@ -127,7 +129,7 @@ function matchVoteToTarget(str: string, info: VoteParserInformation): VoteTarget
     }
 
     for (const keyword of info.noVoteKeywords) {
-        let score = diceCoefficient(str, keyword);
+        const score = diceCoefficient(str, keyword);
         if (score > confidence) {
             confidence = score;
             target = SpecialVote.NOVOTE;
@@ -135,17 +137,18 @@ function matchVoteToTarget(str: string, info: VoteParserInformation): VoteTarget
     }
 
     for (const player of info.players) {
-        let score = diceCoefficient(str, player.name);
+        const score = diceCoefficient(str, player.name);
         if (score > confidence) {
             confidence = score;
             target = player.name;
         }
 
-        const key = Object.keys(info.nicknames).find((key) => key.toLowerCase() === player.name.toLowerCase());
         // find player name case-insensitively
+        const key = Object.keys(info.nicknames).find((key) => key.toLowerCase() === player.name.toLowerCase());
+
         if (key !== undefined) {
             for (const alias of info.nicknames[key]) {
-                let score = diceCoefficient(str, alias);
+                const score = diceCoefficient(str, alias);
                 if (score > confidence) {
                     confidence = score;
                     target = player.name;
@@ -155,7 +158,7 @@ function matchVoteToTarget(str: string, info: VoteParserInformation): VoteTarget
 
         if (player.aliases !== undefined) {
             for (const alias of player.aliases) {
-                let score = diceCoefficient(str, alias);
+                const score = diceCoefficient(str, alias);
                 if (score > confidence) {
                     confidence = score;
                     target = alias;
