@@ -1,6 +1,13 @@
 <template>
     <table>
-        <GameLogItem v-for="(vote, index) in votes" :key="index" :index="index" :event="vote" />
+        <GameLogItem
+            v-for="(event, index) in events"
+            :key="index"
+            :index="index"
+            :event="event"
+            :selected="parseInt(index) === selectedIndex"
+            @select="select(parseInt(index))"
+        />
     </table>
 </template>
 
@@ -10,6 +17,7 @@ import GameLogItem from "./GameLogItem.vue";
 import { Vote, VoteType } from "@/Vote";
 import { Day } from "@/Day";
 import { filterGameLogByDay } from "@/GameDataFilter";
+import { PageData, PostData } from "@/GameData";
 
 @Component({
     name: "GameLogView",
@@ -18,6 +26,8 @@ import { filterGameLogByDay } from "@/GameDataFilter";
     },
 })
 export default class GameLogView extends Vue {
+    private selectedIndex: number = -1;
+
     get selectedDay(): number {
         return this.$store.getters.selectedDay;
     }
@@ -26,11 +36,11 @@ export default class GameLogView extends Vue {
         return this.$store.getters.days[this.selectedDay];
     }
 
-    get rawGameData() {
+    get rawGameData(): PageData {
         return this.$store.getters.rawGameData;
     }
 
-    get votes() {
+    get events(): PostData {
         if (!(this.selectedDay in this.$store.getters.days)) {
             return Object.values(this.rawGameData).reduce((result, current) =>
                 Object.assign(result, current)
@@ -38,6 +48,10 @@ export default class GameLogView extends Vue {
         }
 
         return filterGameLogByDay(this.rawGameData, this.day);
+    }
+
+    select(index: number): void {
+        this.selectedIndex = index;
     }
 }
 </script>

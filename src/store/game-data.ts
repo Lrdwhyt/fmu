@@ -1,8 +1,9 @@
 import { ActionContext } from 'vuex';
 import { getGameData } from "@/LocalStorageManager"
+import { PageData } from '@/GameData';
 
 interface Store {
-    data: {};
+    data: PageData;
 }
 
 export default {
@@ -11,7 +12,7 @@ export default {
     } as Store,
 
     mutations: {
-        setGameData(state: Store, append: any): void {
+        setGameData(state: Store, append: PageData): void {
             state.data = {
                 ...state.data,
                 ...append
@@ -29,7 +30,7 @@ export default {
     },
 
     getters: {
-        rawGameData(state: Store): {} {
+        rawGameData(state: Store): PageData {
             return state.data;
         }
     }

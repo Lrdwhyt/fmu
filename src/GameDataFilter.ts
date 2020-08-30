@@ -1,21 +1,7 @@
 import { Day, DayBoundaryType } from './Day';
+import { PageData, GameData, PostData } from '@/GameData';
 
-interface GameData {
-    user: string;
-    content: string;
-    link: number;
-    time: Date;
-}
-
-interface PageData {
-    [post: number]: GameData
-}
-
-interface TotalData {
-    [page: number]: PageData
-}
-
-export function filterGameLogByDay(data: TotalData, day: Day) {
+export function filterGameLogByDay(data: PageData, day: Day): PostData {
     return Object.values(data).reduce((result, current) => {
         for (const [key, value] of Object.entries(current)) {
             if (!isPostInRange(parseInt(key), new Date((value as GameData).time), day)) {

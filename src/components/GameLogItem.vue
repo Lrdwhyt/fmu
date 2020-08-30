@@ -1,5 +1,5 @@
 <template>
-    <tr>
+    <tr :class="{ selected: selected }" @click="select">
         <td>
             {{ time }}
         </td>
@@ -12,8 +12,8 @@
         <td v-if="isVote">
             <strong>{{ content }}</strong>
         </td>
-        <td @click="expand" v-else>
-            <span class="expanded-text" v-if="isExpanded">{{ fullContent }}</span>
+        <td v-else>
+            <span class="expanded-text" v-if="selected">{{ fullContent }}</span>
             <span :title="fullContent" v-else>{{ content }}</span>
         </td>
     </tr>
@@ -24,14 +24,15 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import { Vote, VoteType } from "@/Vote";
 import { Day } from "@/Day";
 import { linkPost } from "@/forums-of-loathing/LinkUtils";
+import { GameData } from "@/GameData";
 
 @Component({
     name: "GameLogItem",
 })
 export default class GameLogItem extends Vue {
-    @Prop() private event!: any;
+    @Prop() private event!: GameData;
     @Prop() private index!: number;
-    private isExpanded: boolean = false;
+    @Prop() private selected!: boolean;
 
     get location(): number {
         return this.$props.index;
@@ -61,8 +62,8 @@ export default class GameLogItem extends Vue {
         return this.$props.event.content;
     }
 
-    expand(): void {
-        this.isExpanded = !this.isExpanded;
+    select(): void {
+        this.$emit("select");
     }
 
     linkPost(postId: string): string {

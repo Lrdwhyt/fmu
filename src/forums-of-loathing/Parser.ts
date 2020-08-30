@@ -1,5 +1,6 @@
 import * as Post from "./Post"
 import { parseDate } from './DateParser';
+import { PageData, PostData } from '@/GameData';
 
 export function getTimeZone(): number {
     //Get string at bottom which tells time zone
@@ -13,7 +14,7 @@ export function getTimeZone(): number {
 
 const timeZone = getTimeZone();
 
-export function getPosts({ mods, voteKeyword, unvoteKeyword }: { mods: string[], voteKeyword: string, unvoteKeyword: string }): any {
+export function getPosts({ mods, voteKeyword, unvoteKeyword }: { mods: string[], voteKeyword: string, unvoteKeyword: string }): PageData {
     const pageNumber: number = getCurrentPage();
 
     const thread = document.getElementById("posts");
@@ -24,10 +25,10 @@ export function getPosts({ mods, voteKeyword, unvoteKeyword }: { mods: string[],
 
     const posts = thread.getElementsByClassName("page");
 
-    let pageData = {};
+    let pageData: PostData = {};
 
     for (const post of posts) {
-        const postData = getPostData(post, {
+        const postData: PostData = getPostData(post, {
             mods,
             voteKeyword,
             unvoteKeyword
@@ -50,7 +51,7 @@ export function getPosts({ mods, voteKeyword, unvoteKeyword }: { mods: string[],
     };
 }
 
-export function getPostData(post: Element, { mods, voteKeyword, unvoteKeyword }: { mods: string[], voteKeyword: string, unvoteKeyword: string }) {
+export function getPostData(post: Element, { mods, voteKeyword, unvoteKeyword }: { mods: string[], voteKeyword: string, unvoteKeyword: string }): PostData {
     const username: string = Post.getUsername(post);
 
     let content: string = "";
