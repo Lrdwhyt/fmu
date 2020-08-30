@@ -67,7 +67,12 @@ function getNextNight(nightTime: string): Date {
     return nextNight;
 }
 
-export function getTimeStringAsHoursMinutes(time: string) {
+interface HoursMinutes {
+    hours: number,
+    minutes: number
+}
+
+export function getTimeStringAsHoursMinutes(time: string): HoursMinutes {
     const arr = time.split(":");
     const hours = parseInt(arr[0]) % 24;
     const minutes = parseInt(arr[1]);
