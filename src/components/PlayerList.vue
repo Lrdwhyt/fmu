@@ -6,6 +6,7 @@
             <th @click="sortByTimeOfDeath">{{ timeOfDeathColumnHeader }}</th>
             <th @click="sortByGroup">{{ groupColumnHeader }}</th>
             <th>Aliases</th>
+            <th>Notes</th>
         </tr>
         <template v-for="player in sortedPlayers">
             <PlayerItem :player="player" :name="player.name" :key="player.name" />

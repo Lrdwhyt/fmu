@@ -154,6 +154,13 @@ export default {
 
         setPlayerSortOrder(state: Store, order: number): void {
             state.playerSortOrder = order;
+        },
+
+        saveNotes(state: Store, { name, content }: { name: string, content: string }): void {
+            const index = state.players.findIndex((player) => player.name === name);
+            if (index !== -1) {
+                Vue.set(state.players[index], "notes", content);
+            }
         }
     },
 

@@ -53,20 +53,28 @@
                 >
             </select>
         </td>
-        <td class="aliases">
-            <div class="word-view alias" v-for="alias in aliases" :key="alias">
-                <label>{{ alias }}</label
-                ><button class="remove-button" @click="removeAlias(alias)">🗙</button>
+        <td>
+            <div class="aliases">
+                <div class="word-view alias" v-for="alias in aliases" :key="alias">
+                    <label>{{ alias }}</label
+                    ><button class="remove-button" @click="removeAlias(alias)">🗙</button>
+                </div>
+                <input
+                    type="text"
+                    ref="aliasInput"
+                    v-if="showAddAlias"
+                    placeholder="Alias"
+                    @blur="addAlias"
+                    @keyup="handleKeyupAlias"
+                />
+                <button class="fmu-button" @click="toggleAddAlias">+</button>
             </div>
-            <input
-                type="text"
-                ref="aliasInput"
-                v-if="showAddAlias"
-                placeholder="Alias"
-                @blur="addAlias"
-                @keyup="handleKeyupAlias"
-            />
-            <button class="fmu-button" @click="toggleAddAlias">+</button>
+        </td>
+        <td class="player-notes" v-if="isEditNotes">
+            <textarea ref="editNotes" :value="notes" @blur="saveNotes" />
+        </td>
+        <td class="player-notes" v-else @click="editNotes">
+            {{ notes }}
         </td>
     </tr>
 </template>
@@ -83,9 +91,11 @@ import { PhaseType, Phase } from "@/Phase";
 export default class PlayerItem extends Vue {
     @Prop() private name!: string;
     @Prop() private player!: Player;
+
     private isEditName: boolean = false;
     private showAddAlias: boolean = false;
     private isEditDeathTime: boolean = false;
+    private isEditNotes: boolean = false;
 
     get aliases(): string[] {
         return this.$props.player.aliases || [];
@@ -129,6 +139,10 @@ export default class PlayerItem extends Vue {
 
     get groups(): { [group: string]: string } {
         return this.$store.getters.groups;
+    }
+
+    get notes(): string {
+        return this.$props.player.notes ?? "";
     }
 
     startEditName(): void {
@@ -253,6 +267,22 @@ export default class PlayerItem extends Vue {
 
     remove(): void {
         this.$store.commit("removePlayer", this.$props.name);
+    }
+
+    editNotes(): void {
+        this.isEditNotes = true;
+        Vue.nextTick(() => {
+            (this.$refs.editNotes as HTMLTextAreaElement).focus();
+        });
+    }
+
+    saveNotes(e: Event): void {
+        const noteContents = (e.target as HTMLTextAreaElement).value ?? "";
+        this.$store.commit("saveNotes", {
+            name: this.$props.name,
+            content: noteContents,
+        });
+        this.isEditNotes = false;
     }
 }
 </script>

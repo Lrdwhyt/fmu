@@ -6,4 +6,5 @@ export interface Player {
     timeOfDeath?: Phase;
     aliases?: string[];
     group?: string;
+    notes?: string;
 }
