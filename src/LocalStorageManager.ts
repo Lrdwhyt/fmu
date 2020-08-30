@@ -7,14 +7,13 @@ const PLATFORM_DATA = "fmu:platform";
 const INTERFACE_DATA = "fmu:interface";
 let gameId: number = -1;
 
-function convertStringToObject(str: string): any {
+function convertStringToObject(str: string): {} {
     try {
-        const obj = JSON.parse(str);
-        if (obj) {
-            return obj;
-        }
+        const obj = JSON.parse(str) || {};
+        return obj;
     } catch {
     }
+
     return {};
 }
 

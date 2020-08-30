@@ -2,6 +2,7 @@ import { Vote, VoteTarget, VoteType, SpecialVote } from "@/Vote";
 import { Player } from '@/Player';
 import { trimChars } from '@/StringUtils';
 import { NicknameList } from './store/settings';
+import { PageData, GameData } from './GameData';
 
 
 interface VoteParserInformation {
@@ -20,16 +21,18 @@ interface VoteTargetPair {
     target: VoteTarget;
 }
 
-export function parseVotes(rawGameData: any, info: VoteParserInformation): Vote[] {
+export function parseVotes(rawGameData: PageData, info: VoteParserInformation): Vote[] {
     const votes: Vote[] = [];
-    
-    for (const page of Object.keys(rawGameData)) {
-        for (const post of Object.keys(rawGameData[page])) {
-            if (post === "last") {
-                continue; // TODO find better way to handle this
+
+    for (const page of Object.keys(rawGameData).map(Number)) {
+        for (const post of Object.keys(rawGameData[page]).map(Number)) {
+            if (isNaN(post)) {
+                // post number is not number (last)
+                // TODO find better way to handle this
+                continue;
             }
 
-            const data: any = rawGameData[page][post]; // TODO don't use any
+            const data: GameData = rawGameData[page][post]; // TODO don't use any
 
             if (info.moderators.includes(data.user.toLowerCase())) {
                 continue;
@@ -47,11 +50,11 @@ export function parseVotes(rawGameData: any, info: VoteParserInformation): Vote[
                 source: data.content,
                 user: data.user,
                 time: new Date(data.time),
-                link: data.link,
+                link: String(data.link),
                 target: target.target,
                 confidence: target.confidence,
                 type: type,
-                location: parseInt(post)
+                location: post
             }
             votes.push(vote);
         }
