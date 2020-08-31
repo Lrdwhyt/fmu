@@ -73,9 +73,7 @@
         <td class="player-notes" v-if="isEditNotes">
             <textarea ref="editNotes" :value="notes" @blur="saveNotes" />
         </td>
-        <td class="player-notes" v-else @click="editNotes">
-            {{ notes }}
-        </td>
+        <td class="player-notes" v-else @click="editNotes">{{ notes }}</td>
     </tr>
 </template>
 
@@ -401,5 +399,9 @@ select {
 
 .day:hover {
     background-color: #cfdff8;
+}
+
+.player-notes {
+    white-space: pre-wrap;
 }
 </style>
