@@ -2,7 +2,9 @@
     --fmu-background: #eceff1;
     --fmu-background-darker: #c6cfd5;
     --fmu-highlight: #e91e63;
-    --card-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    --fmu-button-background: #7a77a4;
+    --card-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+        0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
 #fmu {
@@ -45,7 +47,7 @@
 }
 
 .fmu-button {
-    background-color: #7a77a4;
+    background-color: var(--fmu-button-background);
     border: none;
     color: #fff;
     font-family: inherit;

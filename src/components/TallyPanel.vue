@@ -3,7 +3,9 @@
         <TallyView :tally="tally" />
         <div class="tally-controls">
             <button class="fmu-button" @click="updateTally">Update</button>
-            <button class="fmu-button" @click="copyBbcode">Copy as BBcode</button>
+            <button class="fmu-button" :disabled="selectedDay < 0" @click="copyBbcode"
+                >Copy as BBcode</button
+            >
             <div class="copy-container" ref="copyContainer">
                 <div>Copy the following text:</div>
                 <textarea
@@ -122,5 +124,13 @@ export default class TallyPanel extends Vue {
 
 .tally-controls {
     margin: 8px 0;
+}
+
+.fmu-button:disabled {
+    opacity: 0.4;
+}
+
+.fmu-button:disabled:hover {
+    background-color: var(--fmu-button-background);
 }
 </style>
