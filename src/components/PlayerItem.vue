@@ -1,6 +1,6 @@
 <template>
     <tr class="player-item" :class="{ 'dead-player': !isAlive }">
-        <td>
+        <td class="player-name-col">
             <div class="player-name word-edit" v-if="isEditName">
                 <input
                     type="text"
@@ -70,10 +70,10 @@
                 <button class="fmu-button" @click="toggleAddAlias">+</button>
             </div>
         </td>
-        <td class="player-notes" v-if="isEditNotes">
+        <td class="player-notes" v-show="isEditNotes">
             <textarea ref="editNotes" :value="notes" @blur="saveNotes" />
         </td>
-        <td class="player-notes" v-else @click="editNotes">{{ notes }}</td>
+        <td class="player-notes" v-show="!isEditNotes" @click="editNotes">{{ notes }}</td>
     </tr>
 </template>
 
@@ -267,8 +267,10 @@ export default class PlayerItem extends Vue {
         this.$store.commit("removePlayer", this.$props.name);
     }
 
-    editNotes(): void {
+    editNotes(e: MouseEvent): void {
         this.isEditNotes = true;
+        // make textarea as wide as text
+        (this.$refs.editNotes as HTMLTextAreaElement).style.width = window.getComputedStyle(e.target as HTMLElement).width;
         Vue.nextTick(() => {
             (this.$refs.editNotes as HTMLTextAreaElement).focus();
         });
@@ -403,5 +405,9 @@ select {
 
 .player-notes {
     white-space: pre-wrap;
+}
+
+.player-name-col {
+    white-space: nowrap;
 }
 </style>
