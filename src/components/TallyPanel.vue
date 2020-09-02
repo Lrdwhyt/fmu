@@ -3,9 +3,7 @@
         <TallyView :tally="tally" />
         <div class="tally-controls">
             <button class="fmu-button" @click="updateTally">Update</button>
-            <button class="fmu-button" :disabled="selectedDay < 0" @click="copyBbcode"
-                >Copy as BBcode</button
-            >
+            <button class="fmu-button" @click="copyBbcode">Copy as BBcode</button>
             <div class="copy-container" ref="copyContainer">
                 <div>Copy the following text:</div>
                 <textarea
@@ -81,17 +79,21 @@ export default class TallyPanel extends Vue {
         const bbCode = tallyHeader + tally;
 
         (this.$refs.copyArea as HTMLTextAreaElement).value = bbCode;
+        (this.$refs.copyArea as HTMLTextAreaElement).focus();
         (this.$refs.copyArea as HTMLTextAreaElement).select();
-        try {
-            const copySuccess = document.execCommand("copy");
-            if (!copySuccess) {
-                (this.$refs.copyContainer as HTMLDivElement).classList.add("show-copy-container");
-            }
-        } catch {
-            (this.$refs.copyContainer as HTMLDivElement).classList.add("show-copy-container");
-        }
         if (this.useManualCopy) {
             (this.$refs.copyContainer as HTMLDivElement).classList.add("show-copy-container");
+        } else {
+            try {
+                const copySuccess = document.execCommand("copy");
+                if (!copySuccess) {
+                    (this.$refs.copyContainer as HTMLDivElement).classList.add(
+                        "show-copy-container"
+                    );
+                }
+            } catch {
+                (this.$refs.copyContainer as HTMLDivElement).classList.add("show-copy-container");
+            }
         }
     }
 

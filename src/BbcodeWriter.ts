@@ -97,6 +97,10 @@ function colourPlayer(playerName: string, options: TallyOptions): string {
 }
 
 export function getTallyHeader(index: number, day: Day): string {
+    if (day === undefined) {
+        return "Tally generated via Forum Mafia Utilities\n\n";
+    }
+
     let start = "";
     let end = "";
     if (day.start.type === DayBoundaryType.POST) {
@@ -111,7 +115,7 @@ export function getTallyHeader(index: number, day: Day): string {
         end = day.end.date.toISOString().substr(0, 16) + " UTC";
     }
 
-    let result = `[b]Day ${index}[/b]
+    const result = `[b]Day ${index}[/b]
 Tally generated from ${start} to ${end} via Forum Mafia Utilities\n\n`;
 
     return result;
