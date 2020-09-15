@@ -270,7 +270,9 @@ export default class PlayerItem extends Vue {
     editNotes(e: MouseEvent): void {
         this.isEditNotes = true;
         // make textarea as wide as text
-        (this.$refs.editNotes as HTMLTextAreaElement).style.width = window.getComputedStyle(e.target as HTMLElement).width;
+        (this.$refs.editNotes as HTMLTextAreaElement).style.width = window.getComputedStyle(
+            e.target as HTMLElement
+        ).width;
         Vue.nextTick(() => {
             (this.$refs.editNotes as HTMLTextAreaElement).focus();
         });
