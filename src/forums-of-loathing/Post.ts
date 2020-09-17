@@ -53,9 +53,6 @@ export function getContent(el: Element): string {
 export function getBoldText(el: Element): string[] {
     const result: string[] = [];
     const boldElements = el.querySelectorAll(".alt1 > div > b, .alt1 > div > :not(div) b");
-    if (boldElements.length === 0) {
-        return [];
-    }
     for (const boldElement of boldElements) {
         result.push(getRawText(boldElement));
     }

@@ -73,9 +73,9 @@ export function getPostData(post: Element, { mods, voteKeyword, unvoteKeyword }:
         return {};
     }
 
-    const timestamp: Date = parseDate(Post.getTime(post), timeZone);
-    const postId = Post.getId(post);
     const postNumber = Post.getNumber(post);
+    const postId = Post.getId(post);
+    const timestamp: Date = parseDate(Post.getTime(post), timeZone);
 
     return {
         [postNumber]: {

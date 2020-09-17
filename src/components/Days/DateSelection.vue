@@ -42,7 +42,7 @@ export default class DateSelection extends Vue {
     }
 
     get localDate(): Date {
-        return offsetDate(this.day[this.type].date, 0, getTimeZone());
+        return offsetDate(this.day[this.type].date, 0, -new Date().getTimezoneOffset() / 60);
     }
 
     get dateString(): string {
